@@ -1,11 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-    <v-app>
-        <v-app-bar app>
+    <v-app class="w-100">
+        <v-app-bar color="surface-variant" title="Application bar" app>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-toolbar-title><RouterLink to="/">Salvando o Labs</RouterLink></v-toolbar-title>
             <v-spacer></v-spacer>
@@ -13,11 +12,10 @@ import HelloWorld from './components/HelloWorld.vue'
             <v-btn text href="/products">Produtos</v-btn>
         </v-app-bar>
 
-  <v-layout class="rounded rounded-md">
-        <v-main class="d-flex justify-center ">
+        <transition name="fade" mode="out-in">
+        <v-main>
             <RouterView />
         </v-main>
-  </v-layout>
+        </transition>
     </v-app>
-
 </template>

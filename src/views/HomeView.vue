@@ -1,7 +1,12 @@
 <template>
-    <v-container class="d-block" fluid>
-        <v-row>
-            <h1>Tecnologia para o Bem: Unindo Forças para a Filantropia</h1>
+    <v-container fluid>
+
+    <v-responsive class="align-center text-center fill-height">
+      <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+        <v-row dense align="center">
+            <v-col color="grey mb-12">
+            <v-sheet cols="12" class="pa-2 ma-2">
+            <h1>1Tecnologia para o Bem: Unindo Forças para a Filantropia</h1>
 
             <h2>Introdução:</h2>
             <p>Em um mundo onde a tecnologia se tornou uma ferramenta indispensável, temos uma missão única: utilizar o poder do desenvolvimento de software para impulsionar ações filantrópicas. Nosso projeto social, "Tecnologia para o Bem", é dedicado a criar soluções inovadoras de software que atendam às necessidades das organizações sem fins lucrativos e comunidades carentes.</p>
@@ -26,6 +31,9 @@
 
             <h2>Conclusão:</h2>
             <p>Através da "Tecnologia para o Bem", unimos talentos e paixões para criar um impacto positivo no mundo. Juntos, podemos usar a tecnologia como uma força para o bem, transformando a vida de pessoas e comunidades através da filantropia.</p>
+          </v-sheet>
+            </v-col>
         </v-row>
+        </v-responsive>
     </v-container>
 </template>
