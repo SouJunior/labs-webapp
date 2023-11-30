@@ -1,27 +1,54 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
-    <v-form @submit.prevent>
-      <v-text-field
-        v-model="firstName"
-        :rules="rules"
-        label="First name"
-      ></v-text-field>
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
+  <v-container>
+    <v-form>
+      <!-- Personal Information -->
+      <v-text-field label="Full Name" v-model="applicant.fullName"></v-text-field>
+      <v-text-field label="Email Address" v-model="applicant.email"></v-text-field>
+      <v-text-field label="LinkedIn Profile" v-model="applicant.linkedin"></v-text-field>
+      <v-text-field label="GitHub Profile" v-model="applicant.github"></v-text-field>
+
+      <!-- Programming Skills -->
+      <v-select
+        label="Primary Programming Language"
+        :items="programmingLanguages"
+        v-model="applicant.primaryLanguage"
+      ></v-select>
+      <v-select
+        label="Secondary Programming Languages"
+        :items="programmingLanguages"
+        v-model="applicant.secondaryLanguages"
+        multiple
+      ></v-select>
+      <v-textarea label="Briefly describe your programming experience" v-model="applicant.experience"></v-textarea>
+
+      <!-- Resume Upload -->
+      <v-file-input label="Upload Resume" v-model="applicant.resume" accept=".pdf,.doc,.docx"></v-file-input>
+
+      <!-- Submit Button -->
+      <v-btn color="primary" @click="submitApplication">Submit Application</v-btn>
     </v-form>
-  </v-sheet>
+  </v-container>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      firstName: '',
-      rules: [
-        value => {
-          if (value) return true
+<script setup>
+import { reactive } from 'vue';
 
-          return 'You must enter a first name.'
-        },
-      ],
-    }),
-  }
+const applicant = reactive({
+  fullName: '',
+  email: '',
+  linkedin: '',
+  github: '',
+  primaryLanguage: '',
+  secondaryLanguages: [],
+  experience: '',
+  resume: null
+});
+
+const programmingLanguages = [
+  'JavaScript', 'Python', 'Java', 'C#', 'C++', 'PHP', 'Ruby', 'Go', 'Swift', 'Kotlin'
+];
+
+const submitApplication = () => {
+  // Handle the submission of the application form
+};
 </script>

@@ -18,6 +18,8 @@
             </v-list-item>
           </v-list>
           <v-card-actions>
+            <v-btn color="primary" to="/squad">Squad</v-btn>
+            <v-spacer></v-spacer>
             <v-btn color="primary" @click="entrarEmContato">Entre em Contato</v-btn>
             <v-spacer></v-spacer>
             <span class="title">Preço: {{ produto.preco }}</span>

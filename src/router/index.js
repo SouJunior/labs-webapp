@@ -32,7 +32,7 @@ const router = createRouter({
     },
     {
       path: '/products',
-      name: 'profile',
+      name: 'products',
       component: ProductsView
     },
     {
