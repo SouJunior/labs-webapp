@@ -1,46 +1,62 @@
 <template>
-  <v-container>
-    <v-list>
-      <v-list-item-group>
-        <v-list-item v-for="(produto, index) in produtos" :key="index">
-          <v-list-item-avatar>
-            <v-img :src="produto.logo"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title><RouterLink to="/product/1">{{ produto.nome }}</RouterLink></v-list-item-title>
-            <v-list-item-subtitle>{{ produto.squad }}</v-list-item-subtitle>
-            <v-list-item-subtitle>{{ produto.descricao }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-container>
+    <v-container>
+        <h1>
+           Meus Produtos
+        </h1>
+        <v-list
+                :items="myProducts"
+                item-props
+                lines="three"
+                link
+                >
+                <template v-slot:subtitle="{ subtitle }">
+                    <div v-html="subtitle"></div>
+                </template>
+        </v-list>
+
+        <h2>
+            Produtos do SJL: 
+        </h2>
+        <v-list
+                :items="produtos"
+                item-props
+                lines="three"
+                link
+                >
+                <template v-slot:subtitle="{ subtitle }">
+                    <div v-html="subtitle"></div>
+                </template>
+        </v-list>
+
+    </v-container>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 
-export default {
-  setup() {
-    const produtos = ref([
-      {
-        nome: "Produto 1",
-        squad: "Squad A",
-        logo: "logo_produto_1.png",
-        descricao: "Descrição do Produto 1"
-      },
-      {
-        nome: "Produto 2",
-        squad: "Squad B",
-        logo: "logo_produto_2.png",
-        descricao: "Descrição do Produto 2"
-      },
-      // Adicione mais produtos conforme necessário
-    ]);
+const produtos = ref([
+    {
+        title: "Produto 1",
+        prependAvatar: "https://placehold.co/200",
+        subtitle: "Descrição do Produto 1",
+        to: {name: 'product-by-id' }
+    },
+    { type: 'divider', inset: true },
+    {
+        title: "Produto 2",
+        prependAvatar: "https://placehold.co/200",
+        subtitle: "Descrição do Produto 2",
+        to: {name: 'product-by-id'}
+    },
+]);
 
-    return {
-      produtos,
-    };
-  }
-};
+const myProducts = ref([
+    {
+        title: "PetJournal",
+        prependAvatar: "https://placehold.co/200",
+        subtitle: "Descrição do Produto 1",
+        to: {name: 'product-by-id' }
+    },
+]);
+
 </script>
