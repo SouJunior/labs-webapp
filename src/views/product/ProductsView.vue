@@ -3,6 +3,7 @@
         <h1>
            Meus Produtos
         </h1>
+        <v-btn :to="{name: 'product-create'}">Criar produto</v-btn>
         <v-list
                 :items="myProducts"
                 item-props
