@@ -1,9 +1,16 @@
 <template>
     <v-container>
-        <h1>
-           Meus Produtos
-        </h1>
-        <v-btn :to="{name: 'product-create'}">Criar produto</v-btn>
+        <v-sheet class="ma-2 pa-2">
+        <v-row>
+            <v-col > 
+                <h1>
+                    Meus Produtos
+                </h1>
+            </v-col > 
+            <v-col class="d-flex justify-end"> 
+                <v-btn  color="primary" :to="{name: 'product-create'}"><v-icon>mdi-plus </v-icon>Criar produto</v-btn>
+            </v-col > 
+        </v-row>
         <v-list
                 :items="myProducts"
                 item-props
@@ -14,9 +21,10 @@
                     <div v-html="subtitle"></div>
                 </template>
         </v-list>
-
+        </v-sheet>
+        <v-sheet class="ma-2 pa-2">
         <h2>
-            Produtos do SJL: 
+            Produtos da Comunidade: 
         </h2>
         <v-list
                 :items="produtos"
@@ -28,7 +36,7 @@
                     <div v-html="subtitle"></div>
                 </template>
         </v-list>
-
+        </v-sheet>
     </v-container>
 </template>
 

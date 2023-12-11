@@ -1,6 +1,13 @@
 <template>
     <v-app >
-        <v-app-bar color="green-accent-2" app>
+        
+        <v-app-bar class="elevation-4" color="#06d7a0" app>
+
+            <v-spacer></v-spacer>
+<v-avatar >
+  <v-img :src="imgUrl" alt="logo" />
+</v-avatar>
+            <v-spacer></v-spacer>
             <v-toolbar-title>Salvando o Labs</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn text :to="{name: 'home'}">Home</v-btn>
@@ -41,7 +48,7 @@
             <v-row justify="center">
                 <v-col cols="12" sm="6" md="3">
                     <h3 class="">Navegação</h3>
-                    <v-list color="green-accent-2" dense>
+                    <v-list bg-color="green-accent-2" dense>
                         <v-list-item  :to="{ name: 'home' }" link>
                             <v-list-item-content color="green-accent-2">Home</v-list-item-content>
                         </v-list-item>
@@ -53,7 +60,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
                     <h3>Midias Sociais</h3>
-                    <v-list color="green-accent-2" dense>
+                    <v-list bg-color="green-accent-2" dense>
                         <v-list-item href="https://www.linkedin.com/company/soujunior-labs/" link>
                             <v-list-item-content>Linkedin</v-list-item-content>
                         </v-list-item>
@@ -70,6 +77,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue';
 import { useUserStore } from '@/stores/user'
 
+import imgUrl from '@/assets/logo.jpg'
 const isLoggedIn = ref(false); // Use ref for reactive primitives
 const userName = ref('Alice');
 const {user} = useUserStore()
