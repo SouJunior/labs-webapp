@@ -1,84 +1,185 @@
 <template>
-    <v-app >
-        
-        <v-app-bar class="elevation-4" color="#06d7a0" app>
+	<v-app>
+		<v-app-bar
+			color="transparent"
+			app
+			elevation="4"
+		>
+			<div class="w-100 d-flex align-center justify-space-between main-container">
+				<a
+					class="d-flex align-center logo"
+					@click="navigateToHome"
+				>
+					<v-img
+						height="36"
+						width="36"
+						:src="imgUrl"
+						alt="Logo SouJunior"
+					/>
+					<h1 class="text-h5 font-weight-bold font-semibold primary-color ml-3 logo-text">SouJunior Labs</h1>
+				</a>
+				<div class="d-flex align-center ga-2">
+					<v-icon
+						v-if="currentTheme.dark"
+						variant="text"
+						icon="mdi-weather-night"
+						size="large"
+						color="purple-darken-1"
+						class="mr-8 cursor-pointer"
+						@click="toggleTheme"
+					/>
+					<v-icon
+						v-if="!currentTheme.dark"
+						variant="text"
+						icon="mdi-white-balance-sunny"
+						size="large"
+						color="orange"
+						class="mr-8 cursor-pointer"
+						@click="toggleTheme"
+					/>
+					<v-btn
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'home' }"
+					>
+						Home
+					</v-btn>
+					<v-btn
+						v-if="!user.getName"
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'registry' }"
+					>
+						Registro
+					</v-btn>
+					<v-btn
+						v-if="!user.getName"
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'login' }"
+					>
+						Login
+					</v-btn>
+					<v-btn
+						v-if="user.getName"
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'products' }"
+					>
+						Produtos
+					</v-btn>
+					<v-btn
+						v-if="user.getName"
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'squads' }"
+					>
+						Squads
+					</v-btn>
+					<v-menu
+						v-if="user.getName"
+						open-on-hover
+					>
+						<template v-slot:activator="{ props }">
+							<v-btn
+								variant="text"
+								class="font-weight-semibold"
+								v-bind="props"
+							>
+								{{ user.getName }}
+								<v-icon icon="$vuetify"></v-icon>
+								<v-icon right>mdi-chevron-down</v-icon>
+							</v-btn>
+						</template>
 
-            <v-spacer></v-spacer>
-<v-avatar >
-  <v-img :src="imgUrl" alt="logo" />
-</v-avatar>
-            <v-spacer></v-spacer>
-            <v-toolbar-title>Salvando o Labs</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn text :to="{name: 'home'}">Home</v-btn>
-            <v-btn v-if="!user.getName" text :to="{name: 'registry'}">Registro</v-btn>
-            <v-btn v-if="!user.getName" text :to="{name: 'login'}">Login</v-btn>
-            <v-btn v-if="user.getName" text :to="{name: 'products'}">Produtos</v-btn>
-            <v-spacer></v-spacer>
-            <!-- Custom Dropdown -->
-            <v-menu v-if="user.getName" open-on-hover>
-                <template v-slot:activator="{ props }">
-                    <v-btn text v-bind="props" >
-                        {{ user.getName }}
-                        <v-icon icon="$vuetify"></v-icon>
-                        <v-icon right>mdi-chevron-down</v-icon>
-                    </v-btn>
-                </template>
+						<v-list>
+							<v-list-item
+								link
+								:to="{ name: 'profile' }"
+							>
+								<v-list-item-title>Profile</v-list-item-title>
+							</v-list-item>
+							<v-list-item
+								link
+								:to="{ name: 'home' }"
+							>
+								<v-list-item-title>Logout</v-list-item-title>
+							</v-list-item>
+						</v-list>
+					</v-menu>
+				</div>
+			</div>
+		</v-app-bar>
 
-                <v-list>
-                    <v-list-item link :to="{name: 'profile'}">
-                        <v-list-item-title>Profile</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item link :to="{name: 'home'}">
-                        <v-list-item-title>Logout</v-list-item-title>
-                    </v-list-item>
-                </v-list>
-
-            </v-menu>
-
-        </v-app-bar>
-
-        <transition name="fade" mode="out-in">
-        <v-main>
-            <RouterView />
-        </v-main>
-        </transition>
-
-        <v-footer color="green-accent-2" padless>
-            <v-row justify="center">
-                <v-col cols="12" sm="6" md="3">
-                    <h3 class="">Navegação</h3>
-                    <v-list bg-color="green-accent-2" dense>
-                        <v-list-item  :to="{ name: 'home' }" link>
-                            <v-list-item-content color="green-accent-2">Home</v-list-item-content>
-                        </v-list-item>
-                        <v-list-item link :to="{name: 'registry'}">
-                            <v-list-item-content>Registro</v-list-item-content>
-                        </v-list-item>
-                        <!-- More links -->
-                    </v-list>
-                </v-col>
-                <v-col cols="12" sm="6" md="3">
-                    <h3>Midias Sociais</h3>
-                    <v-list bg-color="green-accent-2" dense>
-                        <v-list-item href="https://www.linkedin.com/company/soujunior-labs/" link>
-                            <v-list-item-content>Linkedin</v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-col>
-                <!-- Additional columns for more content -->
-            </v-row>
-        </v-footer>
-    </v-app>
+		<transition
+			name="fade"
+			mode="out-in"
+		>
+			<v-main
+				class="d-flex flex-grow-1 main-container"
+				style="margin-top: 64px"
+			>
+				<RouterView />
+			</v-main>
+		</transition>
+	</v-app>
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue';
-import { useUserStore } from '@/stores/user'
+import { computed } from 'vue';
+import { useRouter, RouterView } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import { useTheme } from 'vuetify';
+import imgUrl from '@/assets/logo-green-transparent.png';
 
-import imgUrl from '@/assets/logo.jpg'
-const isLoggedIn = ref(false); // Use ref for reactive primitives
-const userName = ref('Alice');
-const {user} = useUserStore()
+const router = useRouter();
+const theme = useTheme();
+const currentTheme = computed(() => theme.current.value);
+const { user } = useUserStore();
+
+const navigateToHome = () => {
+	router.push({ name: 'home' })
+};
+
+function toggleTheme() {
+	theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
+	localStorage.setItem('theme', theme.global.name.value);
+}
 </script>
+
+<style lang="scss">
+.main-container {
+	margin-left: 240px;
+	margin-right: 240px;
+	padding: 0;
+
+	@media (max-width: 1600px) {
+		margin-left: 120px;
+		margin-right: 120px;
+	}
+}
+
+.primary-color {
+	color: #06d7a0;
+}
+
+.logo {
+	cursor: pointer;
+	transition: ease-in-out 0.2s;
+
+	&:hover {
+		filter: brightness(1.25);
+		transition: ease-in-out 0.2s;
+	}
+}
+
+.drag-none {
+	user-select: none;
+	-moz-drag-over: none;
+	-webkit-user-drag: none;
+}
+
+.logo-text {
+	font-family: "Merriweather", serif !important;
+}
+</style>
