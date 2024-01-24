@@ -5,35 +5,33 @@
       <v-sheet class="pa-2">
     <h1>Registro de usuários</h1>
     <v-form>
-      <!-- Personal Information -->
-      <v-text-field 
-               color="green-accent-2"
+      <v-text-field
+              label="Login"
+              v-model="applicant.login"
               prepend-icon="mdi-account"
-          label="Nome" v-model="applicant.fullName"></v-text-field>
-      <v-text-field 
+              ></v-text-field>
+      <v-text-field
+              label="E-mail"
+              v-model="applicant.email"
               prepend-icon="mdi-email"
-          label="Email" v-model="applicant.email"></v-text-field>
-      <v-text-field 
-              prepend-icon="mdi-linkedin"
-          label="Perfil do LinkedIn " v-model="applicant.linkedin"></v-text-field>
-      <v-text-field 
-              prepend-icon="mdi-github"
-          label="Perfil do GitHub" v-model="applicant.github"></v-text-field>
-
-      <v-select
-              prepend-icon="mdi-map-marker"
-        label="Seu Estado"
-        :items="states"
-        item-title="name"
-        item-value="initials"
-      ></v-select>
-      
-      <v-textarea label="Bio" v-model="applicant.experience"></v-textarea>
+              ></v-text-field>
+      <v-text-field
+              color="green-accent-2"
+              prepend-icon="mdi-lock"
+              label="Senha" v-model="applicant.password"></v-text-field>
+      <v-text-field
+              color="green-accent-2"
+              prepend-icon="mdi-lock"
+              label="Confirme a senha" v-model="applicant.passwordConfirm"></v-text-field>
+      <v-text-field
+              color="green-accent-2"
+              prepend-icon="mdi-account-key"
+              label="Token único de registro" v-model="applicant.token"></v-text-field>
       <v-checkbox
               color="green-accent-2"
-              label="Eu concordo com os termos e condições"
+              label="Eu concordo com os termos e condições" v-model="applicant.terms"
               ></v-checkbox>
-      <v-btn color="primary" @click="submitApplication">Salvar</v-btn>
+      <v-btn color="green-accent-2" @click="submitApplication">Salvar</v-btn>
     </v-form>
       </v-sheet>
           </v-col>
@@ -43,54 +41,48 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { useUserStore } from '@/stores/user.js'
 
 const applicant = reactive({
-  fullName: '',
+  login: '',
   email: '',
-  linkedin: '',
-  github: '',
-  primaryLanguage: '',
-  secondaryLanguages: [],
-  experience: '',
-  resume: null
+  password: '',
+  terms: false
 });
 
-const programmingLanguages = [
-  'JavaScript', 'Python', 'Java', 'C#', 'C++', 'PHP', 'Ruby', 'Go', 'Swift', 'Kotlin'
-];
+const resetForm = () => {
+  applicant.login = '';
+  applicant.email = '';
+  applicant.password = '';
+  applicant.passwordConfirm = '';
+  applicant.token = '';
+  applicant.terms = false;
+};
 
-// genarate a lis of states of brazili, with name and initials
-const states = [
-  { name: 'Acre', initials: 'AC' },
-  { name: 'Alagoas', initials: 'AL' },
-  { name: 'Amapá', initials: 'AP' },
-  { name: 'Amazonas', initials: 'AM' },
-  { name: 'Bahia', initials: 'BA' },
-  { name: 'Ceará', initials: 'CE' },
-  { name: 'Distrito Federal', initials: 'DF' },
-  { name: 'Espírito Santo', initials: 'ES' },
-  { name: 'Goiás', initials: 'GO' },
-  { name: 'Maranhão', initials: 'MA' },
-  { name: 'Mato Grosso', initials: 'MT' },
-  { name: 'Mato Grosso do Sul', initials: 'MS' },
-  { name: 'Minas Gerais', initials: 'MG' },
-  { name: 'Pará', initials: 'PA' },
-  { name: 'Paraíba', initials: 'PB' },
-  { name: 'Paraná', initials: 'PR' },
-  { name: 'Pernambuco', initials: 'PE' },
-  { name: 'Piauí', initials: 'PI' },
-  { name: 'Rio de Janeiro', initials: 'RJ' },
-  { name: 'Rio Grande do Norte', initials: 'RN' },
-  { name: 'Rio Grande do Sul', initials: 'RS' },
-  { name: 'Rondônia', initials: 'RO' },
-  { name: 'Roraima', initials: 'RR' },
-  { name: 'Santa Catarina', initials: 'SC' },
-  { name: 'São Paulo', initials: 'SP' },
-  { name: 'Sergipe', initials: 'SE' },
-  { name: 'Tocantins', initials: 'TO' }
-];
+const usersStore = useUserStore();
 
 const submitApplication = () => {
-  // Handle the submission of the application form
+  const newApplicant = { ...applicant };
+  if (!newApplicant.login || !newApplicant.email || !newApplicant.password || !newApplicant.passwordConfirm || !newApplicant.token) {
+    alert('Preencha todos os campos');
+    return;
+  }
+  else if (!newApplicant.terms) {
+    alert('Você precisa concordar com os termos e condições');
+    return;
+  }
+  else if (newApplicant.password !== newApplicant.passwordConfirm) {
+    alert('As senhas não conferem');
+    return;
+  }
+  else if (newApplicant.token !== 'SJLv1BETA') {
+    alert('Token inválido');
+    return;
+  }
+  else {
+    usersStore.addUser(newApplicant);
+    alert('Usuário cadastrado com sucesso');
+    resetForm();
+  }
 };
 </script>
