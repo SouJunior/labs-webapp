@@ -10,18 +10,18 @@
       <h1>Login</h1>
     <v-form @submit.prevent>
       <v-text-field
-              prepend-icon="mdi-account"
-        v-model="user.getName"
+              prepend-icon="mdi-email"
+        v-model="user.email"
         :rules="rules"
-        label="Login"
+        label="Email"
       ></v-text-field>
       <v-text-field
               prepend-icon="mdi-lock"
-        v-model="firstName"
+        v-model="user.password"
         :rules="rules"
         label="Senha"
       ></v-text-field>
-      <v-btn color="primary" type="submit" block class="mt-2" @click.prevent="login()">Login</v-btn>
+      <v-btn color="primary" type="submit" block class="mt-2" @click="submitLogin">Login</v-btn>
     </v-form>
   </v-sheet>
 </v-container>
@@ -29,20 +29,33 @@
 
 <script setup>
 
-import { ref } from 'vue';
+import { reactive, ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
-import { useUserStore } from '@/stores/user'
-import { storeToRefs } from "pinia";
 import imgUrl from '@/assets/logo.jpg'
 //const { form1 } = storeToRefs(useUserStore());
+import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user'
 
 const counter = useCounterStore()
-const {user} = storeToRefs(useUserStore())
 
+const authStore = useAuthStore();
+const userStore = useUserStore();
+
+const user = reactive({
+  email: '',
+  password: ''
+});
+
+const submitLogin = async () => {
+try {
+  await authStore.login(user);
+} catch (error) {
+  console.log(error.message);
+}
+}
 
 counter.increment()
 
-const firstName = ref(''); // ref is used for primitive types
 
 const rules = ref([
     value => {

@@ -14,9 +14,10 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.17",
+    "axios": "^1.6.7",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "postcss": "^8.4.33",
-     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
     "vuetify": "^3.0.0"
