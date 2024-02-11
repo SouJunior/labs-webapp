@@ -6,8 +6,8 @@
     <h1>Registro de usuários</h1>
     <v-form>
       <v-text-field
-              label="Login"
-              v-model="applicant.login"
+              label="Nome"
+              v-model="applicant.name"
               prepend-icon="mdi-account"
               ></v-text-field>
       <v-text-field
@@ -24,9 +24,13 @@
               prepend-icon="mdi-lock"
               label="Confirme a senha" v-model="applicant.passwordConfirm"></v-text-field>
       <v-text-field
+        color="green-accent-2"
+        prepend-icon="mdi-linkedin"
+        label="LinkedIn" v-model="applicant.linkedin"></v-text-field>
+      <v-text-field
               color="green-accent-2"
               prepend-icon="mdi-account-key"
-              label="Token único de registro" v-model="applicant.token"></v-text-field>
+              label="Token único de registro" v-model="applicant.register_token"></v-text-field>
       <v-checkbox
               color="green-accent-2"
               label="Eu concordo com os termos e condições" v-model="applicant.terms"
@@ -44,26 +48,30 @@ import { reactive } from 'vue';
 import { useUserStore } from '@/stores/user.js'
 
 const applicant = reactive({
-  login: '',
+  name: '',
   email: '',
   password: '',
+  passwordConfirm: '',
+  linkedin: '',
+  register_token: '',
   terms: false
 });
 
 const resetForm = () => {
-  applicant.login = '';
+  applicant.name = '';
   applicant.email = '';
   applicant.password = '';
   applicant.passwordConfirm = '';
-  applicant.token = '';
+  applicant.linkedin = '';
+  applicant.register_token = '';
   applicant.terms = false;
 };
 
 const usersStore = useUserStore();
 
-const submitApplication = () => {
+const submitApplication = async () => {
   const newApplicant = { ...applicant };
-  if (!newApplicant.login || !newApplicant.email || !newApplicant.password || !newApplicant.passwordConfirm || !newApplicant.token) {
+  if (!newApplicant.name || !newApplicant.email || !newApplicant.password || !newApplicant.passwordConfirm || !newApplicant.linkedin || !newApplicant.register_token) {
     alert('Preencha todos os campos');
     return;
   }
@@ -75,14 +83,13 @@ const submitApplication = () => {
     alert('As senhas não conferem');
     return;
   }
-  else if (newApplicant.token !== 'SJLv1BETA') {
-    alert('Token inválido');
-    return;
-  }
   else {
-    usersStore.addUser(newApplicant);
-    alert('Usuário cadastrado com sucesso');
-    resetForm();
+    try {
+      await usersStore.register(newApplicant);
+      resetForm();
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 </script>
