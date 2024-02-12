@@ -42,10 +42,18 @@
 						class="font-weight-semibold"
 						:to="{ name: 'home' }"
 					>
-						Home
+                    Home 
 					</v-btn>
 					<v-btn
-						v-if="!user.getName"
+						v-if="auth.getName()"
+						variant="text"
+						class="font-weight-semibold"
+						:to="{ name: 'onboarding' }"
+					>
+                        Onboarding	
+					</v-btn>
+					<v-btn
+						v-if="!auth.getName()"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'registry' }"
@@ -53,7 +61,7 @@
 						Registro
 					</v-btn>
 					<v-btn
-						v-if="!user.getName"
+						v-if="!auth.getName()"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'login' }"
@@ -61,7 +69,7 @@
 						Login
 					</v-btn>
 					<v-btn
-						v-if="user.getName"
+						v-if="auth.getName()"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'products' }"
@@ -69,7 +77,7 @@
 						Produtos
 					</v-btn>
 					<v-btn
-						v-if="user.getName"
+						v-if="auth.getName()"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'squads' }"
@@ -77,7 +85,7 @@
 						Squads
 					</v-btn>
 					<v-menu
-						v-if="user.getName"
+						v-if="auth.getName()"
 						open-on-hover
 					>
 						<template v-slot:activator="{ props }">
@@ -86,8 +94,7 @@
 								class="font-weight-semibold"
 								v-bind="props"
 							>
-								{{ user.getName }}
-								<v-icon icon="$vuetify"></v-icon>
+								{{ auth.getName() }}
 								<v-icon right>mdi-chevron-down</v-icon>
 							</v-btn>
 						</template>
@@ -101,7 +108,7 @@
 							</v-list-item>
 							<v-list-item
 								link
-								:to="{ name: 'home' }"
+                                @click="auth.logout()"
 							>
 								<v-list-item-title>Logout</v-list-item-title>
 							</v-list-item>
@@ -129,6 +136,7 @@
 import { computed } from 'vue';
 import { useRouter, RouterView } from 'vue-router';
 import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 import { useTheme } from 'vuetify';
 import imgUrl from '@/assets/logo-green-transparent.png';
 
@@ -136,6 +144,8 @@ const router = useRouter();
 const theme = useTheme();
 const currentTheme = computed(() => theme.current.value);
 const { user } = useUserStore();
+
+const auth = useAuthStore();
 
 const navigateToHome = () => {
 	router.push({ name: 'home' })
@@ -145,6 +155,7 @@ function toggleTheme() {
 	theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
 	localStorage.setItem('theme', theme.global.name.value);
 }
+
 </script>
 
 <style lang="scss">

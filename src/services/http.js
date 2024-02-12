@@ -1,13 +1,15 @@
 import axios from 'axios';
 
+const token = localStorage.getItem('token');
+
 const instance = axios.create({
-    baseURL: 'https://h57es3eyha.us-east-1.awsapprunner.com/api',
+    baseURL: import.meta.env.VITE_API_URL + '/api',
     timeout: 1000,
     headers: {
-        'Authorization': 'Bearer token',
+        'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-}
+    }
 });
 
 export default instance;
