@@ -47,7 +47,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/product/1',
+      path: '/product/:uuid',
       name: 'product-by-id',
       component: ProductView,
         meta : {
@@ -63,18 +63,18 @@ const router = createRouter({
         }
     },
     {
-      path: '/squads',
+      path: '/squads/:uuid',
       name: 'squads',
       component: SquadsView
     },
     {
-      path: '/squad/:id',
+      path: '/squad/:uuid',
       name: 'squad-by-id',
       component: SquadView,
       props: true, 
     },
     {
-      path: '/squad/create',
+      path: '/squad/create/:uuid',
       name: 'squad-create',
       component: SquadCreateView
     },

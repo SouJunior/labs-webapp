@@ -41,28 +41,46 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useProductStore } from '@/stores/product';
 
-const produtos = ref([
-    {
-        title: "Produto 1",
-        prependAvatar: "https://placehold.co/200",
-        subtitle: "Descrição do Produto 1",
-        to: {name: 'product-by-id' }
-    },
-    { type: 'divider', inset: true },
-    {
-        title: "Produto 2",
-        prependAvatar: "https://placehold.co/200",
-        subtitle: "Descrição do Produto 2",
-        to: {name: 'product-by-id'}
-    },
-]);
+const products = useProductStore();
 
-const myProducts = ref([
-    {
-        title: "PetJournal",
-        prependAvatar: "https://placehold.co/200",
+//console.log(products);
+
+
+onMounted(
+    () => {
+        console.log('teste');
+        products.fetchProducts();
+    }
+) 
+
+products.$subscribe((state) => {
+    console.log(state.products);
+//    myProducts.value = state.products;
+});
+
+    const produtos = ref([
+        {
+            title: "Produto 1",
+            prependAvatar: "https://placehold.co/200",
+            subtitle: "Descrição do Produto 1",
+            to: {name: 'product-by-id' }
+        },
+        { type: 'divider', inset: true },
+        {
+            title: "Produto 2",
+            prependAvatar: "https://placehold.co/200",
+            subtitle: "Descrição do Produto 2",
+            to: {name: 'product-by-id'}
+        },
+    ]);
+
+    const myProducts = ref([
+        {
+            title: "PetJournal",
+            prependAvatar: "https://placehold.co/200",
         subtitle: "Descrição do Produto 1",
         to: {name: 'product-by-id' }
     },

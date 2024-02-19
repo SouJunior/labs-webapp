@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<v-sheet class="pa-4 rounded-lg mb-4">
-			<h1 class="mb-8">Editar {{ squadItem.title }}</h1>
+			<h1 class="mb-8">Editar </h1>
 			<v-form>
 				<div class="d-flex align-items-center ga-8">
 					<div>
@@ -9,14 +9,13 @@
 						 size="140"
 						>
 						 <v-img
-							 :src="squadItem.prependAvatar"
 							 alt="Foto da squad"
 						 ></v-img>
 					 </v-avatar>
 					</div>
 					<div class="w-100">
-						<v-text-field v-model="squadItem.title" label="Título"></v-text-field>
-						<v-text-field v-model="squadItem.subtitle" label="Descrição"></v-text-field>
+						<v-text-field  label="Título"></v-text-field>
+						<v-text-field  label="Descrição"></v-text-field>
 					</div>
 				</div>
 				<div class="mt-8 d-flex align-center ga-4">

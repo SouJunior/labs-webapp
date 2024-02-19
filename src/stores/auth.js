@@ -1,6 +1,8 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import instance from "@/services/http.js";
+import productService from "@/services/product.js";
+import squadService from "@/services/squad.js";
 import router from "@/router";
 
 export const useAuthStore = defineStore('auth', () => {
@@ -8,6 +10,8 @@ export const useAuthStore = defineStore('auth', () => {
     const axiosInstance = instance;
 
     const auth = ref({ name: '', email: '', token: '' });
+    const products = ref([]);
+    const squads = ref([]);
 
     async function login( user ) {
         try {
@@ -22,10 +26,11 @@ export const useAuthStore = defineStore('auth', () => {
 
                 localStorage.setItem('token', token);
 
-                user.value = data;
                 auth.value = parseJwt(token);
-                // user.value =  { email: 'teste', password: '', token: token };
-                    // console.log('token :', parseJwt(token));
+
+                await fetchProducts(auth.value.uuid);
+
+                await fetchSquads(products.value[0].uuid);
 
                 router.push('/onboarding');
             }
@@ -38,14 +43,29 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function fetchProducts(uuid) {
+        products.value = await productService.byUser(uuid)
+        return products.value
+    }
+
+    async function fetchSquads(uuid) {
+        console.log('fetchSquads');
+        squads.value = await squadService.fetchBy(uuid)
+        return squads.value
+    }
+
     function getName() {
         return auth.value.name;
+    }
+
+    function getUuid() {
+        return auth.value.uuid;
     }
 
     async function logout() {
         localStorage.removeItem('token');
         auth.value = { name: '', email: '', token: '' };
-        router.push('/login');
+        router.push('/');
     }
 
     function $reset() {
@@ -61,9 +81,11 @@ export const useAuthStore = defineStore('auth', () => {
         return JSON.parse(jsonPayload);
     }
 
-
-
-    return { login, logout, auth, getName, $reset}
+    return { login, logout, auth, getName, getUuid, $reset, 
+        products,
+        fetchProducts,
+        fetchSquads, squads
+    }
 
 },
     { 
