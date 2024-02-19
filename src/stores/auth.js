@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const axiosInstance = instance;
 
-    const auth = ref({ name: '', email: '', token: '' });
+    const auth = ref({ name: '', email: '', uuid: '', iat: '' });
     const products = ref([]);
     const squads = ref([]);
 
@@ -49,7 +49,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function fetchSquads(uuid) {
-        console.log('fetchSquads');
         squads.value = await squadService.fetchBy(uuid)
         return squads.value
     }
@@ -78,10 +77,18 @@ export const useAuthStore = defineStore('auth', () => {
         var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
+
+        console.log('jsonPayload :', JSON.parse(jsonPayload));
         return JSON.parse(jsonPayload);
     }
 
-    return { login, logout, auth, getName, getUuid, $reset, 
+    return { 
+        login, 
+        logout, 
+        auth, 
+        getName, 
+        getUuid, 
+        $reset, 
         products,
         fetchProducts,
         fetchSquads, squads
