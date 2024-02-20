@@ -36,16 +36,19 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: ProfileView
+      component: ProfileView, 
+        meta : {
+            auth: true
+        }
     },
-    {
-      path: '/products',
-      name: 'products',
-      component: ProductsView,
-      meta : {
-          auth: true
-      }
-    },
+      {
+          path: '/products',
+          name: 'products',
+          component: ProductsView,
+          meta : {
+              auth: true
+          }
+      },
     {
       path: '/product/:uuid',
       name: 'product-by-id',
@@ -55,9 +58,9 @@ const router = createRouter({
         }
     },
     {
-      path: '/product/create',
-      name: 'product-create',
-      component: ProductRegistryView,
+        path: '/product/create',
+        name: 'product-create',
+        component: ProductRegistryView,
         meta : {
             auth: true
         }
@@ -65,23 +68,37 @@ const router = createRouter({
     {
       path: '/squads/:uuid',
       name: 'squads',
-      component: SquadsView
+      component: SquadsView, 
+        meta : {
+            auth: true
+        }
+
     },
     {
       path: '/squad/:uuid',
       name: 'squad-by-id',
       component: SquadView,
       props: true, 
+        meta : {
+            auth: true
+        }
+
     },
     {
       path: '/squad/create/:uuid',
       name: 'squad-create',
-      component: SquadCreateView
+      component: SquadCreateView,
+        meta : {
+            auth: true
+        }
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('../views/OnboardingView.vue')
+      component: () => import('../views/OnboardingView.vue'),
+        meta : {
+            auth: true
+        }
     },
     {
       path: '/about',
@@ -99,10 +116,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if (to.meta.auth === true) {
         console.log('protected route: ', to.name)
-        if (true == true) {
+
+        const token = localStorage.getItem('token')
+
+        if (token !== '') {
             return next()
         } else {
-            router.push({ name: 'not-found' })
+            router.push({ name: 'login' })
         }
     } else {
         return next()

@@ -72,7 +72,7 @@
 						v-if="logged === true"
 						variant="text"
 						class="font-weight-semibold"
-						:to="{ name: 'products' }"
+                        :to="{ name: 'products' }"
 					>
 						Produtos
 					</v-btn>
@@ -140,6 +140,8 @@ const auth = useAuthStore();
 
 
 const logged = computed(() => auth.getName() != '');
+
+const productUuid = computed(() => auth.getName() != '' ?  auth.products[0] : false);
 
 console.log('logged', logged);
 

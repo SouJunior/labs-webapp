@@ -7,7 +7,6 @@
       <v-list-item
           v-for="(item, index) in mySquad"
           :key="index"
-          :prepend-avatar="item.prependAvatar"
           lines="three"
           >
           <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -17,7 +16,7 @@
     </v-sheet>
 
     <v-sheet class="py-4 rounded-lg">
-        <h2 class="px-4">Squads da comunidade</h2>
+        <h2 class="px-4">Squad do produto</h2>
         <v-list-item
             v-for="(item, index) in useMembers.member"
             :key="index"

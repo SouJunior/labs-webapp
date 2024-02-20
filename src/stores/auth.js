@@ -91,7 +91,8 @@ export const useAuthStore = defineStore('auth', () => {
         $reset, 
         products,
         fetchProducts,
-        fetchSquads, squads
+        fetchSquads, 
+        squads
     }
 
 },
