@@ -7,7 +7,7 @@
 			<div class="d-flex flex-column ga-6">
 				<div>
 					<h1 class="home-title text-left mb-2">SouJunior Labs</h1>
-					<h2 class="home-subtitle text-left text-grey-darken-1 text-h4">Unindo forças para a Filantropia</h2>
+					<h2 class="home-subtitle text-left text-grey-darken-1 text-h4">Laboratorio de oportunidades.</h2>
 				</div>
 				<br>
 				<div>
