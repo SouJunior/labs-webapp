@@ -63,12 +63,14 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function logout() {
         localStorage.removeItem('token');
-        auth.value = { name: '', email: '', token: '' };
+        $reset();
         router.push('/');
     }
 
     function $reset() {
         auth.value = { name: '', email: '', token: '' }
+        products.value = []
+        squads.value = [] 
     }
 
     function parseJwt (token) {

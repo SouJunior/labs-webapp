@@ -17,14 +17,40 @@
 
     <v-sheet class="py-4 rounded-lg">
         <h2 class="px-4">Squad do produto</h2>
+
         <v-list-item
             v-for="(item, index) in useMembers.member"
             :key="index"
-            :prepend-avatar="item.prependAvatar"
             lines="three"
         >
-            <v-list-item-title v-text="item.name"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.role"></v-list-item-subtitle>
+
+            <v-dialog width="500">
+                <template v-slot:activator="{ props }">
+                    <v-list-item-title v-bind="props" v-text="item.name"></v-list-item-title>
+                    <v-list-item-subtitle v-text="item.role"></v-list-item-subtitle>
+                </template>
+                <template v-slot:default="{ isActive }">
+                    <v-card title="Dialog">
+                        <v-card-text>
+                           Você tem certeza que deseja excluir o produto? 
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-btn
+                                color="red"
+                                text="excluir"
+                                @click=""
+                                ></v-btn>
+                            <v-spacer/>
+                            <v-btn
+                                text="Cancelar"
+                                @click="isActive.value = false"
+                                ></v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+
         </v-list-item>
     </v-sheet>
 </template>

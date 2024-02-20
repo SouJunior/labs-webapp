@@ -1,8 +1,16 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import axiosInstance from '@/services/http.js'
+import router from "@/router";
 
 export const useUserStore = defineStore('user', () => {
+
+    const user = ref({
+        name: '',
+        email: ''
+    })
+
+    const registered = ref(false)
 
     async function register(applicant) {
         try {
@@ -13,23 +21,15 @@ export const useUserStore = defineStore('user', () => {
                 alert(data.error)
                 return;
             } else if (data.message) {
-                alert(data.message)
-            }
-            else {
+                registered.value = true;
                 localStorage.setItem('user', data);
-            }
-        }
-        catch (error) {
+            } 
+        } catch (error) {
             if (error.response.status === 401 || error.response.status === 422 || error.response.status === 404 || error.response.status === 500) {
                 alert(error.response.data)
             }
         }
     }
-
-    const user = ref({
-        name: '',
-        email: ''
-    })
 
     function setName(text) {
         user.value.name = text
@@ -43,5 +43,9 @@ export const useUserStore = defineStore('user', () => {
         state.user = user
     }
 
-    return { user, setName, state, addUser, register }
+    return { user, setName, state, addUser, 
+        register ,
+        registered
+    }
+
 }, { persist: true })

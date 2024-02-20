@@ -79,8 +79,31 @@ async function byUser(uuid) {
     }
 }
 
+async function del(uuid) {
+    try {
+        const response = await axiosInstance.get(
+            '/product/' + uuid, 
+            { headers: headers() }
+        );
+
+        const data = response.data;
+
+        if (data.error) {
+            alert(data.error)
+            return;
+        }
+        else {
+            return data
+        }
+    }
+    catch (error) {
+        alert(error)
+    }
+}
+
 export default {
     fetchProducts,
     show,
-    byUser
+    byUser,
+    del
 };

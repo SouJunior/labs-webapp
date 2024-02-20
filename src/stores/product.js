@@ -32,13 +32,19 @@ export const useProductStore = defineStore('product', () => {
         return products.value
     }
 
+    async function del(uuid) {
+        products.value = await productRequest.del(uuid)
+        return products.value
+    }
+
     return { 
         products, 
         fetchProducts,
         getProductsByUuid,
         getProduct,
         product,
-        byUser
+        byUser,
+        del
     }
 }, 
     { 

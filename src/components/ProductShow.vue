@@ -11,6 +11,33 @@
               <v-btn color="primary" :to="{ name : 'squads', params: {uuid: auth.squads[0].uuid } }">Squad</v-btn>
             <v-spacer></v-spacer>
             <v-btn color="primary" :to="{ name : 'product-create' }">Atualizar</v-btn>
+
+            <v-dialog width="500">
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" color="red">excluir</v-btn>
+                </template>
+                <template v-slot:default="{ isActive }">
+                    <v-card title="Dialog">
+                        <v-card-text>
+                           Você tem certeza que deseja excluir o produto? 
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-btn
+                                color="red"
+                                text="excluir"
+                                @click=""
+                                ></v-btn>
+                            <v-spacer/>
+                            <v-btn
+                                text="Cancelar"
+                                @click="isActive.value = false"
+                                ></v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+
           </v-card-actions>
         </v-card>
       </v-col>
