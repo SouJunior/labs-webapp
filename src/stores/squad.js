@@ -1,15 +1,38 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
+import squadService from '@/services/squad.js'
+import { ref } from 'vue'
 
-export const useSquadStore = defineStore({
-	id: 'squad',
+export const useSquadStore = defineStore('squad', () => {
+    const squad = ref([]);
 
-	state: () => ({
-		squadItem: null,
-	}),
+    async function fetch() {
+        try {
+            const response = await squadService.fechtBy();
+            const data = response.data;
 
-	actions: {
-		setSquadItem(item) {
-			this.squadItem = item;
-		},
-	},
-});
+            if (data.error) {
+                alert(data.error)
+                return;
+            } else if (data.message) {
+                alert(data.message)
+            }
+            else {
+                squad.value = data
+            }
+        }
+        catch (error) {
+                alert(error)
+        }
+    }
+
+
+
+    return { 
+        squad, 
+        fetch,
+    }
+}, 
+    { 
+        persist: true 
+    }
+)

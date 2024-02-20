@@ -42,10 +42,10 @@
 						class="font-weight-semibold"
 						:to="{ name: 'home' }"
 					>
-                    Home 
+                        Home 
 					</v-btn>
 					<v-btn
-						v-if="auth.getName()"
+						v-if="logged === true"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'onboarding' }"
@@ -53,7 +53,7 @@
                         Onboarding	
 					</v-btn>
 					<v-btn
-						v-if="!auth.getName()"
+						v-if="logged === false"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'registry' }"
@@ -61,7 +61,7 @@
 						Registro
 					</v-btn>
 					<v-btn
-						v-if="!auth.getName()"
+						v-if="logged === false"
 						variant="text"
 						class="font-weight-semibold"
 						:to="{ name: 'login' }"
@@ -69,23 +69,15 @@
 						Login
 					</v-btn>
 					<v-btn
-						v-if="auth.getName()"
+						v-if="logged === true"
 						variant="text"
 						class="font-weight-semibold"
-						:to="{ name: 'products' }"
+                        :to="{ name: 'products' }"
 					>
 						Produtos
 					</v-btn>
-					<v-btn
-						v-if="auth.getName()"
-						variant="text"
-						class="font-weight-semibold"
-						:to="{ name: 'squads' }"
-					>
-						Squads
-					</v-btn>
 					<v-menu
-						v-if="auth.getName()"
+						v-if="logged === true"
 						open-on-hover
 					>
 						<template v-slot:activator="{ props }">
@@ -135,17 +127,23 @@
 <script setup>
 import { computed } from 'vue';
 import { useRouter, RouterView } from 'vue-router';
-import { useUserStore } from '@/stores/user';
 import { useAuthStore } from '@/stores/auth';
 import { useTheme } from 'vuetify';
 import imgUrl from '@/assets/logo-green-transparent.png';
 
 const router = useRouter();
 const theme = useTheme();
+
 const currentTheme = computed(() => theme.current.value);
-const { user } = useUserStore();
 
 const auth = useAuthStore();
+
+
+const logged = computed(() => auth.getName() != '');
+
+const productUuid = computed(() => auth.getName() != '' ?  auth.products[0] : false);
+
+console.log('logged', logged);
 
 const navigateToHome = () => {
 	router.push({ name: 'home' })

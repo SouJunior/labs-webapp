@@ -36,8 +36,8 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore();
 
 const user = reactive({
-  email: '',
-  password: ''
+  email: 'w@w.com',
+  password: '12345678'
 });
 
 const submitLogin = async () => {
