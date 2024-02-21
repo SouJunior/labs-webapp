@@ -1,62 +1,47 @@
 <template>
   <v-container>
+    <v-row justify="center">
+      <v-col xl="6" xxl="6">
+        <v-sheet class="pa-2">
+    <h1>Perfil do usuário</h1>
     <v-form>
-      <v-text-field label="First Name" v-model="profile.firstName"></v-text-field>
-      <v-text-field label="Last Name" v-model="profile.lastName"></v-text-field>
-      <v-text-field label="Email" v-model="profile.email"></v-text-field>
-      <v-menu
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        :return-value.sync="profile.birthDate"
-        transition="scale-transition"
-        offset-y
-        min-width="290px"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="profile.birthDate"
-            label="Birthdate"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker v-model="profile.birthDate" no-title scrollable>
-          <v-spacer></v-spacer>
-          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn text color="primary" @click="saveDate">OK</v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-select
-        label="Gender"
-        :items="genders"
-        v-model="profile.gender"
-      ></v-select>
-      <v-btn color="primary" @click="submitProfile">Submit</v-btn>
+      <v-text-field label="Nome completo" v-model="profile.name" disabled></v-text-field>
+      <v-text-field label="E-mail" v-model="profile.email" disabled></v-text-field>
+      <v-text-field label="Cidade" v-model="profile.city"></v-text-field>
+      <v-text-field label="Estado" v-model="profile.state"></v-text-field>
+      <v-text-field label="Cargo?" v-model="profile.stack"></v-text-field>
+      <v-text-field label="Perfil do LinkedIn" v-model="profile.linkedin"></v-text-field>
+      <v-text-field label="Perfil no Discord" v-model="profile.discord"></v-text-field>
+      <v-btn color="primary" @click="submitProfile">Atualizar</v-btn>
     </v-form>
+        </v-sheet>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
+import { useAuthStore} from '@/stores/auth.js';
+
+const auth = useAuthStore();
 
 const profile = reactive({
-  firstName: '',
-  lastName: '',
-  email: '',
-  birthDate: '',
-  gender: ''
+  name: auth.auth.name,
+  city: '',
+  stack: '',
+  linkedin: '',
+  email: auth.auth.email,
+  state: '',
+  discord: '',
 });
 
-const genders = ref(['Male', 'Female', 'Other']);
-const menu = ref(false);
-
-const saveDate = () => {
-  menu.value = false;
-};
-
-const submitProfile = () => {
-  // Submit profile data
+const submitProfile = async () => {
+  const attProfile = JSON.stringify(profile);
+  try {
+    auth.updateProfile(attProfile);
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
