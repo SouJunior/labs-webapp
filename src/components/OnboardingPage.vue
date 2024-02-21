@@ -28,7 +28,7 @@
                     </v-btn>
                 </p>
 
-                <p v-if="auth.squads.length == 0" >
+                <p v-if="squad.length == 0" >
                     Você ainda não cadastrou o sua Squad, cadastre agora.
                     <v-btn
                         variant="text"
@@ -38,12 +38,13 @@
                         cadastre agora
                     </v-btn>
                 </p>
-                <p v-else: >
+
+                <p v-if="squad" >
                     Acesse a sua Squad
                     <v-btn
                         variant="text"
                         class="font-weight-semibold"
-                        :to="{ name: 'squads', params: { uuid: auth.squads[0].uuid} }"
+                        :to="{ name: 'squads', params: { uuid: squad.uuid} }"
                     >
                        acessar 
                     </v-btn>
@@ -54,32 +55,23 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useProductStore } from "@/stores/product";
 import { useAuthStore } from "@/stores/auth";
-//import { useSquadStore } from "@/stores/squad";
 
 const product = useProductStore();
-const auth = useAuthStore();
-//const useSquad = useSquadStore();
-
 const tt = await product.fetchProducts();
 
-console.log('tt', tt[0].uuid)
+const auth = useAuthStore();
 
+// const squad = computed(() => auth.getSquad())
+const squad =  auth.getSquad()
+console.log('squad :', squad.length)
 onMounted(
-   async () => {
+    async () => {
         if (auth.getUuid() != undefined) {
-
-            //const p = product.getProductsByUuid()
             console.log('mount :')
         }
     }
 ) 
-
-// console.log(product.getProductsByUuid())
-
 </script>
-
-<style scoped>
-</style>

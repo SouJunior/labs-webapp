@@ -84,6 +84,14 @@ export const useAuthStore = defineStore('auth', () => {
         return JSON.parse(jsonPayload);
     }
 
+    function getSquad() {
+        if (squads.value.length === 0) {
+            return false;
+        }
+
+        return squads.value[0];
+    }
+
     return { 
         login, 
         logout, 
@@ -94,7 +102,8 @@ export const useAuthStore = defineStore('auth', () => {
         products,
         fetchProducts,
         fetchSquads, 
-        squads
+        squads,
+        getSquad
     }
 
 },
