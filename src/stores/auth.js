@@ -30,7 +30,9 @@ export const useAuthStore = defineStore('auth', () => {
 
                 await fetchProducts(auth.value.uuid);
 
-                await fetchSquads(products.value[0].uuid);
+                if (products.value.length > 0) {
+                    await fetchSquads(products.value[0].uuid);
+                }
 
                 router.push('/onboarding');
             }
@@ -92,6 +94,14 @@ export const useAuthStore = defineStore('auth', () => {
         return squads.value[0];
     }
 
+    function getProduct() {
+        if (products.value.length === 0) {
+            return false;
+        }
+
+        return products.value[0];
+    }
+
     return { 
         login, 
         logout, 
@@ -103,7 +113,8 @@ export const useAuthStore = defineStore('auth', () => {
         fetchProducts,
         fetchSquads, 
         squads,
-        getSquad
+        getSquad,
+        getProduct
     }
 
 },

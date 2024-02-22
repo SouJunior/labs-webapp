@@ -1,34 +1,45 @@
 <template>
-  <v-container>
-      <h1>Criação de produto</h1>
-    <v-form>
-      <!-- Personal Information -->
-      <v-text-field label="Qual o nome do projeto?" v-model="applicant.fullName"></v-text-field>
-      <v-text-field label="Qual o escopo do projeto?" v-model="applicant.email"></v-text-field>
-      <v-btn color="primary" @click="submitApplication">Salvar</v-btn>
-    </v-form>
-  </v-container>
+    <v-container>
+        <v-row align="center" justify="center">
+            <v-col cols="6">
+                <h1 class="text-primary">Cadastre seu produto</h1>
+            </v-col>
+        </v-row>
+
+        <v-row  align="center" justify="center">
+            <v-col cols="6">
+                <v-form>
+                    <v-text-field label="Nome do produto*" 
+                                  variant="outlined"
+                                  v-model="product.name"></v-text-field>
+                    <v-text-field 
+                                  variant="outlined"
+                                  label="Descreva seu projeto?" v-model="product.description"></v-text-field>
+                    <v-row  align="center" justify="center">
+                        <v-col cols="6">
+                            <v-btn color="primary" @click="submitApplication">Salvar</v-btn>
+                            <v-btn class="ml-3" :to="{ name: 'onboarding' }">cancelar</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-form>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script setup>
 import { reactive } from 'vue';
+import { useProductStore } from '@/stores/product';
 
-const applicant = reactive({
-  fullName: '',
-  email: '',
-  linkedin: '',
-  github: '',
-  primaryLanguage: '',
-  secondaryLanguages: [],
-  experience: '',
-  resume: null
+const productStore = useProductStore();
+
+const product = reactive({
+    name: '',
+    description: '',
+    owner_uuid: '1234'
 });
 
-const programmingLanguages = [
-  'JavaScript', 'Python', 'Java', 'C#', 'C++', 'PHP', 'Ruby', 'Go', 'Swift', 'Kotlin'
-];
-
 const submitApplication = () => {
-  // Handle the submission of the application form
+    productStore.create(product);
 };
 </script>

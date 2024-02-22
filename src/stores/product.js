@@ -37,6 +37,12 @@ export const useProductStore = defineStore('product', () => {
         return products.value
     }
 
+    async function create(product) {
+        console.log('product :', product);
+         await productRequest.create(product)
+        // return products.value
+    }
+
     return { 
         products, 
         fetchProducts,
@@ -44,7 +50,8 @@ export const useProductStore = defineStore('product', () => {
         getProduct,
         product,
         byUser,
-        del
+        del,
+        create
     }
 }, 
     { 
