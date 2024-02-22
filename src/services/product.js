@@ -1,4 +1,5 @@
 import axiosInstance from '@/services/http.js'
+import productService from '@/services/product.js'
 
 function headers () {
     const token = localStorage.getItem('token');
@@ -27,6 +28,32 @@ async function fetchProducts() {
             alert(data.message)
         }
         else {
+            return data
+        }
+    }
+    catch (error) {
+            alert(error)
+    }
+}
+
+async function create(product) {
+    console.log('service :', product);
+    try {
+        const response = await axiosInstance.post(
+            '/product', 
+            { 
+                name: product.name,
+                description: product.description,
+                owner_uuid: product.owner_uuid,
+            }
+        );
+
+        const data = response.data;
+
+        if (data.error) {
+            // alert(data.error)
+            return;
+        } else {
             return data
         }
     }
@@ -105,5 +132,6 @@ export default {
     fetchProducts,
     show,
     byUser,
-    del
+    del,
+    create
 };

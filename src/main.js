@@ -1,4 +1,4 @@
-import './assets/main.css';
+// import './assets/main.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
@@ -9,6 +9,7 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
+import '@/assets/main.scss';
 
 const savedTheme = localStorage.getItem('theme') || 'dark';
 
@@ -20,8 +21,9 @@ const vuetify = createVuetify({
 		themes: {
 			myTheme: {
 				dark: savedTheme == 'light' ? false : true,
-				color: {
-					primary: '#06d7a0'
+				colors: {
+					primary: '#62d4a4',
+                    background: "#323232",
 				}
 			}
 		},

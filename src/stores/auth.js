@@ -30,7 +30,9 @@ export const useAuthStore = defineStore('auth', () => {
 
                 await fetchProducts(auth.value.uuid);
 
-                await fetchSquads(products.value[0].uuid);
+                if (products.value.length > 0) {
+                    await fetchSquads(products.value[0].uuid);
+                }
 
                 router.push('/onboarding');
             }
@@ -84,6 +86,22 @@ export const useAuthStore = defineStore('auth', () => {
         return JSON.parse(jsonPayload);
     }
 
+    function getSquad() {
+        if (squads.value.length === 0) {
+            return false;
+        }
+
+        return squads.value[0];
+    }
+
+    function getProduct() {
+        if (products.value.length === 0) {
+            return false;
+        }
+
+        return products.value[0];
+    }
+
     async function updateProfile(profile) {
         try {
             const response = await axiosInstance.put('/user/' + auth.value.uuid, profile);
@@ -91,7 +109,6 @@ export const useAuthStore = defineStore('auth', () => {
             const data = response.data;
 
             alert(data.message)
-
         } catch (error) {
             alert(error.message)
         }
@@ -108,6 +125,8 @@ export const useAuthStore = defineStore('auth', () => {
         fetchProducts,
         fetchSquads,
         squads,
+        getSquad,
+        getProduct,
         updateProfile
     }
 

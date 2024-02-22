@@ -8,7 +8,14 @@
           <v-card-title class="headline">{{ produto.nome }}</v-card-title>
           <v-card-subtitle>{{ produto.descricaoCurta }}</v-card-subtitle>
           <v-card-actions>
-              <v-btn color="primary" :to="{ name : 'squads', params: {uuid: auth.squads[0].uuid } }">Squad</v-btn>
+
+              <v-btn 
+                    v-if="auth.getSquad() == false"
+                    color="primary" :to="{ name : 'squad-create' }">Criar Squad</v-btn>
+              <v-btn 
+                    v-if="auth.getSquad()"
+                    color="primary" :to="{ name : 'squads', params: {uuid: auth.getSquad().uuid } }">Squad</v-btn>
+
             <v-spacer></v-spacer>
             <v-btn color="primary" :to="{ name : 'product-create' }">Atualizar</v-btn>
 
