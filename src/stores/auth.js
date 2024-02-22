@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('auth', () => {
     const products = ref([]);
     const squads = ref([]);
 
-    async function login( user ) {
+    async function login(user) {
         try {
             const response = await axiosInstance.post('/login', user);
             const data = response.data;
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
 
         } catch (error) {
             console.log('error :', error);
-            if (error.response?.status === 401){
+            if (error.response?.status === 401) {
                 alert(error.response.data)
             }
         }
@@ -70,13 +70,13 @@ export const useAuthStore = defineStore('auth', () => {
     function $reset() {
         auth.value = { name: '', email: '', token: '' }
         products.value = []
-        squads.value = [] 
+        squads.value = []
     }
 
-    function parseJwt (token) {
+    function parseJwt(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -84,21 +84,35 @@ export const useAuthStore = defineStore('auth', () => {
         return JSON.parse(jsonPayload);
     }
 
-    return { 
-        login, 
-        logout, 
-        auth, 
-        getName, 
-        getUuid, 
-        $reset, 
+    async function updateProfile(profile) {
+        try {
+            const response = await axiosInstance.put('/user/' + auth.value.uuid, profile);
+
+            const data = response.data;
+
+            alert(data.message)
+
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    return {
+        login,
+        logout,
+        auth,
+        getName,
+        getUuid,
+        $reset,
         products,
         fetchProducts,
-        fetchSquads, 
-        squads
+        fetchSquads,
+        squads,
+        updateProfile
     }
 
 },
-    { 
-        persist: true 
+    {
+        persist: true
     }
 )

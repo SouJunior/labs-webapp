@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
             } else if (data.message) {
                 registered.value = true;
                 localStorage.setItem('user', data);
-            } 
+            }
         } catch (error) {
             if (error.response.status === 401 || error.response.status === 422 || error.response.status === 404 || error.response.status === 500) {
                 alert(error.response.data)
@@ -43,8 +43,9 @@ export const useUserStore = defineStore('user', () => {
         state.user = user
     }
 
-    return { user, setName, state, addUser, 
-        register ,
+    return {
+        user, setName, state, addUser,
+        register,
         registered
     }
 
