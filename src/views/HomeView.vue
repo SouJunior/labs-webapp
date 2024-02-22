@@ -62,7 +62,7 @@ import imgUrl from '@/assets/logo-green-transparent.png';
 }
 
 .home-title {
-	font-family: "Merriweather", serif !important;
+	font-family: "Radio Canada", serif !important;
 	font-size: 3.6rem;
 }
 
