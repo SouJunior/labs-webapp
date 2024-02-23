@@ -1,28 +1,25 @@
 <template>
 <v-container fluid class="pa-0 d-flex align-center justify-center">
-  <div>
-    <div class="d-flex div-gap">
-      <div>
+    <v-col class="d-flex flex-grow-0 v-col-gap">
         <img :src="imgUrl" width="auto" height="100%" alt="Logo SouJunior Labs" class="floating">
-      </div>
-      <div class="login-form">
+      <v-card class="login-form secondary">
           <p>Entrar</p>
           <hr class="mt-1 mb-8">
           <v-form @submit.prevent>
             <v-text-field
               variant="outlined"
               v-model="user.email"
-              :rules="rules"
+              :rules="emailRules"
               label="Email"
+              class="mb-2"
             />
             <v-text-field
               :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
               :type="visible ? 'text' : 'password'"
               @click:append-inner="visible = !visible"
-              density="compact"
               variant="outlined"
               v-model="user.password"
-              :rules="rules"
+              :rules="passwordRules"
               label="Senha"
             />
             <div class="d-flex align-center justify-space-between">
@@ -34,11 +31,10 @@
             </div>
             <hr class="mb-6 mt-8">
             <v-btn color="primary" type="submit" block @click="submitLogin">Login</v-btn>
-            <v-btn block class="mt-2" @click="$router.push('/registry')">Registrar</v-btn>
+            <v-btn block class="mt-2" :to="{ name: 'registry' }">Registrar</v-btn>
           </v-form>
-      </div>
-    </div>
-  </div>
+      </v-card>
+    </v-col>
 </v-container>
 </template>
 
@@ -52,8 +48,7 @@ const authStore = useAuthStore();
 
 const user = reactive({
   email: 'w@w.com',
-  password: '12345678',
-  
+  password: '12345678'
 });
 
 const submitLogin = async () => {
@@ -64,12 +59,15 @@ const submitLogin = async () => {
     }
 }
 
-const rules = ref([
-    value => {
-        if (value) return true;
-        return 'Campo obrigatório!';
-    },
-]);
+const emailRules = [
+  (v) => !!v || 'E-mail é obrigatório',
+  (v) => /.+@.+\..+/.test(v) || 'E-mail deve ser válido',
+];
+
+const passwordRules = [
+  (v) => !!v || 'Senha é obrigatória',
+  (v) => v.length >= 8 || 'Senha deve ter no mínimo 8 caracteres',
+];
 
 const visible = ref(false);
 </script>
@@ -90,15 +88,16 @@ const visible = ref(false);
     transform: translateY(-20px);
   }
 }
-.div-gap {
-  gap: 250px;
+
+.v-col-gap {
+  gap: 200px;
 }
+
 .login-form {
   width: 450px;
-  height: auto;
-  padding: 38px;
+  padding: 40px;
   border-radius: 12px;
-  background-color: #212121;
+  box-shadow: 0px 0px 20px 0px #00000033;
 }
 
 .login-form p {
