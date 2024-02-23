@@ -41,7 +41,7 @@ import  OnboardingPage  from '@/components/OnboardingPage.vue';
 }
 
 .home-title {
-	font-family: "Merriweather", serif !important;
+	font-family: "Radio Canada", serif !important;
 	font-size: 3.6rem;
 }
 

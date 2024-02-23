@@ -189,6 +189,6 @@ function toggleTheme() {
 }
 
 .logo-text {
-	font-family: "Merriweather", serif !important;
+	font-family: "Radio Canada", serif !important;
 }
 </style>
