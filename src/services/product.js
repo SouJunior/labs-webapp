@@ -62,6 +62,32 @@ async function create(product) {
     }
 }
 
+async function update(product) {
+    console.log('service update:', product);
+    try {
+        const response = await axiosInstance.put(
+            '/product/' + product.uuid, 
+            { 
+                name: product.name,
+                description: product.description,
+            },
+            { headers: headers() }
+        );
+
+        let data = response.data;
+
+        if (data.error) {
+            // alert(data.error)
+            return;
+        } else {
+            return data = { ...data, statusCode: response.status }
+        }
+    }
+    catch (error) {
+            alert(error)
+    }
+}
+
 async function show (uuid) {
     try {
         const response = await axiosInstance.get(
@@ -133,5 +159,6 @@ export default {
     show,
     byUser,
     del,
-    create
+    create,
+    update
 };

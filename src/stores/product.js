@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 // import axiosInstance from '@/services/http.js'
 import productRequest from '@/services/product.js'
 import { useAuthStore } from './auth.js'
+import router from "@/router";
 
 export const useProductStore = defineStore('product', () => {
     const tt  = useAuthStore()
@@ -43,6 +44,18 @@ export const useProductStore = defineStore('product', () => {
         // return products.value
     }
 
+    async function update(product) {
+        console.log('product update:', product);
+        const p =  await productRequest.update(product)
+        console.log('product updated:', p);
+        if (p.statusCode == 200) {
+            tt.fetchProducts(tt.getUuid())
+
+            router.push('/product/' + product.uuid);
+        }
+        // return products.value
+    }
+
     return { 
         products, 
         fetchProducts,
@@ -51,7 +64,8 @@ export const useProductStore = defineStore('product', () => {
         product,
         byUser,
         del,
-        create
+        create,
+        update
     }
 }, 
     { 

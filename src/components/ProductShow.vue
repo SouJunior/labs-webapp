@@ -17,7 +17,7 @@
                     color="primary" :to="{ name : 'squads', params: {uuid: auth.getSquad().uuid } }">Squad</v-btn>
 
             <v-spacer></v-spacer>
-            <v-btn color="primary" :to="{ name : 'product-create' }">Atualizar</v-btn>
+            <v-btn color="primary" :to="{ name : 'product-update', params: {uuid:  route.params.uuid} }">Atualizar</v-btn>
 
             <v-dialog width="500">
                 <template v-slot:activator="{ props }">

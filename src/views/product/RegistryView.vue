@@ -2,7 +2,8 @@
     <v-container>
         <v-row align="center" justify="center">
             <v-col cols="6">
-                <h1 class="text-primary">Cadastre seu produto</h1>
+                <h1 v-if="route.meta.update == false" class="text-primary">Cadastre seu produto</h1>
+                <h1 v-if="route.meta.update == true" class="text-primary">Atualizar seu produto</h1>
             </v-col>
         </v-row>
 
@@ -30,16 +31,28 @@
 <script setup>
 import { reactive } from 'vue';
 import { useProductStore } from '@/stores/product';
+import { useAuthStore } from "@/stores/auth";
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const productStore = useProductStore();
+const useAuth = useAuthStore();
+
+const index = useAuth.products.map(function(e) { return e.uuid; }).indexOf(route.params.uuid);
+const p = useAuth.products[index];
 
 const product = reactive({
-    name: '',
-    description: '',
-    owner_uuid: '1234'
+    uuid: route.params.uuid,
+    name: p.name,
+    description: p.description,
 });
 
 const submitApplication = () => {
-    productStore.create(product);
+    if (route.meta.update == false) {
+        productStore.create(product);
+    } else {
+        productStore.update(product);
+    }
 };
 </script>

@@ -66,6 +66,15 @@ const router = createRouter({
         }
     },
     {
+        path: '/product/:uuid/update',
+        name: 'product-update',
+        component: ProductRegistryView,
+        meta : {
+            auth: true,
+            update: true
+        }
+    },
+    {
       path: '/squads/:uuid',
       name: 'squads',
       component: SquadsView, 
