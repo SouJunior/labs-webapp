@@ -12,18 +12,19 @@
         </label>
       </v-col>
     </v-row>
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" class="form">
       <v-col cols="7">
-        <v-stepper v-model="step" :items="items" hide-actions>
+        <v-stepper v-model="step" :items="items" hide-actions class="stepper">
           <template v-slot:item.1>
-            <p class="mt-6">
+            <p>
               Olá você acaba de ser convidado para o painel administrativo da
-              <strong color="primary">SouJunior Labs</strong>, para prosseguir será necessário se
-              cadastrar.
+              <span>SouJunior Labs</span>, para prosseguir será necessário se cadastrar.
             </p>
             <v-col align="center" class="mt-6">
-              <v-btn color="primary" @click="nextStep">Continuar</v-btn>
-              <v-btn class="ml-3" :to="{ name: 'home' }" @click="resetForm">Cancelar</v-btn>
+              <v-btn class="nextButton" @click="nextStep">Continuar</v-btn>
+              <v-btn class="ml-3 cancelButton" :to="{ name: 'home' }" @click="resetForm"
+                >Cancelar</v-btn
+              >
             </v-col>
           </template>
           <template v-slot:item.2>
@@ -71,8 +72,10 @@
               ></v-checkbox>
               <v-row>
                 <v-col align="center">
-                  <v-btn @click="submitApplicant" color="primary">Cadastrar-se</v-btn>
-                  <v-btn class="ml-3" :to="{ name: 'home' }" @click="resetForm">Cancelar</v-btn>
+                  <v-btn @click="submitApplicant" class="nextButton">Cadastrar-se</v-btn>
+                  <v-btn class="ml-3 cancelButton" :to="{ name: 'home' }" @click="resetForm"
+                    >Cancelar</v-btn
+                  >
                 </v-col>
               </v-row>
             </v-form>
@@ -83,16 +86,16 @@
               para a pagina de login.
             </p>
             <v-col align="center" class="mt-6">
-              <v-btn color="primary" @click="redirectToLogin">Continuar</v-btn>
+              <v-btn class="nextButton" @click="redirectToLogin">Continuar</v-btn>
             </v-col>
           </template>
         </v-stepper>
       </v-col>
       <v-col cols="7" class="mt-6">
-        <v-card v-if="step === 1" class="pa-6" outlined color="primary"
+        <v-card v-if="step === 1" class="pa-6 registerCard" outlined
           >No momento, o cadastro esta liberado apenas para os founders dos projetos já ativos. Mas
-          em breve esperamos ter todos por aqui. Se você é founder, confira o register_token de
-          acesso no canal do Discord exclusivo para os founders.</v-card
+          em breve esperamos ter todos por aqui. Se você é founder, confira o token de acesso no
+          canal do Discord exclusivo para os founders.</v-card
         >
       </v-col>
     </v-row>
@@ -112,6 +115,7 @@ const items = [
   { step: 2, title: '' },
   { step: 3, title: '' }
 ]
+
 const applicant = reactive({
   register_token: '',
   name: '',
@@ -196,5 +200,62 @@ const submitApplicant = async () => {
 
 p {
   font-size: 18px;
+}
+
+p span {
+  font-weight: bold;
+  color: #62d4a4;
+}
+
+.v-text-field {
+  padding-bottom: 10px;
+}
+
+.stepper {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.v-stepper :deep(.v-stepper-header) {
+  box-shadow: none;
+}
+
+.v-stepper :deep(.v-stepper-item__avatar) {
+  margin-inline-end: 0;
+}
+
+.form {
+  text-align: center;
+}
+
+.registerCard {
+  background: rgba(82, 255, 182, 0.25);
+  color: black;
+  border-radius: 12px;
+  box-shadow: rgba(82, 255, 182, 0.25) 0px 0px 1px 1px;
+}
+
+.cancelButton .nextButton {
+  border-radius: 6px;
+}
+
+.cancelButton {
+  background-color: transparent;
+  color: #62d4a4;
+  border: 3px solid rgba(82, 255, 182, 0.25);
+  box-shadow: rgba(82, 255, 182, 0.25) 0px 0px 1px 1px;
+  transition: ease-in-out 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #62d4a4;
+  color: white;
+  transition: ease-in-out 0.2s;
+  box-shadow: rgba(82, 255, 182, 0.25) 0px 0px 1px 1px;
+}
+
+.nextButton {
+  background-color: #62d4a4;
+  color: black;
 }
 </style>
