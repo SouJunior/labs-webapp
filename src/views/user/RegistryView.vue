@@ -242,16 +242,15 @@ p span {
 .cancelButton {
   background-color: transparent;
   color: #62d4a4;
-  border: 3px solid rgba(82, 255, 182, 0.25);
-  box-shadow: rgba(82, 255, 182, 0.25) 0px 0px 1px 1px;
+  border: 2px solid #62d4a4;
   transition: ease-in-out 0.2s;
+  box-shadow: none;
 }
 
 .cancelButton:hover {
   background-color: #62d4a4;
   color: white;
   transition: ease-in-out 0.2s;
-  box-shadow: rgba(82, 255, 182, 0.25) 0px 0px 1px 1px;
 }
 
 .nextButton {

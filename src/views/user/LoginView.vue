@@ -1,75 +1,74 @@
 <template>
-<v-container fluid class="pa-0 d-flex align-center justify-center">
+  <v-container fluid class="pa-0 d-flex align-center justify-center">
     <v-col class="d-flex flex-grow-0 v-col-gap">
-        <img :src="imgUrl" width="auto" height="100%" alt="Logo SouJunior Labs" class="floating">
-      <v-card class="login-form secondary">
-          <p>Entrar</p>
-          <hr class="mt-1 mb-8">
-          <v-form @submit.prevent>
-            <v-text-field
-              variant="outlined"
-              v-model="user.email"
-              :rules="emailRules"
-              label="Email"
-              class="mb-2"
-            />
-            <v-text-field
-              :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="visible ? 'text' : 'password'"
-              @click:append-inner="visible = !visible"
-              variant="outlined"
-              v-model="user.password"
-              :rules="passwordRules"
-              label="Senha"
-            />
-            <div class="d-flex align-center justify-space-between">
-              <label>
-                <input type="checkbox" class="mr-2">
-                Lembrar-me
-              </label>
-              <a href="/">Precisa de ajuda?</a>
-            </div>
-            <hr class="mb-6 mt-8">
-            <v-btn color="primary" type="submit" block @click="submitLogin">Login</v-btn>
-            <v-btn block class="mt-2" :to="{ name: 'registry' }">Registrar</v-btn>
-          </v-form>
+      <img :src="imgUrl" width="auto" height="100%" alt="Logo SouJunior Labs" class="floating" />
+      <v-card class="login-form" color="transparent">
+        <p>Entrar</p>
+        <hr class="mt-1 mb-8" />
+        <v-form @submit.prevent>
+          <v-text-field
+            variant="outlined"
+            v-model="user.email"
+            :rules="emailRules"
+            label="Email"
+            class="mb-2"
+          />
+          <v-text-field
+            :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="visible ? 'text' : 'password'"
+            @click:append-inner="visible = !visible"
+            variant="outlined"
+            v-model="user.password"
+            :rules="passwordRules"
+            label="Senha"
+          />
+          <div class="d-flex align-center justify-space-between">
+            <label>
+              <input type="checkbox" class="mr-2" />
+              Lembrar-me
+            </label>
+            <a href="/">Precisa de ajuda?</a>
+          </div>
+          <hr class="mb-6 mt-8" />
+          <v-btn class="loginButton" type="submit" block @click="submitLogin">Login</v-btn>
+          <v-btn block class="mt-2 registerButton" :to="{ name: 'registry' }">Cadastre-se</v-btn>
+        </v-form>
       </v-card>
     </v-col>
-</v-container>
+  </v-container>
 </template>
 
 <script setup>
-
 import { reactive, ref } from 'vue'
-import imgUrl from '@/assets/logo-green-transparent.png';
+import imgUrl from '@/assets/logo-green-transparent.png'
 import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 const user = reactive({
   email: 'w@w.com',
   password: '12345678'
-});
+})
 
 const submitLogin = async () => {
-    try {
-        await authStore.login(user);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await authStore.login(user)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const emailRules = [
   (v) => !!v || 'E-mail é obrigatório',
-  (v) => /.+@.+\..+/.test(v) || 'E-mail deve ser válido',
-];
+  (v) => /.+@.+\..+/.test(v) || 'E-mail deve ser válido'
+]
 
 const passwordRules = [
   (v) => !!v || 'Senha é obrigatória',
-  (v) => v.length >= 8 || 'Senha deve ter no mínimo 8 caracteres',
-];
+  (v) => v.length >= 8 || 'Senha deve ter no mínimo 8 caracteres'
+]
 
-const visible = ref(false);
+const visible = ref(false)
 </script>
 
 <style scoped>
@@ -97,7 +96,7 @@ const visible = ref(false);
   width: 450px;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0px 0px 20px 0px #00000033;
+  border: 1px solid #62d4a4;
 }
 
 .login-form p {
@@ -108,11 +107,11 @@ const visible = ref(false);
 }
 
 .login-form hr {
-  border: 1.46px solid #CBCBCB;
+  border: 1.46px solid #cbcbcb;
 }
 
 .login-form div a {
-  color: #62D4A4;
+  color: #62d4a4;
   text-decoration: none;
   font-size: 16px;
   font-family: 'Radio Canada', serif !important;
@@ -123,5 +122,24 @@ const visible = ref(false);
   font-size: 14px;
   font-family: 'Sora', sans-serif !important;
   font-weight: 400;
+}
+
+.registerButton {
+  background-color: transparent;
+  color: #62d4a4;
+  border: 2px solid #62d4a4;
+  transition: ease-in-out 0.2s;
+  box-shadow: none;
+}
+
+.registerButton:hover {
+  background-color: #62d4a4;
+  color: white;
+  transition: ease-in-out 0.2s;
+}
+
+.loginButton {
+  background-color: #62d4a4;
+  color: black;
 }
 </style>
