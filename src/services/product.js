@@ -45,16 +45,17 @@ async function create(product) {
                 name: product.name,
                 description: product.description,
                 owner_uuid: product.owner_uuid,
-            }
+            },
+            { headers: headers() }
         );
 
-        const data = response.data;
+        let data = response.data;
 
         if (data.error) {
             // alert(data.error)
             return;
         } else {
-            return data
+            return data = { ...data, statusCode: response.status }
         }
     }
     catch (error) {
@@ -134,7 +135,7 @@ async function byUser(uuid) {
 
 async function del(uuid) {
     try {
-        const response = await axiosInstance.get(
+        const response = await axiosInstance.delete(
             '/product/' + uuid, 
             { headers: headers() }
         );

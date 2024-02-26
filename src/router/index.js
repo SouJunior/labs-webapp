@@ -62,7 +62,8 @@ const router = createRouter({
         name: 'product-create',
         component: ProductRegistryView,
         meta : {
-            auth: true
+            auth: true,
+            update: false 
         }
     },
     {

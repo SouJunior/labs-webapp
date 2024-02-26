@@ -34,13 +34,23 @@ export const useProductStore = defineStore('product', () => {
     }
 
     async function del(uuid) {
-        products.value = await productRequest.del(uuid)
-        return products.value
+        await productRequest.del(uuid)
+
+        await tt.fetchProducts(tt.getUuid())
+
+        router.push('/onboarding' );
+        //return products.value
     }
 
     async function create(product) {
-        console.log('product :', product);
-         await productRequest.create(product)
+        const p = await productRequest.create(product)
+        console.log('product created:', p);
+
+        if (p.statusCode == 200) {
+            await tt.fetchProducts(tt.getUuid())
+
+            router.push('/product/' + p.product.uuid);
+        }
         // return products.value
     }
 
@@ -49,7 +59,7 @@ export const useProductStore = defineStore('product', () => {
         const p =  await productRequest.update(product)
         console.log('product updated:', p);
         if (p.statusCode == 200) {
-            tt.fetchProducts(tt.getUuid())
+            await tt.fetchProducts(tt.getUuid())
 
             router.push('/product/' + product.uuid);
         }

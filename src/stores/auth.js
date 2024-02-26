@@ -50,6 +50,11 @@ export const useAuthStore = defineStore('auth', () => {
         return products.value
     }
 
+    function setProducts(products) {
+        products.value = products
+        return products.value
+    }
+
     async function fetchSquads(uuid) {
         squads.value = await squadService.fetchBy(uuid)
         return squads.value
@@ -127,7 +132,8 @@ export const useAuthStore = defineStore('auth', () => {
         squads,
         getSquad,
         getProduct,
-        updateProfile
+        updateProfile,
+        setProducts
     }
 
 },

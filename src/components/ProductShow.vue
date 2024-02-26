@@ -1,9 +1,6 @@
 <template>
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-img :src="produto.imagem" aspect-ratio="1.7"></v-img>
-      </v-col>
-      <v-col cols="12" md="6">
+    <v-row justify="center">
+      <v-col cols="6" md="6">
         <v-card>
           <v-card-title class="headline">{{ produto.nome }}</v-card-title>
           <v-card-subtitle>{{ produto.descricaoCurta }}</v-card-subtitle>
@@ -33,7 +30,7 @@
                             <v-btn
                                 color="red"
                                 text="excluir"
-                                @click=""
+                                @click="del(route.params.uuid)"
                                 ></v-btn>
                             <v-spacer/>
                             <v-btn
@@ -55,6 +52,7 @@
 import { ref } from 'vue';
 import { useProductStore } from '@/stores/product';
 import { useRoute } from 'vue-router';
+import router from "@/router";
 
 import { useAuthStore } from "@/stores/auth";
 
@@ -64,7 +62,7 @@ const route = useRoute();
 
 const product = useProductStore();
 
-const p = await product.getProduct(route.params.uuid);
+const p = auth.getProduct();
 
 console.log(p);
 
@@ -85,6 +83,12 @@ console.log(p);
       // Implementar a lógica de contato ou redirecionar para a página de compra
       console.log("Entrar em contato ou ir para a página de compra");
     };
+
+
+function del(uuid) {
+    product.del(uuid);
+    router.push({ name: 'onboarding' });
+}
 
 </script>
 

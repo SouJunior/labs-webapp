@@ -2,11 +2,11 @@
     <div class="d-flex flex-column justify-center align-center">
         <div class="d-flex flex-column ga-6">
             <div>
-                <h1 class="home-title text-left mb-2">Seja Bem vindo(a) ao Labs</h1>
+                <h1 class="home-title text-left mb-2">Seja Bem vindo(a) ao SouJunior Labs</h1>
                 <h2 class="home-subtitle text-left text-grey-darken-1 text-h4">Laboratorio de oportunidades</h2>
             </div>
             <br>
-            <div>
+            <div class="ma-2">
                 <p v-if="auth.getProduct() == false">
                     Voce ainda não cadastrou o seu produto
                     <v-btn
@@ -20,12 +20,14 @@
                    Acesse seu produto agora! 
                    <v-btn 
                         class="font-weight-semibold"
-                        :to="{ name: 'product-by-id', params: { uuid: tt[0].uuid } }"
+                        :to="{ name: 'product-by-id', params: { uuid: auth.getProduct().uuid } }"
                         >
                        Acessar 
                     </v-btn>
                 </p>
 
+            </div>
+            <div class="ma-2">
                 <p v-if="auth.getSquad() == false && auth.getProduct()" >
                     Você ainda não cadastrou o sua Squad, cadastre agora.
                     <v-btn
@@ -59,6 +61,6 @@ const product = useProductStore();
 const tt = await product.fetchProducts();
 
 const auth = useAuthStore();
-
+console.log('getProduct()', auth.getProduct())
 const squad =  auth.getSquad()
 </script>

@@ -38,15 +38,25 @@ const route = useRoute();
 
 const productStore = useProductStore();
 const useAuth = useAuthStore();
+let p = {}
 
-const index = useAuth.products.map(function(e) { return e.uuid; }).indexOf(route.params.uuid);
-const p = useAuth.products[index];
+if ( route.meta.update ==  true) {
+    //const index = useAuth.products.map(function(e) { return e.uuid; }).indexOf(route.params.uuid);
+    //p = useAuth.products[index];
+    p = useAuth.getProduct();
+}
 
 const product = reactive({
-    uuid: route.params.uuid,
-    name: p.name,
-    description: p.description,
+    uuid: '',
+    name: '',
+    description: '',
 });
+
+if ( route.meta.update ==  true) {
+    product.uuid = route.params.uuid
+    product.name = p.name
+    product.description = p.description 
+}
 
 const submitApplication = () => {
     if (route.meta.update == false) {
