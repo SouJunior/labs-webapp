@@ -1,7 +1,7 @@
 <template>
     <v-sheet class="py-4 rounded-lg mb-4">
       <div class="px-4 d-flex align-center justify-space-between">
-        <h1>Minha Squad</h1>
+        <h1>Squad do produto</h1>
       </div>
 
       <v-list-item
@@ -12,11 +12,54 @@
           <v-list-item-title v-text="item.title"></v-list-item-title>
           <v-list-item-subtitle v-text="item.subtitle"></v-list-item-subtitle>
       </v-list-item>
+      <v-btn >
+          Atualizar
+      </v-btn >
 
+      <v-dialog width="500">
+          <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" color="red">excluir</v-btn>
+          </template>
+          <template v-slot:default="{ isActive }">
+              <v-card title="Dialog">
+                  <v-card-text>
+                      Você tem certeza que deseja excluir a squad? 
+                  </v-card-text>
+
+                  <v-card-actions>
+                      <v-btn
+                              color="red"
+                              text="excluir"
+                              @click="del(route.params.uuid)"
+                              ></v-btn>
+                      <v-spacer/>
+                          <v-btn
+                                  text="Cancelar"
+                                  @click="isActive.value = false"
+                                  ></v-btn>
+                  </v-card-actions>
+              </v-card>
+          </template>
+      </v-dialog>
     </v-sheet>
 
     <v-sheet class="py-4 rounded-lg">
-        <h2 class="px-4">Squad do produto</h2>
+        <h2 class="px-4">Equipe do produto</h2>
+
+
+            <v-dialog width="500">
+                <template v-slot:activator="{ props }">
+
+              <v-btn v-bind="props" >Adicionar membro </v-btn>
+                </template>
+                <template v-slot:default="{ isActive }">
+                    <v-card title="Criar membro">
+                        <v-card-text>
+                            <MemberForm />
+                        </v-card-text>
+                    </v-card>
+                </template>
+            </v-dialog>
 
         <v-list-item
             v-for="(item, index) in useMembers.member"
@@ -56,10 +99,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 
 import { useAuthStore } from "@/stores/auth";
 import { useMemberStore } from "@/stores/member";
+import MemberForm from "@/components/MemberForm.vue";
 
 const auth = useAuthStore();
 const useMembers = useMemberStore();
@@ -70,10 +114,16 @@ const mySquad = ref([
   {
     id: 1,
     title: auth.squads[0].name,
-    prependAvatar: `https://picsum.photos/600?random=${Math.random()}`,
     subtitle: auth.squads[0].description,
   },
-]);
+])
+
+
+const product = reactive({
+    uuid: '',
+    name: '',
+    description: '',
+});
 
 const squad = ref([
   {

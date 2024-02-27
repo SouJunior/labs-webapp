@@ -32,7 +32,7 @@
                     Você ainda não cadastrou o sua Squad, cadastre agora.
                     <v-btn
                         class="font-weight-semibold"
-                        :to="{ name: 'squad-create', params: { uuid: tt[0].uuid } }"
+                        :to="{ name: 'squad-create', params: { uuid: auth.getProduct().uuid } }"
                         >
                         cadastre agora
                     </v-btn>

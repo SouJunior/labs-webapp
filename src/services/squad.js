@@ -32,6 +32,29 @@ async function fetchBy(uuid) {
     }
 }
 
+async function post(squad) {
+    try {
+        const response = await axiosInstance.post(
+            '/squad', 
+            squad,
+            { headers: headers() }
+        );
+
+        const data = response.data;
+
+        if (data.error) {
+            alert(data.error)
+            return;
+        } else {
+            return data
+        }
+    }
+    catch (error) {
+        alert(error)
+    }
+}
+
 export default {
     fetchBy,
+    post
 };

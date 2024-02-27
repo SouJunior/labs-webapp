@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import squadService from '@/services/squad.js'
 import { ref } from 'vue'
+import { useAuthStore } from './auth.js'
 
 export const useSquadStore = defineStore('squad', () => {
     const squad = ref([]);
+    const useAuth = useAuthStore()
 
     async function fetch() {
         try {
@@ -25,11 +27,33 @@ export const useSquadStore = defineStore('squad', () => {
         }
     }
 
+    async function create(squad) {
+        try {
+            const data = await squadService.post(squad);
+
+            if (data.error) {
+                alert(data.error)
+                return;
+            } else if (data.message) {
+                // alert(data.message)
+                // await fetch()
+                await useAuth.fetchSquads(squad.product_uuid)
+            }
+            else {
+                squad.value = data
+            }
+        }
+        catch (error) {
+                alert(error)
+        }
+    }
+
 
 
     return { 
         squad, 
         fetch,
+        create
     }
 }, 
     { 
