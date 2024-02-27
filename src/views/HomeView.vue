@@ -111,6 +111,49 @@
         </div>
       </div>
     </v-container>
+    <v-container class="howToUse-section">
+      <div>
+        <h2>Como utilizar a plataforma?</h2>
+        <p>
+          Atualmente, nossa plataforma está em fase de testes e
+          <strong>disponível exclusivamente para os fundadores de projetos ativos.</strong> No
+          entanto, estamos trabalhando para que, em breve, ela se torne o principal canal de
+          comunicação da nossa comunidade. Contamos com o seu apoio e feedback para tornar este
+          objetivo uma realidade.
+        </p>
+        <section>
+          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
+          <span> <strong> Se você é Founder</strong> </span>, utilize o token enviado no Discord da
+          Sou Junior Labs, para completar o seu cadastro.
+        </section>
+        <section>
+          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
+          Na plataforma você poderá fazer o cadastro do seu produto, adicionando informações sobre
+          ele e sua equipe. Lembre-se de manter o produto atualizado, especialmente em casos de
+          mudanças na equipe.
+        </section>
+        <section>
+          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
+          Em breve adicionaremos diversas outras funcionalidades para tornar a plataforma ainda mais
+          útil e eficiente para todos.
+        </section>
+        <h4 class="mt-2">Juntos, podemos fazer grandes coisas acontecerem.</h4>
+      </div>
+      <div>
+        <img :src="howToUse" alt="" />
+      </div>
+    </v-container>
+    <v-container class="contact-section">
+      <v-card>
+        <h2>Precisa de Ajuda?</h2>
+        <p>
+          Se estiver enfrentando alguma dificuldade ao utilizar nossa plataforma ou se possuir
+          dúvidas ou sugestões que gostaria de compartilhar conosco, clique no botão abaixo e nos
+          envie uma mensagem. Nossa equipe ficará feliz em ouvi-lo e ajudá-lo.
+        </p>
+        <v-btn class="mt-3">Entrar em contato</v-btn>
+      </v-card>
+    </v-container>
   </v-container>
 </template>
 
@@ -136,6 +179,7 @@ import areaIcon9 from '@/assets/areaIcon9.png'
 import areaIcon10 from '@/assets/areaIcon10.png'
 import areaIcon11 from '@/assets/areaIcon11.png'
 import areaIcon12 from '@/assets/areaIcon12.png'
+import howToUse from '@/assets/howToUse.png'
 
 const carouselItems = [
   { title: 'Business', icon: areaIcon1 },
@@ -223,6 +267,12 @@ h3 {
   color: #62d4a4;
 }
 
+h4 {
+  font-size: 22px;
+  font-family: 'Radio Canada', sans-serif;
+  font-weight: 700;
+}
+
 .services-section {
   display: flex;
   flex-direction: column;
@@ -250,7 +300,6 @@ h3 {
 .services section div img {
   width: 32px;
   height: 32px;
-  margin-right: 10px;
 }
 
 .services section div p {
@@ -329,13 +378,12 @@ h3 {
 
 .carousel-container {
   text-align: center;
-  padding: 20px;
+  padding: 50px 0;
 }
 
 .carousel-container .swiper-slide {
   background-color: #62d4a4;
   border-radius: 1rem;
-  transition: ease 3s;
   cursor: pointer;
   padding: 10px;
 }
@@ -344,6 +392,52 @@ h3 {
   font-size: 16px;
   font-family: 'Radio Canada', sans-serif;
   font-weight: 400;
-  margin-bottom: 1rem;
+}
+
+.howToUse-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.howToUse-section div {
+}
+
+.howToUse-section div img {
+  max-height: 450px;
+}
+
+.howToUse-section div p {
+  font-family: 'Radio Canada', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.howToUse-section div section {
+  margin-top: 10px;
+}
+
+.contact-section {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-section .v-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 32px;
+  background-color: transparent;
+  text-align: center;
+  border: 1px solid #62d4a4;
+  border-radius: 16px;
+  max-width: 1200px;
+}
+
+.contact-section .v-card .v-btn {
+  background-color: #62d4a4;
+  color: black;
 }
 </style>
