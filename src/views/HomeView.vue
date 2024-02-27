@@ -337,6 +337,7 @@ h3 {
   border-radius: 1rem;
   transition: ease 3s;
   cursor: pointer;
+  padding: 10px;
 }
 
 .carousel-container .swiper-slide p {
