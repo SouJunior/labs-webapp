@@ -13,6 +13,40 @@
           Atualizar
       </v-btn>
 
+                    <v-dialog width="500">
+                        <template v-slot:activator="{ props }">
+                            <v-btn v-bind="props" color="red">
+
+                                <v-icon
+                                    size="small"
+                                    >
+                                        mdi-delete
+                                </v-icon>
+                            </v-btn>
+
+                        </template>
+                        <template v-slot:default="{ isActive }">
+                            <v-card title="Dialog">
+                                <v-card-text>
+                                    Você tem certeza que deseja excluir a squad? 
+                                    <strong>{{auth.squads[0].name}}</strong>
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-btn
+                                            color="red"
+                                            text="excluir"
+                                            @click="del(auth.squads[0].uuid)"
+                                            ></v-btn>
+                                    <v-spacer/>
+                                        <v-btn
+                                                text="Cancelar"
+                                                @click="isActive.value = false"
+                                                ></v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </template>
+                    </v-dialog>
     </v-sheet>
 
     <v-sheet class="py-4 rounded-lg">
@@ -24,7 +58,11 @@
                 <template v-slot:default="{ isActive }">
                     <v-card title="Criar membro">
                         <v-card-text>
-                            <MemberForm type="create" />
+                            <MemberForm 
+                            type="create"
+                            @submit="isActive.value = false"
+                            @submitcancel="isActive.value = false"/>
+
                         </v-card-text>
                     </v-card>
                 </template>
@@ -74,15 +112,16 @@
                         <template v-slot:default="{ isActive }">
                             <v-card title="Dialog">
                                 <v-card-text>
-                                    Você tem certeza que deseja excluir a squad? 
+                                    Você tem certeza que deseja excluir o membro squad? 
+                                    <strong>{{item.name}}</strong>
                                 </v-card-text>
 
                                 <v-card-actions>
                                     <v-btn
-                                            color="red"
-                                            text="excluir"
-                                            @click="del(auth.squads[0].uuid)"
-                                            ></v-btn>
+                                        color="red"
+                                        text="excluir"
+                                        @click="delMember(item.squad_uuid, item.uuid); isActive.value = false"
+                                        ></v-btn>
                                     <v-spacer/>
                                         <v-btn
                                                 text="Cancelar"
@@ -139,5 +178,10 @@ const squad = ref([
 function del(uuid) {
     useSquad.del(uuid);
     router.push({ name: 'onboarding' });
+}
+
+function delMember(uuid, member) {
+    useMembers.del(uuid, member);
+    //router.push({ name: 'onboarding' });
 }
 </script>

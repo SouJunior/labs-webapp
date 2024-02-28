@@ -78,8 +78,8 @@ async function update(member) {
 
 async function del(uuidSquad, uuidMember) {
     try {
-        const response = await axiosInstance.get(
-            '/squad/' + uuidSquad + '/members/' + uuidMember, 
+        const response = await axiosInstance.delete(
+            '/squad/' + uuidSquad + '/member/' + uuidMember, 
             { headers: headers() }
         );
 

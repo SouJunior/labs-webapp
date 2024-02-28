@@ -32,7 +32,7 @@
                     Você ainda não cadastrou o sua Squad, cadastre agora.
                     <v-btn
                         class="font-weight-semibold"
-                        :to="{ name: 'squad-create', params: { uuid: auth.getProduct().uuid } }"
+                        :to="{ name: 'squad-create', params: { productUuid: auth.getProduct().uuid } }"
                         >
                         cadastre agora
                     </v-btn>
@@ -42,7 +42,7 @@
                     Acesse a sua Squad
                     <v-btn
                         class="font-weight-semibold"
-                        :to="{ name: 'squads', params: { uuid: squad.uuid} }"
+                        :to="{ name: 'squads', params: { uuid: auth.getSquad().uuid} }"
                     >
                        acessar 
                     </v-btn>
@@ -61,6 +61,4 @@ const product = useProductStore();
 const tt = await product.fetchProducts();
 
 const auth = useAuthStore();
-console.log('getProduct()', auth.getProduct())
-const squad =  auth.getSquad()
 </script>

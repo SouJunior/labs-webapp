@@ -10,7 +10,6 @@
         <v-row  align="center" justify="center">
             <v-col>
                 <v-btn color="primary" @click="submit">Salvar</v-btn>
-                {{auth.squads[0].uuid}}
                 <v-btn 
                     class="ml-3" 
                     @click="emit('submitcancel')"
@@ -58,8 +57,9 @@ function submit() {
         useMembers.create(m);
     } else {
         useMembers.update(m);
-        emit('submit')
     }
+
+    emit('submit')
 }
 
 </script>

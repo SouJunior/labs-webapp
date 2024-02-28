@@ -30,7 +30,7 @@ export const useMemberStore = defineStore('member', () => {
                 alert(data.error)
                 return;
             } else {
-                member.value = data
+                fetch(data.member.squad_uuid)
             }
         } catch (error) {
             alert('Catch: ' + error)
@@ -62,7 +62,7 @@ export const useMemberStore = defineStore('member', () => {
                 alert(data.error)
                 return;
             } else {
-                member.value = data
+                fetch(uuidSquad)
             }
         } catch (error) {
             alert('Catch: ' + error)

@@ -10,9 +10,9 @@
                     <v-btn color="primary" class="me-4"
                                            @click="submit">Salvar</v-btn>
                     <v-btn 
-                                           :to="{ name: 'squads', params: { uuid: route.params.uuid } }"
-                                            class="me-4"
-                                           >Cancelar</v-btn>
+                       :to="{ name: 'squads', params: { uuid: route.params.productUuid } }"
+                        class="me-4"
+                       >Cancelar</v-btn>
                 </v-form>
 
             </v-col>
@@ -31,12 +31,12 @@ import router from "@/router";
 const useSquad = useSquadStore();
 const route = useRoute();
 const useAuth = useAuthStore();
-
+console.log('params:' , route.params);
 const squad = reactive({
     name: '',
     description: '',
-    product_uuid: '',
-    uuid: route.params.uuid,
+    product_uuid: route.params.productUuid,
+    uuid: ''
 });
 
 if (route.meta.type === 'update') {
@@ -53,7 +53,7 @@ const submit = () => {
         router.push({ name: 'onboarding' });
     } else {
         console.log(useSquad.update(squad))
-        router.push({ name: 'squads', params: { uuid: route.params.uuid }});
+        router.push({ name: 'squads', params: { uuid: route.params.productUuid }});
     }
     // router.push({ name: 'product-by-id', params: { uuid: route.params.uuid } });
 };

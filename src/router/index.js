@@ -95,7 +95,7 @@ const router = createRouter({
 
     },
     {
-      path: '/squad/create/:uuid',
+      path: '/squad/create/:productUuid',
       name: 'squad-create',
       component: SquadCreateView,
         meta : {
