@@ -80,6 +80,10 @@ export const useAuthStore = defineStore('auth', () => {
         squads.value = []
     }
 
+    function squadReset() {
+        squads.value = []
+    }
+
     function parseJwt(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -133,7 +137,8 @@ export const useAuthStore = defineStore('auth', () => {
         getSquad,
         getProduct,
         updateProfile,
-        setProducts
+        setProducts,
+        squadReset
     }
 
 },

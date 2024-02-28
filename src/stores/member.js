@@ -37,16 +37,16 @@ export const useMemberStore = defineStore('member', () => {
         }
     }
 
-    async function update(uuidSquad, UuidMember) {
+    async function update(member) {
         try {
-            const response = await memberService.update(uuidSquad, UuidMember);
+            const response = await memberService.update(member);
             const data = response;
 
             if (data.error) {
                 alert(data.error)
                 return;
             } else {
-                member.value = data
+                fetch(data.member.squad_uuid)
             }
         } catch (error) {
             alert('Catch: ' + error)

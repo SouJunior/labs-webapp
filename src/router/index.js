@@ -99,7 +99,17 @@ const router = createRouter({
       name: 'squad-create',
       component: SquadCreateView,
         meta : {
-            auth: true
+            auth: true,
+            type: 'create'
+        }
+    },
+    {
+      path: '/squad/:uuid/update',
+      name: 'squad-update',
+      component: SquadCreateView,
+        meta : {
+            auth: true,
+            type: 'update'
         }
     },
     {

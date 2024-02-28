@@ -54,7 +54,52 @@ async function post(squad) {
     }
 }
 
+async function put(squad) {
+    try {
+        const response = await axiosInstance.put(
+            '/squad/' + squad.uuid, 
+            squad,
+            { headers: headers() }
+        );
+
+        const data = response.data;
+
+        if (data.error) {
+            alert(data.error)
+            return;
+        } else {
+            return data
+        }
+    }
+    catch (error) {
+        alert(error)
+    }
+}
+
+async function del(uuid) {
+    try {
+        const response = await axiosInstance.delete(
+            '/squad/' + uuid, 
+            { headers: headers() }
+        );
+
+        const data = response.data;
+
+        if (data.error) {
+            alert(data.error)
+            return;
+        } else {
+            return data
+        }
+    }
+    catch (error) {
+        alert(error)
+    }
+}
+
 export default {
     fetchBy,
-    post
+    post,
+    del,
+    put
 };

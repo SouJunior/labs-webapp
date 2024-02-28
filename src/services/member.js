@@ -31,10 +31,12 @@ async function fetchBy(uuidSquad) {
     }
 }
 
-async function create(uuidSquad) {
+async function create(member) {
+    console.log('member :', member);
     try {
         const response = await axiosInstance.post(
-            '/squad/' + uuidSquad + '/members', 
+            '/squad/' + member.squad_uuid + '/member', 
+            member,
             { headers: headers() }
         );
 
@@ -52,10 +54,11 @@ async function create(uuidSquad) {
     }
 }
 
-async function update(uuidSquad, uuidMember) {
+async function update(member) {
     try {
         const response = await axiosInstance.put(
-            '/squad/' + uuidSquad + '/members/' + uuidMember, 
+            '/squad/' + member.squad_uuid + '/member/' + member.uuid, 
+            member,
             { headers: headers() }
         );
 
