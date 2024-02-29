@@ -1,59 +1,69 @@
 <template>
-    <v-sheet class="py-4 rounded-lg mb-4">
       <div class="px-4 d-flex align-center justify-space-between">
           <h1>Squad do produto</h1>
       </div>
 
-      <v-card class="pa-2">
-          <p>Nome: {{auth.getSquad().name}}</p>
-          <p>Descrição: {{auth.getSquad().description}}</p>
-      </v-card>
+      <v-row>
+          <v-col>
+          <v-card class="pa-2">
 
-      <v-btn :to="{ name: 'squad-update', params: {uuid: auth.squads[0].uuid}}">
-          Atualizar
-      </v-btn>
 
-                    <v-dialog width="500">
-                        <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props" color="red">
+          <v-card-item>
 
-                                <v-icon
-                                    size="small"
-                                    >
-                                        mdi-delete
-                                </v-icon>
-                            </v-btn>
+              <p>Nome: {{auth.getSquad().name}}</p>
+              <p>Descrição: {{auth.getSquad().description}}</p>
+          </v-card-item>
+              <v-card-actions>
+          <v-btn  color="primary" :to="{ name: 'squad-update', params: {uuid: auth.squads[0].uuid}}">
+              Atualizar
+          </v-btn>
+          <v-spacer/>
+          <v-dialog width="500">
+              <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" color="red">
 
-                        </template>
-                        <template v-slot:default="{ isActive }">
-                            <v-card title="Dialog">
-                                <v-card-text>
-                                    Você tem certeza que deseja excluir a squad? 
-                                    <strong>{{auth.squads[0].name}}</strong>
-                                </v-card-text>
+                      <v-icon
+                              size="small"
+                              >
+                              mdi-delete
+                      </v-icon>
+                  </v-btn>
 
-                                <v-card-actions>
-                                    <v-btn
-                                            color="red"
-                                            text="excluir"
-                                            @click="del(auth.squads[0].uuid)"
-                                            ></v-btn>
-                                    <v-spacer/>
-                                        <v-btn
-                                                text="Cancelar"
-                                                @click="isActive.value = false"
-                                                ></v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </template>
-                    </v-dialog>
-    </v-sheet>
+              </template>
+              <template v-slot:default="{ isActive }">
+                  <v-card title="Dialog">
+                      <v-card-text>
+                          Você tem certeza que deseja excluir a squad? 
+                          <strong>{{auth.squads[0].name}}</strong>
+                      </v-card-text>
 
-    <v-sheet class="py-4 rounded-lg">
-        <h2 class="px-4">Equipe do produto</h2>
+                      <v-card-actions>
+                          <v-btn
+                                  color="red"
+                                  text="excluir"
+                                  @click="del(auth.squads[0].uuid)"
+                                  ></v-btn>
+                          <v-spacer/>
+                              <v-btn
+                                      text="Cancelar"
+                                      @click="isActive.value = false"
+                                      ></v-btn>
+                      </v-card-actions>
+                  </v-card>
+              </template>
+          </v-dialog>
+
+              </v-card-actions>
+          </v-card>
+          </v-col>
+      </v-row>
             <v-dialog width="500">
                 <template v-slot:activator="{ props }">
-              <v-btn v-bind="props" >Adicionar membro </v-btn>
+              <v-btn class="ma-4" color="primary" v-bind="props" >
+                  <v-icon>
+                      mdi-plus
+                  </v-icon>
+                  Adicionar membro </v-btn>
                 </template>
                 <template v-slot:default="{ isActive }">
                     <v-card title="Criar membro">
@@ -71,11 +81,20 @@
             <v-data-table 
                 :headers="headers"
                 :items="useMembers.member">
+
+                    <template v-slot:item.role="{ value }">
+                        <v-chip>
+                            {{ value }}
+                        </v-chip>
+                    </template>
                 <template v-slot:item.actions="{ item }">
+
 
                     <v-dialog width="500">
                         <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props"> 
+                            <v-btn 
+                                  variant="text"
+                                v-bind="props"> 
                                 <v-icon
                                         size="small"
                                         class="me-2"
@@ -99,10 +118,11 @@
 
                     <v-dialog width="500">
                         <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props" color="red">
+                            <v-btn v-bind="props"  variant="text">
 
                                 <v-icon
                                     size="small"
+                                    color="red"
                                     >
                                         mdi-delete
                                 </v-icon>
@@ -134,7 +154,6 @@
                 </template>
             </v-data-table>
 
-    </v-sheet>
 </template>
 
 <script setup>
@@ -150,30 +169,15 @@ const auth = useAuthStore();
 const useMembers = useMemberStore();
 const useSquad = useSquadStore();
 
-let dialog = ref(false);
-
 if (auth.squads.length !== 0) {
     await useMembers.fetch(auth.squads[0].uuid);
 }
 
 const headers = [ 
     { title: 'Nome', key:'name', value: 'name' },
-    { title: 'Cargo', key:'role', value: 'role' },
-    { title: 'Actions', key: 'actions', sortable: false },
+    { title: 'Cargo', key:'role' },
+    { title: 'Ações', key: 'actions', sortable: false },
 ]
-
-const squad = ref([
-  {
-    id: 2,
-    title: 'Squad 1',
-    subtitle: 'Descrição da Squad 1',
-  },
-  {
-    id: 3,
-    title: 'Squad 2',
-    subtitle: 'Descrição da Squad 2',
-  },
-]);
 
 function del(uuid) {
     useSquad.del(uuid);
@@ -185,3 +189,8 @@ function delMember(uuid, member) {
     //router.push({ name: 'onboarding' });
 }
 </script>
+<style scoped>
+.v-table {
+    background: rgb(var(--v-theme-background));
+}
+</style>

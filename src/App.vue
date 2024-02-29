@@ -19,7 +19,7 @@
 					<h1 class="text-h5 font-weight-bold font-semibold primary-color ml-3 logo-text">SouJunior Labs</h1>
 				</a>
 				<div class="d-flex align-center ga-2">
-					<v-icon
+					<!--v-icon
 						v-if="currentTheme.dark"
 						variant="text"
 						icon="mdi-weather-night"
@@ -27,8 +27,8 @@
 						color="purple-darken-1"
 						class="mr-8 cursor-pointer"
 						@click="toggleTheme"
-					/>
-					<v-icon
+					/-->
+					<!--v-icon
 						v-if="!currentTheme.dark"
 						variant="text"
 						icon="mdi-white-balance-sunny"
@@ -36,7 +36,7 @@
 						color="orange"
 						class="mr-8 cursor-pointer"
 						@click="toggleTheme"
-					/>
+					/-->
 					<v-btn
 						variant="text"
 						class="font-weight-semibold"
