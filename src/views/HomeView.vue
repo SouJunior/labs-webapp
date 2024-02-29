@@ -148,18 +148,36 @@
         <h2>Precisa de Ajuda?</h2>
         <p>
           Se estiver enfrentando alguma dificuldade ao utilizar nossa plataforma ou se possuir
-          dúvidas ou sugestões que gostaria de compartilhar conosco, clique no botão abaixo e nos
-          envie uma mensagem. Nossa equipe ficará feliz em ouvi-lo e ajudá-lo.
+          dúvidas ou sugestões que gostaria de compartilhar, entre em contato conosco através do
+          canal "Founders only" no Discord da Sou Junior Labs. Nossa equipe ficará feliz em ouvi-lo
+          e ajudá-lo.
         </p>
-        <v-btn class="mt-3">Entrar em contato</v-btn>
       </v-card>
     </v-container>
+    <v-footer>
+      <v-row>
+        <v-col cols="12" class="d-flex align-center justify-center">
+          <div>
+            <a class="d-flex align-center logo">
+              <v-img height="36" width="36" :src="logo_white" alt="Logo SouJunior" />
+              <h1 class="text-h5 font-weight-bold font-semibold primary-color ml-3 logo-text">
+                SouJunior Labs
+              </h1>
+            </a>
+          </div>
+          <div>
+            <p>Faça parte da nossa comunidade!</p>
+          </div>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-container>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import imgUrl from '@/assets/logo-green-transparent.png'
+import logo_white from '@/assets/logo-white-transparent.png'
 import homeIcon1 from '@/assets/home-icon1.png'
 import homeIcon2 from '@/assets/home-icon2.png'
 import homeIcon3 from '@/assets/home-icon3.png'
@@ -180,6 +198,13 @@ import areaIcon10 from '@/assets/areaIcon10.png'
 import areaIcon11 from '@/assets/areaIcon11.png'
 import areaIcon12 from '@/assets/areaIcon12.png'
 import howToUse from '@/assets/howToUse.png'
+import footerIcon1 from '@/assets/Github.png'
+import footerIcon2 from '@/assets/Discord.png'
+import footerIcon3 from '@/assets/Linkedin.png'
+import footerIcon4 from '@/assets/Instagram.png'
+import footerIcon5 from '@/assets/Youtube.png'
+import footerIcon6 from '@/assets/Twitter.png'
+import footerIcon7 from '@/assets/Facebook.png'
 
 const carouselItems = [
   { title: 'Business', icon: areaIcon1 },
@@ -428,16 +453,46 @@ h4 {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  padding: 32px;
+  padding: 40px;
   background-color: transparent;
   text-align: center;
   border: 1px solid #62d4a4;
   border-radius: 16px;
-  max-width: 1200px;
 }
 
 .contact-section .v-card .v-btn {
   background-color: #62d4a4;
   color: black;
+}
+
+.logo {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+
+  &:hover {
+    filter: brightness(1.25);
+    transition: ease-in-out 0.2s;
+  }
+}
+
+.logo-text {
+  font-family: 'Radio Canada', serif !important;
+  color: white;
+}
+
+.v-footer {
+  background-color: transparent;
+  padding-bottom: 80px;
+}
+
+.v-footer p {
+  font-family: 'Radio Canada', sans-serif;
+  color: #62d4a4;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.v-footer a {
+  margin-right: 300px;
 }
 </style>

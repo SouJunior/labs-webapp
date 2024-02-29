@@ -22,14 +22,7 @@
             :rules="passwordRules"
             label="Senha"
           />
-          <div class="d-flex align-center justify-space-between">
-            <label>
-              <input type="checkbox" class="mr-2" />
-              Lembrar-me
-            </label>
-            <a href="/">Precisa de ajuda?</a>
-          </div>
-          <hr class="mb-6 mt-8" />
+          <hr class="mb-6 mt-3" />
           <v-btn class="loginButton" type="submit" block @click="submitLogin">Login</v-btn>
           <v-btn block class="mt-2 registerButton" :to="{ name: 'registry' }">Cadastre-se</v-btn>
         </v-form>
