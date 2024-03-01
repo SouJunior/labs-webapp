@@ -19,6 +19,7 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "postcss": "^8.4.33",
     "vue": "^3.3.4",
+    "vue-gtag": "^2.0.1",
     "vue-router": "^4.2.5",
     "vuetify": "^3.0.0"
   },

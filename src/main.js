@@ -10,6 +10,7 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
 import '@/assets/main.scss';
+import VueGtag from "vue-gtag";
 
 const savedTheme = localStorage.getItem('theme') || 'dark';
 
@@ -41,5 +42,9 @@ app.use(pinia)
 app.use(createPinia());
 app.use(router);
 app.use(vuetify);
+	
+app.use(VueGtag, {
+    config: { id: "G-5F4LFMZQK6" }
+});
 
 app.mount('#app');
