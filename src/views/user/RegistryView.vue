@@ -84,7 +84,7 @@
               para a pagina de login.
             </p>
             <v-col align="center" class="mt-6">
-              <v-btn color="primary" @click="redirectToLogin">Continuar</v-btn>
+              <v-btn color="primary" :to="{ name: 'login' }">Continuar</v-btn>
             </v-col>
           </template>
         </v-stepper>
@@ -202,8 +202,6 @@ const cancelForm = () => {
     $router.push({ name: 'home' })
   }
 }
-
-const dialog = ref(false)
 
 const acceptTerms = () => {
   applicant.terms = true
