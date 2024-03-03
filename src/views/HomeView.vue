@@ -268,7 +268,7 @@ import footerIcon1 from '@/assets/home/Github.png'
 import footerIcon2 from '@/assets/home/Discord.png'
 import footerIcon3 from '@/assets/home/Linkedin.png'
 import footerIcon4 from '@/assets/home/Instagram.png'
-import footerIcon5 from '@/assets/home/Youtube.png'
+import footerIcon5 from '@/assets/home/YouTube.png'
 import footerIcon6 from '@/assets/home/Twitter.png'
 import footerIcon7 from '@/assets/home/Facebook.png'
 const carouselItems = [
