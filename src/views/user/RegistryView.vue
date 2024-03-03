@@ -203,6 +203,8 @@ const cancelForm = () => {
   }
 }
 
+const dialog = ref(false)
+
 const acceptTerms = () => {
   applicant.terms = true
   dialog.value = false
