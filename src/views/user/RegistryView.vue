@@ -68,11 +68,12 @@
               <v-checkbox
                 label="Eu concordo com os termos e condições."
                 v-model="applicant.terms"
+                @click="dialog = true"
               ></v-checkbox>
               <v-row>
                 <v-col align="center">
                   <v-btn @click="submitApplicant" color="primary">Cadastrar-se</v-btn>
-                  <v-btn class="ml-3" :to="{ name: 'home' }" @click="resetForm">Cancelar</v-btn>
+                  <v-btn class="ml-3" @click="cancelForm">Cancelar</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -91,11 +92,29 @@
       <v-col cols="7" class="mt-6">
         <v-card v-if="step === 1" class="pa-6" outlined color="primary"
           >No momento, o cadastro esta liberado apenas para os founders dos projetos já ativos. Mas
-          em breve esperamos ter todos por aqui. Se você é founder, confira o register_token de
-          acesso no canal do Discord exclusivo para os founders.</v-card
+          em breve esperamos ter todos por aqui. Se você é founder, confira o token de acesso no
+          canal do Discord exclusivo para os founders.</v-card
         >
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog" max-width="600">
+      <v-card class="pa-3">
+        <v-card-title>Termos e Condições</v-card-title>
+        <v-card-text>
+          <p>
+            Todas as participações no SouJunior Labs são VOLUNTÁRIAS, não remuneradas e sem qualquer
+            vínculo empregatício. As participações visam, unicamente, servir de experiência ao
+            voluntário que também contribuirá com o crescimento do projeto. A SouJunior Labs não
+            garante vaga de trabalho à pessoa voluntária, embora exista a possibilidade de que
+            receba convites para oportunidades em empresas parceiras, externas e/ou recrutadores.
+          </p>
+        </v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn @click="acceptTerms" color="primary">Aceitar</v-btn>
+          <v-btn @click="rejectTerms" color="error">Cancelar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -103,6 +122,9 @@
 import { ref, reactive } from 'vue'
 import { useUserStore } from '@/stores/user.js'
 import imgUrl from '@/assets/logo-green-transparent.png'
+import { useRouter } from 'vue-router'
+
+const $router = useRouter()
 
 const userStore = useUserStore()
 
@@ -172,6 +194,25 @@ const submitApplicant = async () => {
       console.error(error.message)
     }
   }
+}
+
+const cancelForm = () => {
+  if (confirm('Você deseja mesmo cancelar esta ação?')) {
+    resetForm()
+    $router.push({ name: 'home' })
+  }
+}
+
+const dialog = ref(false)
+
+const acceptTerms = () => {
+  applicant.terms = true
+  dialog.value = false
+}
+
+const rejectTerms = () => {
+  applicant.terms = false
+  dialog.value = false
 }
 </script>
 
