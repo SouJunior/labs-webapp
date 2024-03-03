@@ -238,4 +238,19 @@ const rejectTerms = () => {
 p {
   font-size: 18px;
 }
+
+.v-text-field {
+  padding-bottom: 10px;
+}
+
+.v-stepper {
+  box-shadow: none;
+}
+
+.v-stepper :deep(.v-stepper-header) {
+  box-shadow: none;
+}
+.v-stepper :deep(.v-stepper-item__avatar) {
+  margin-inline-end: 0;
+}
 </style>
