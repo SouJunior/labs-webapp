@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar color="transparent" app elevation="4">
+    <v-app-bar color="background" app elevation="4">
       <div class="w-100 d-flex align-center justify-space-between main-container">
         <a class="d-flex align-center logo" @click="navigateToHome">
           <v-img height="36" width="36" :src="imgUrl" alt="Logo SouJunior" />

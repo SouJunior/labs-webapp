@@ -66,6 +66,30 @@
         </p>
       </div>
     </v-container>
+    <v-container class="howToUse-section">
+      <div>
+        <h2>A Plataforma</h2>
+        <p>
+          Nossa plataforma foi projetada para auxiliar no gerenciamento dos produtos criados na
+          SouJunior Labs. Por enquanto, ela
+          <strong>está disponível apenas para os Founders dos produtos já cadastrados,</strong> mas
+          em breve todos poderão acessá-la.
+        </p>
+        <p>
+          Se você é um Founder ativo, primeiro precisamos fazer seu cadastro. Bem simples! Na aba de
+          registro, confirme que quer realizar o cadastro e, de posse do token enviado no canal
+          dedicado aos , no Discord da Sou Junior Labs, realize o seu cadastro.
+        </p>
+        <p>
+          Não esqueça de cadastrar seu produto e squad. Como o intuito é termos um local oficial
+          para nossos produtos, é importante manter esses dados sempre atualizados. Em breve,
+          teremos mais novidades.
+        </p>
+      </div>
+      <div>
+        <img :src="howToUse" alt="" />
+      </div>
+    </v-container>
     <v-container class="occupation-section">
       <div>
         <h2>Aqui, todas as áreas são bem-vindas:</h2>
@@ -111,36 +135,58 @@
         </div>
       </div>
     </v-container>
-    <v-container class="howToUse-section">
-      <div>
-        <h2>Como utilizar a plataforma?</h2>
-        <p>
-          Atualmente, nossa plataforma está em fase de testes e
-          <strong>disponível exclusivamente para os fundadores de projetos ativos.</strong> No
-          entanto, estamos trabalhando para que, em breve, ela se torne o principal canal de
-          comunicação da nossa comunidade. Contamos com o seu apoio e feedback para tornar este
-          objetivo uma realidade.
-        </p>
-        <section>
-          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
-          <span> <strong> Se você é Founder</strong> </span>, utilize o token enviado no Discord da
-          Sou Junior Labs, para completar o seu cadastro.
-        </section>
-        <section>
-          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
-          Como o intuito é termos um local oficial para nossos produtos, é importante manter esses
-          dados sempre atualizados, especialmente em casos de mudanças, combinado!?
-        </section>
-        <section>
-          <v-icon color="#06d7a0">mdi-arrow-right-thin</v-icon>
-          Em breve adicionaremos diversas outras funcionalidades para tornar a plataforma ainda mais
-          útil e eficiente para todos.
-        </section>
-        <h4 class="mt-2">Juntos, podemos fazer grandes coisas acontecerem.</h4>
-      </div>
-      <div>
-        <img :src="howToUse" alt="" />
-      </div>
+    <v-container class="squad-section">
+      <h5>Conheça nossa equipe</h5>
+      <p class="squad-text">
+        No SouJunior Labs, nossa equipe é apaixonada por criar produtos inovadores que fazem a
+        diferença. Estamos comprometidos em melhorar a experiência da comunidade e em ajudar
+        profissionais iniciantes a crescerem no mercado de tecnologia. Estamos sempre prontos para
+        ouvir suas ideias e responder às suas perguntas. Sinta-se à vontade para entrar em contato
+        conosco.
+      </p>
+      <v-row>
+        <v-col
+          v-for="member in teamMembers"
+          :key="member.id"
+          cols="12"
+          md="6"
+          lg="3"
+          class="d-flex flex-column align-center"
+        >
+          <v-card class="d-flex flex-column align-center">
+            <v-img :src="member.image" width="100" height="100" />
+            <h6>{{ member.name }}</h6>
+            <p>{{ member.role }}</p>
+            <div class="d-flex align-center justify-center ga-2 mt-3">
+              <a :href="member.linkedin" target="_blank" rel="noopener noreferrer">
+                <v-img height="20" width="20" :src="squadIcon1" alt="Linkedin" />
+              </a>
+              <a :href="member.github" target="_blank" rel="noopener noreferrer">
+                <v-img height="20" width="20" :src="squadIcon2" alt="Github" />
+              </a>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="6" lg="12" class="d-flex flex-column align-center">
+          <v-card class="d-flex flex-column align-center">
+            <v-img :src="wouernerIcon" width="100" height="100" />
+            <h6>Wouerner Brandão</h6>
+            <p>Founder e CEO SouJunior / Tech Lead</p>
+            <div class="d-flex align-center justify-center ga-2 mt-3">
+              <a
+                href="https://www.linkedin.com/in/wouerner/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <v-img height="20" width="20" :src="squadIcon1" alt="Linkedin" />
+              </a>
+              <a href="https://www.github.com/wouerner" target="_blank" rel="noopener noreferrer">
+                <v-img height="20" width="20" :src="squadIcon2" alt="Github" />
+              </a>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
     <v-container class="contact-section">
       <v-card>
@@ -155,7 +201,7 @@
     </v-container>
     <v-footer>
       <v-row>
-        <v-col cols="12" class="d-flex align-center justify-center">
+        <v-col cols="12" class="d-flex">
           <div>
             <a class="d-flex align-center logo">
               <v-img height="36" width="36" :src="logo_white" alt="Logo SouJunior" />
@@ -271,6 +317,14 @@ import footerIcon4 from '@/assets/home/Instagram.png'
 import footerIcon5 from '@/assets/home/YouTube.png'
 import footerIcon6 from '@/assets/home/Twitter.png'
 import footerIcon7 from '@/assets/home/Facebook.png'
+import squadIcon1 from '@/assets/home/squadIcon1.png'
+import squadIcon2 from '@/assets/home/squadIcon2.png'
+import djhonantanIcon from '@/assets/home/djhonantan.png'
+import inahyeIcon from '@/assets/home/inahye.png'
+import thaisIcon from '@/assets/home/thais.png'
+import thaynnaIcon from '@/assets/home/thaynna.png'
+import wouernerIcon from '@/assets/home/wouerner.png'
+
 const carouselItems = [
   { title: 'Business', icon: areaIcon1 },
   { title: 'Tech Recruiter', icon: areaIcon2 },
@@ -296,6 +350,41 @@ const navigationPrev = () => {
     .slice(-1)
     .concat(carouselItemsRef.value.slice(0, -1))
 }
+
+const teamMembers = [
+  {
+    id: 1,
+    name: 'Djhonantan Parreira',
+    role: 'Front-end Developer',
+    linkedin: 'https://www.linkedin.com/in/djhonantanparreira/',
+    github: 'https://www.github.com/djhonantanparreira',
+    image: djhonantanIcon
+  },
+  {
+    id: 2,
+    name: 'Inahyê Dourado',
+    role: 'Product Manager',
+    linkedin: 'https://www.linkedin.com/in/inahyedourado/',
+    github: 'https://github.com/InahyeDourado',
+    image: inahyeIcon
+  },
+  {
+    id: 3,
+    name: 'Thais Escobar',
+    role: 'Product Manager',
+    linkedin: 'https://www.linkedin.com/in/thaisescobar/',
+    github: 'https://github.com/thaisescobarf',
+    image: thaisIcon
+  },
+  {
+    id: 4,
+    name: 'Thaynná Oliveira',
+    role: 'UI/UX Designer',
+    linkedin: 'https://www.linkedin.com/in/thaynnaoliveira/',
+    github: 'https://github.com/thaygjo',
+    image: thaynnaIcon
+  }
+]
 </script>
 
 <style scoped>
@@ -361,6 +450,18 @@ h4 {
   font-family: 'Radio Canada', sans-serif;
   font-weight: 700;
 }
+h5 {
+  font-size: 40px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+h6 {
+  font-size: 20px;
+  font-family: 'Radio Canada', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
 .services-section {
   display: flex;
   flex-direction: column;
@@ -376,10 +477,14 @@ h4 {
   align-items: center;
   gap: 20px;
   margin-top: 20px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 .services section div {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 .services section div img {
   width: 32px;
@@ -471,7 +576,7 @@ h4 {
   padding: 50px 0;
 }
 .carousel-container .swiper-slide {
-  background-color: #62d4a4;
+  background-color: #40715c;
   border-radius: 1rem;
   cursor: pointer;
   padding: 10px;
@@ -488,6 +593,16 @@ h4 {
   gap: 20px;
 }
 
+.howToUse-section div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
+}
+
 .howToUse-section div img {
   max-height: 450px;
   @media screen and (max-width: 1500px) {
@@ -502,9 +617,6 @@ h4 {
   font-size: 22px;
   font-weight: 400;
 }
-.howToUse-section div section {
-  margin-top: 10px;
-}
 .contact-section {
   display: flex;
   justify-content: center;
@@ -514,6 +626,7 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 12px;
   padding: 40px;
   background-color: transparent;
@@ -524,6 +637,10 @@ h4 {
 .contact-section .v-card .v-btn {
   background-color: #62d4a4;
   color: black;
+}
+
+.contact-section .v-card p {
+  max-width: 800px;
 }
 .logo {
   cursor: pointer;
@@ -537,18 +654,79 @@ h4 {
   font-family: 'Radio Canada', serif !important;
   color: white;
 }
+
+.squad-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.squad-section .v-row {
+  display: flex;
+  margin-top: 20px;
+}
+
+.squad-section .squad-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 20px;
+  max-width: 900px;
+  text-align: center;
+}
+
+.squad-section .v-card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 3px;
+  padding: 30px 0px 20px 0px;
+  background-color: transparent;
+  text-align: center;
+  border: 1px solid #62d4a4;
+  border-radius: 8px;
+}
+
+.squad-section .v-card .v-img {
+  margin-bottom: 20px;
+}
+
+.squad-section .v-card p {
+  font-size: 16px;
+  font-family: 'Radio Canada', sans-serif;
+  font-weight: 400;
+  color: #62d4a4;
+}
+
+.squad-section .v-card a {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  &:hover {
+    filter: brightness(1.25);
+    transition: ease-in-out 0.2s;
+  }
+}
+
 .v-footer {
   background-color: transparent;
   padding-bottom: 80px;
 }
 
 .v-footer .v-col {
-  gap: 300px;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .v-footer .v-col div {
   gap: 40px;
   margin-top: 10px;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    flex-direction: column;
+  }
 }
 
 .v-footer p {
