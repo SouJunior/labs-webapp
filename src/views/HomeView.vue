@@ -713,6 +713,7 @@ hr {
   text-align: center;
   border: 1px solid #62d4a4;
   border-radius: 8px;
+  background-color: #335445;
 }
 
 .squad-section .v-card .v-img {
