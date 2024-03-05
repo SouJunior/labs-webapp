@@ -257,7 +257,7 @@ p {
 }
 
 .cancelButton {
-  border: 1px solid #254034;
+  border: 1px solid #62d4a4;
   color: #325f4b;
 }
 
