@@ -380,7 +380,7 @@ const teamMembers = [
     id: 3,
     name: 'Thais Escobar',
     role: 'Product Manager',
-    linkedin: 'https://www.linkedin.com/in/thaisescobar/',
+    linkedin: 'https://www.linkedin.com/in/thais-escobar/',
     github: 'https://github.com/thaisescobarf',
     image: thaisIcon
   },
@@ -388,7 +388,7 @@ const teamMembers = [
     id: 4,
     name: 'Thaynná Oliveira',
     role: 'UI/UX Designer',
-    linkedin: 'https://www.linkedin.com/in/thaynnaoliveira/',
+    linkedin: 'https://www.linkedin.com/in/thaygjo/',
     github: 'https://github.com/thaygjo',
     image: thaynnaIcon
   }
