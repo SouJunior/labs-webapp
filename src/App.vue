@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-app-bar color="background" app elevation="4">
+  <v-app :class="ef">
+    <v-app-bar class="header" color="transparent" app elevation="4">
       <div class="w-100 d-flex align-center justify-space-between main-container">
         <a class="d-flex align-center logo" @click="navigateToHome">
           <v-img height="36" width="36" :src="imgUrl" alt="Logo SouJunior" />
@@ -36,14 +36,14 @@
           >
             Onboarding
           </v-btn>
-          <v-btn
+          <!-- <v-btn
             v-if="logged === false"
             variant="text"
             class="font-weight-semibold"
             :to="{ name: 'registry' }"
           >
             Registro
-          </v-btn>
+          </v-btn> -->
           <v-btn
             v-if="logged === false"
             variant="text"
@@ -91,7 +91,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useRouter, RouterView } from 'vue-router'
+import { useRouter, RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useTheme } from 'vuetify'
 import imgUrl from '@/assets/logo-green-transparent.png'
@@ -103,11 +103,14 @@ const currentTheme = computed(() => theme.current.value)
 
 const auth = useAuthStore()
 
+const route = useRoute()
+
 const logged = computed(() => auth.getName() != '')
 
 const productUuid = computed(() => (auth.getName() != '' ? auth.products[0] : false))
 
-console.log('logged', logged)
+console.log('logged', route.path)
+const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
 
 const navigateToHome = () => {
   router.push({ name: 'home' })
@@ -120,6 +123,19 @@ function toggleTheme() {
 </script>
 
 <style lang="scss">
+.homeBackgroundEffect {
+  background-image: url('/src/assets/home/homeBackground.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 .main-container {
   margin-left: 240px;
   margin-right: 240px;

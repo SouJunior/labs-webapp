@@ -8,6 +8,9 @@
             Aqui você desenvolve produtos reais e aprimora habilidades práticas para conquistar o
             mercado de trabalho.
           </p>
+          <a href="https://forms.gle/uptNHWPrLn4CgqMf9" target="_blank" rel="noopener noreferrer">
+            <v-btn class="font-weight-semibold">Quero fazer parte</v-btn>
+          </a>
         </div>
       </div>
       <div>
@@ -95,7 +98,9 @@
         <h2>Aqui, todas as áreas são bem-vindas:</h2>
         <div class="occupation-info">
           <p>Participe da nossa comunidade e explore diversas oportunidades disponíveis</p>
-          <v-btn>Quero fazer parte</v-btn>
+          <a href="https://forms.gle/uptNHWPrLn4CgqMf9" target="_blank" rel="noopener noreferrer">
+            <v-btn class="font-weight-semibold">Quero fazer parte</v-btn>
+          </a>
         </div>
       </div>
       <div>
@@ -412,6 +417,14 @@ const teamMembers = [
   font-size: 32px;
   font-weight: 400;
 }
+
+.hero-section .v-btn {
+  max-width: fit-content;
+  background-color: #62d4a4;
+  color: black;
+  margin-top: 10px;
+}
+
 .hero-section img {
   @media screen and (max-width: 1300px) {
     max-height: 300px;
