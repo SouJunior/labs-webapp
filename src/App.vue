@@ -126,9 +126,6 @@ function toggleTheme() {
 .homeBackgroundEffect {
   background-image: url('/src/assets/home/homeBackground.png');
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
 }
 
 .header {
