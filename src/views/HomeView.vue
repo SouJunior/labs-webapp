@@ -189,15 +189,18 @@
       </v-row>
     </v-container>
     <v-container class="contact-section">
-      <v-card>
-        <h2>Precisa de Ajuda?</h2>
-        <p>
-          Se estiver enfrentando alguma dificuldade ao utilizar nossa plataforma ou se possuir
-          dúvidas ou sugestões que gostaria de compartilhar, entre em contato conosco através do
-          canal "Founders only" no Discord da Sou Junior Labs. Nossa equipe ficará feliz em ouvi-lo
-          e ajudá-lo.
-        </p>
-      </v-card>
+      <div class="contact-section d-flex flex-column align-center">
+        <hr />
+        <v-card>
+          <h2>Precisa de Ajuda?</h2>
+          <p>
+            Se estiver enfrentando alguma dificuldade ao utilizar nossa plataforma ou se possuir
+            dúvidas ou sugestões que gostaria de compartilhar, entre em contato conosco através do
+            canal "Founders only" no Discord da Sou Junior Labs. Nossa equipe ficará feliz em
+            ouvi-lo e ajudá-lo.
+          </p>
+        </v-card>
+      </div>
     </v-container>
     <v-footer>
       <v-row>
@@ -506,6 +509,13 @@ h6 {
   align-items: center;
   gap: 80px;
 }
+
+.about-section div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .about-section div img {
   width: 500px;
   height: 500px;
@@ -621,6 +631,15 @@ h6 {
   display: flex;
   justify-content: center;
 }
+
+hr {
+  border-image: linear-gradient(to right, #60a69c, #000) 250;
+  height: 1px;
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+}
+
 .contact-section .v-card {
   display: flex;
   flex-direction: column;
@@ -631,12 +650,8 @@ h6 {
   padding: 40px;
   background-color: transparent;
   text-align: center;
-  border: 1px solid #62d4a4;
-  border-radius: 16px;
-}
-.contact-section .v-card .v-btn {
-  background-color: #62d4a4;
-  color: black;
+  border: none;
+  box-shadow: none;
 }
 
 .contact-section .v-card p {

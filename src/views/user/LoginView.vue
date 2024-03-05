@@ -24,7 +24,7 @@
           />
           <hr class="mb-6 mt-3" />
           <v-btn color="primary" type="submit" block @click="submitLogin">Login</v-btn>
-          <v-btn block class="mt-2" :to="{ name: 'registry' }">Registrar</v-btn>
+          <v-btn block class="mt-2 cancelButton" :to="{ name: 'registry' }">Registrar</v-btn>
         </v-form>
       </v-card>
     </v-col>
@@ -115,5 +115,15 @@ const visible = ref(false)
   font-size: 14px;
   font-family: 'Sora', sans-serif !important;
   font-weight: 400;
+}
+
+.cancelButton {
+  border: 1px solid #254034;
+  color: #325f4b;
+}
+
+.cancelButton:hover {
+  background-color: #325f4b;
+  color: #fff;
 }
 </style>

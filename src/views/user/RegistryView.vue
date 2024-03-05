@@ -23,7 +23,9 @@
             </p>
             <v-col align="center" class="mt-6">
               <v-btn color="primary" @click="nextStep">Continuar</v-btn>
-              <v-btn class="ml-3" :to="{ name: 'home' }" @click="resetForm">Cancelar</v-btn>
+              <v-btn class="ml-3 cancelButton" :to="{ name: 'home' }" @click="resetForm"
+                >Cancelar</v-btn
+              >
             </v-col>
           </template>
           <template v-slot:item.2>
@@ -73,7 +75,7 @@
               <v-row>
                 <v-col align="center">
                   <v-btn @click="submitApplicant" color="primary">Cadastrar-se</v-btn>
-                  <v-btn class="ml-3" @click="cancelForm">Cancelar</v-btn>
+                  <v-btn class="ml-3 cancelButton" @click="cancelForm">Cancelar</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -90,7 +92,7 @@
         </v-stepper>
       </v-col>
       <v-col cols="7" class="mt-6">
-        <v-card v-if="step === 1" class="pa-6" outlined color="primary"
+        <v-card v-if="step === 1" class="pa-6" outlined color="#325F4B"
           >No momento, o cadastro esta liberado apenas para os founders dos projetos já ativos. Mas
           em breve esperamos ter todos por aqui. Se você é founder, confira o token de acesso no
           canal do Discord exclusivo para os founders.</v-card
@@ -252,5 +254,15 @@ p {
 }
 .v-stepper :deep(.v-stepper-item__avatar) {
   margin-inline-end: 0;
+}
+
+.cancelButton {
+  border: 1px solid #254034;
+  color: #325f4b;
+}
+
+.cancelButton:hover {
+  background-color: #325f4b;
+  color: #fff;
 }
 </style>
