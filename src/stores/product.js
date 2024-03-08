@@ -3,12 +3,16 @@ import { defineStore } from 'pinia'
 // import axiosInstance from '@/services/http.js'
 import productRequest from '@/services/product.js'
 import { useAuthStore } from './auth.js'
+import { useSnackbarStore } from './snackbar.js'
+
 import router from "@/router";
 
 export const useProductStore = defineStore('product', () => {
     const tt  = useAuthStore()
     const products = ref([])
     const product = ref({})
+
+    const useSnackbar = useSnackbarStore()
 
     async function fetchProducts() {
         products.value = await productRequest.fetchProducts()
@@ -48,7 +52,11 @@ export const useProductStore = defineStore('product', () => {
 
         if (p.statusCode == 200) {
             await tt.fetchProducts(tt.getUuid())
-
+            useSnackbar.showSnackbar({
+                text: 'Product created successfully',
+                color: 'success',
+                timeout: 3000
+            })
             router.push('/product/' + p.product.uuid);
         }
         // return products.value
@@ -60,6 +68,12 @@ export const useProductStore = defineStore('product', () => {
         console.log('product updated:', p);
         if (p.statusCode == 200) {
             await tt.fetchProducts(tt.getUuid())
+
+            useSnackbar.showSnackbar({
+                text: 'Produto atualizado com sucesso',
+                color: 'success',
+                timeout: 3000
+            })
 
             router.push('/product/' + product.uuid);
         }

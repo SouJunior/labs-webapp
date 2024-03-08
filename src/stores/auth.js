@@ -4,6 +4,7 @@ import instance from "@/services/http.js";
 import productService from "@/services/product.js";
 import squadService from "@/services/squad.js";
 import router from "@/router";
+import { useSnackbarStore } from "./snackbar.js";
 
 export const useAuthStore = defineStore('auth', () => {
 
@@ -12,6 +13,7 @@ export const useAuthStore = defineStore('auth', () => {
     const auth = ref({ name: '', email: '', uuid: '', iat: '' });
     const products = ref([]);
     const squads = ref([]);
+    const useSnackbar = useSnackbarStore();
 
     async function login(user) {
         try {
@@ -34,11 +36,16 @@ export const useAuthStore = defineStore('auth', () => {
                     await fetchSquads(products.value[0].uuid);
                 }
 
+                useSnackbar.showSnackbar({
+                    text: 'Bem vindo! ' + auth.value.name,
+                    color: 'success',
+                    timeout: 3000
+                })
+
                 router.push('/onboarding');
             }
 
         } catch (error) {
-            console.log('error :', error);
             if (error.response?.status === 401) {
                 alert(error.response.data)
             }

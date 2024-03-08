@@ -81,23 +81,38 @@
       </div>
     </v-app-bar>
 
+
     <transition name="fade" mode="out-in">
       <v-main class="d-flex flex-grow-1 main-container" style="margin-top: 64px">
         <RouterView />
+
+    <v-snackbar v-model="snackbarStore.snack.show" v-bind="snackbarStore.snack" location="top right">
+      {{ text }}
+      <template v-slot:actions>
+        <v-btn  variant="text" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
       </v-main>
     </transition>
+
+
   </v-app>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter, RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useTheme } from 'vuetify'
+import { useSnackbarStore } from '@/stores/snackbar'
 import imgUrl from '@/assets/logo-green-transparent.png'
 
 const router = useRouter()
 const theme = useTheme()
+const snackbarStore = useSnackbarStore()
 
 const currentTheme = computed(() => theme.current.value)
 

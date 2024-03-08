@@ -8,7 +8,7 @@
 
               <v-btn 
                     v-if="auth.getSquad() == false"
-                    color="primary" :to="{ name : 'squad-create' }">Criar Squad</v-btn>
+                    color="primary" :to="{ name : 'squad-create', params: { productUuid: route.params.uuid} }">Criar Squad</v-btn>
               <v-btn 
                     v-if="auth.getSquad()"
                     color="primary" :to="{ name : 'squads', params: {uuid: auth.getSquad().uuid } }">Squad</v-btn>
