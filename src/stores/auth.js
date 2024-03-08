@@ -4,7 +4,7 @@ import instance from "@/services/http.js";
 import productService from "@/services/product.js";
 import squadService from "@/services/squad.js";
 import router from "@/router";
-import { useSnackbarStore } from "./snackbar.js";
+import { useSnackbarStore } from "@/stores/snackbar.js";
 
 export const useAuthStore = defineStore('auth', () => {
 
