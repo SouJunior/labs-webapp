@@ -1,8 +1,9 @@
 <template>
     <v-form>
-        <v-text-field label="Nome*" 
-                      variant="outlined"
-                      v-model="m.name" ></v-text-field>
+        <v-text-field
+v-model="m.name" 
+                      label="Nome*"
+                      variant="outlined" ></v-text-field>
         <v-text-field 
                       v-model="m.role"
                       variant="outlined"

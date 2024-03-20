@@ -10,12 +10,13 @@
         <v-row  align="center" justify="center">
             <v-col cols="6">
                 <v-form>
-                    <v-text-field label="Nome do produto*" 
-                                  variant="outlined"
-                                  v-model="product.name"></v-text-field>
+                    <v-text-field
+v-model="product.name" 
+                                  label="Nome do produto*"
+                                  variant="outlined"></v-text-field>
                     <v-text-field 
-                                  variant="outlined"
-                                  label="Descreva seu projeto?" v-model="product.description"></v-text-field>
+                                  v-model="product.description"
+                                  variant="outlined" label="Descreva seu projeto?"></v-text-field>
                     <v-row  align="center" justify="center">
                         <v-col cols="6">
                             <v-btn color="primary" @click="submitApplication">Salvar</v-btn>

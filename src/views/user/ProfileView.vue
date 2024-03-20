@@ -9,26 +9,26 @@
     <v-row align="center" justify="center">
       <v-col cols="6">
         <v-form>
-          <v-text-field label="Nome completo *" variant="outlined" v-model="profile.name" disabled>
+          <v-text-field v-model="profile.name" label="Nome completo *" variant="outlined" disabled>
           </v-text-field>
-          <v-text-field label="E-mail *" variant="outlined" v-model="profile.email"> </v-text-field>
+          <v-text-field v-model="profile.email" label="E-mail *" variant="outlined"> </v-text-field>
           <v-text-field
+            v-model="profile.city"
             label="Cidade *"
             variant="outlined"
-            v-model="profile.city"
             :rules="[rules.textOnly]"
           >
           </v-text-field>
           <v-text-field
+            v-model="profile.state"
             label="Estado *"
             variant="outlined"
-            v-model="profile.state"
             :rules="[rules.textOnly]"
           >
           </v-text-field>
-          <v-text-field label="Perfil do LinkedIn *" variant="outlined" v-model="profile.linkedin">
+          <v-text-field v-model="profile.linkedin" label="Perfil do LinkedIn *" variant="outlined">
           </v-text-field>
-          <v-text-field label="Perfil no Discord *" variant="outlined" v-model="profile.discord">
+          <v-text-field v-model="profile.discord" label="Perfil no Discord *" variant="outlined">
           </v-text-field>
           <v-row>
             <v-col>

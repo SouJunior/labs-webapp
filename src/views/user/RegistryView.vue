@@ -15,7 +15,7 @@
     <v-row align="center" justify="center">
       <v-col cols="7">
         <v-stepper v-model="step" :items="items" hide-actions>
-          <template v-slot:item.1>
+          <template #item.1>
             <p class="mt-6">
               Olá você acaba de ser convidado para o painel administrativo da
               <strong color="primary">SouJunior Labs</strong>, para prosseguir será necessário se
@@ -28,59 +28,59 @@
               >
             </v-col>
           </template>
-          <template v-slot:item.2>
+          <template #item.2>
             <v-form>
               <v-text-field
+                v-model="applicant.register_token"
                 class="pt-1"
                 label="Token"
                 variant="outlined"
                 hint="O Token foi  encaminhado através do canal Founders no Discord. Caso precise de ajude, entre em contato conosco através do discord."
-                v-model="applicant.register_token"
               >
               </v-text-field>
               <v-text-field
+                v-model="applicant.name"
                 label="Digite seu nome completo."
                 placeholder="Ex: Jonatas de Souza"
                 variant="outlined"
-                v-model="applicant.name"
               >
               </v-text-field>
               <v-text-field
+                v-model="applicant.email"
                 label="Digite seu e-mail."
                 placeholder="exemplo@exemplo.com"
                 variant="outlined"
-                v-model="applicant.email"
                 :rules="emailRules"
               >
               </v-text-field>
               <v-text-field
+                v-model="applicant.password"
                 label="Digite sua senha."
                 variant="outlined"
-                v-model="applicant.password"
                 :rules="passwordRules"
               >
               </v-text-field>
               <v-text-field
+                v-model="applicant.confirmPassword"
                 label="Confirme sua senha."
                 variant="outlined"
-                v-model="applicant.confirmPassword"
                 :rules="passwordRules"
               >
               </v-text-field>
               <v-checkbox
-                label="Eu concordo com os termos e condições."
                 v-model="applicant.terms"
+                label="Eu concordo com os termos e condições."
                 @click="dialog = true"
               ></v-checkbox>
               <v-row>
                 <v-col align="center">
-                  <v-btn @click="submitApplicant" color="primary">Cadastrar-se</v-btn>
+                  <v-btn color="primary" @click="submitApplicant">Cadastrar-se</v-btn>
                   <v-btn class="ml-3 cancelButton" @click="cancelForm">Cancelar</v-btn>
                 </v-col>
               </v-row>
             </v-form>
           </template>
-          <template v-slot:item.3>
+          <template #item.3>
             <p class="mt-6">
               Meus parabéns, conta criada com sucesso, clique em continuar para ser redirecionado
               para a pagina de login.
@@ -112,8 +112,8 @@
           </p>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn @click="acceptTerms" color="primary">Aceitar</v-btn>
-          <v-btn @click="rejectTerms" color="error">Cancelar</v-btn>
+          <v-btn color="primary" @click="acceptTerms">Aceitar</v-btn>
+          <v-btn color="error" @click="rejectTerms">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

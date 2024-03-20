@@ -17,10 +17,10 @@
             <v-btn color="primary" :to="{ name : 'product-update', params: {uuid:  route.params.uuid} }">Atualizar</v-btn>
 
             <v-dialog width="500">
-                <template v-slot:activator="{ props }">
+                <template #activator="{ props }">
                     <v-btn v-bind="props" color="red">excluir</v-btn>
                 </template>
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                     <v-card title="Dialog">
                         <v-card-text>
                            Você tem certeza que deseja excluir o produto? 

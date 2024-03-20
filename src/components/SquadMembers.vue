@@ -19,7 +19,7 @@
           </v-btn>
           <v-spacer/>
           <v-dialog width="500">
-              <template v-slot:activator="{ props }">
+              <template #activator="{ props }">
                   <v-btn v-bind="props" color="red">
 
                       <v-icon
@@ -30,7 +30,7 @@
                   </v-btn>
 
               </template>
-              <template v-slot:default="{ isActive }">
+              <template #default="{ isActive }">
                   <v-card title="Dialog">
                       <v-card-text>
                           Você tem certeza que deseja excluir a squad? 
@@ -58,14 +58,14 @@
           </v-col>
       </v-row>
             <v-dialog width="500">
-                <template v-slot:activator="{ props }">
+                <template #activator="{ props }">
               <v-btn class="ma-4" color="primary" v-bind="props" >
                   <v-icon>
                       mdi-plus
                   </v-icon>
                   Adicionar membro </v-btn>
                 </template>
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                     <v-card title="Criar membro">
                         <v-card-text>
                             <MemberForm 
@@ -82,16 +82,16 @@
                 :headers="headers"
                 :items="useMembers.member">
 
-                    <template v-slot:item.role="{ value }">
+                    <template #item.role="{ value }">
                         <v-chip>
                             {{ value }}
                         </v-chip>
                     </template>
-                <template v-slot:item.actions="{ item }">
+                <template #item.actions="{ item }">
 
 
                     <v-dialog width="500">
-                        <template v-slot:activator="{ props }">
+                        <template #activator="{ props }">
                             <v-btn 
                                   variant="text"
                                 v-bind="props"> 
@@ -103,7 +103,7 @@
                                 </v-icon>
                             </v-btn>
                         </template>
-                        <template v-slot:default="{ isActive }">
+                        <template #default="{ isActive }">
                             <v-card title="Criar membro">
                                 <v-card-text>
                                     <MemberForm 
@@ -117,7 +117,7 @@
                     </v-dialog>
 
                     <v-dialog width="500">
-                        <template v-slot:activator="{ props }">
+                        <template #activator="{ props }">
                             <v-btn v-bind="props"  variant="text">
 
                                 <v-icon
@@ -129,7 +129,7 @@
                             </v-btn>
 
                         </template>
-                        <template v-slot:default="{ isActive }">
+                        <template #default="{ isActive }">
                             <v-card title="Dialog">
                                 <v-card-text>
                                     Você tem certeza que deseja excluir o membro squad? 

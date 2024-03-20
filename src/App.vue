@@ -53,7 +53,6 @@
             Login
           </v-btn>
           <v-btn
-            v-if="logged === true"
             variant="text"
             class="font-weight-semibold"
             :to="{ name: 'products' }"
@@ -61,7 +60,7 @@
             Produtos
           </v-btn>
           <v-menu v-if="logged === true" open-on-hover>
-            <template v-slot:activator="{ props }">
+            <template #activator="{ props }">
               <v-btn variant="text" class="font-weight-semibold" v-bind="props">
                 {{ auth.getName() }}
                 <v-icon right>mdi-chevron-down</v-icon>
@@ -88,7 +87,7 @@
 
     <v-snackbar v-model="snackbarStore.snack.show" v-bind="snackbarStore.snack" location="top right">
       {{ text }}
-      <template v-slot:actions>
+      <template #actions>
         <v-btn  variant="text" @click="snackbar = false">
           Close
         </v-btn>

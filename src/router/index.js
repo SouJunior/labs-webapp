@@ -49,7 +49,7 @@ const router = createRouter({
           name: 'products',
           component: ProductsView,
           meta : {
-              auth: true
+              auth: false
           }
       },
     {

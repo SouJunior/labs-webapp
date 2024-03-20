@@ -5,9 +5,10 @@
                 <h1 v-if="route.meta.type == 'create'">Cadastrar Squad</h1>
                 <h1 v-if="route.meta.type == 'update'">Atualizar Squad</h1>
                 <v-form>
-                    <v-text-field variant="outlined" v-model="squad.name" label="Nome"></v-text-field>
-                    <v-text-field variant="outlined" v-model="squad.description" label="Descrição"></v-text-field>
-                    <v-btn color="primary" class="me-4"
+                    <v-text-field v-model="squad.name" variant="outlined" label="Nome"></v-text-field>
+                    <v-text-field v-model="squad.description" variant="outlined" label="Descrição"></v-text-field>
+                    <v-btn
+color="primary" class="me-4"
                                            @click="submit">Salvar</v-btn>
                     <v-btn 
                        :to="{ name: 'squads', params: { uuid: route.params.productUuid } }"
