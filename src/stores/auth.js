@@ -52,6 +52,32 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function loginByToken() {
+
+        const token = localStorage.getItem('token');
+
+        try {
+            auth.value = parseJwt(token);
+
+            await fetchProducts(auth.value.uuid);
+
+            if (products.value.length > 0) {
+                await fetchSquads(products.value[0].uuid);
+            }
+
+            useSnackbar.showSnackbar({
+                text: 'Bem vindo! ' + auth.value.name,
+                color: 'success',
+                timeout: 3000
+            })
+
+        } catch (error) {
+            if (error.response?.status === 401) {
+                alert(error.response.data)
+            }
+        }
+    }
+
     async function fetchProducts(uuid) {
         products.value = await productService.byUser(uuid)
         return products.value
@@ -145,7 +171,8 @@ export const useAuthStore = defineStore('auth', () => {
         getProduct,
         updateProfile,
         setProducts,
-        squadReset
+        squadReset,
+        loginByToken
     }
 
 },

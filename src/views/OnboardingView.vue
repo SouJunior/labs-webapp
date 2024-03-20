@@ -8,7 +8,7 @@
                 <OnboardingPage />
             </template >
             <template #fallback>
-                <div>Loading...</div>
+                <v-progress-circular color="primary" indeterminate></v-progress-circular>
             </template>
         </suspense>
 	</v-container>
@@ -16,6 +16,8 @@
 
 <script setup>
 import  OnboardingPage  from '@/components/OnboardingPage.vue';
+
+
 </script>
 
 <style scoped>

@@ -15,6 +15,9 @@ import SquadsView from '../views/squad/SquadsView.vue'
 import SquadView from '../views/squad/SquadView.vue'
 import SquadCreateView from '../views/squad/CreateView.vue'
 
+import { useAuthStore } from '@/stores/auth';
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -134,19 +137,19 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.auth === true) {
-        console.log('protected route: ', to.name)
+    const token = localStorage.getItem('token')
 
-        const token = localStorage.getItem('token')
+    const auth = useAuthStore();
 
-        if (token !== '') {
-            return next()
-        } else {
-            router.push({ name: 'login' })
-        }
-    } else {
-        return next()
+    if (to.meta.auth === true && (token === '' || token === null)) {
+        router.push({ name: 'login' })
+    } 
+
+    if (auth.auth.name === '') {
+        auth.loginByToken()
     }
+
+    return next()
 });
 
 export default router
