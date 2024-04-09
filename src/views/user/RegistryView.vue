@@ -54,6 +54,9 @@
               >
               </v-text-field>
               <v-text-field
+                :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="visible ? 'text' : 'password'"
+                @click:append-inner="visible = !visible"
                 v-model="applicant.password"
                 label="Digite sua senha."
                 variant="outlined"
@@ -61,6 +64,9 @@
               >
               </v-text-field>
               <v-text-field
+                :append-inner-icon="visible1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="visible1 ? 'text' : 'password'"
+                @click:append-inner="visible1 = !visible1"
                 v-model="applicant.confirmPassword"
                 label="Confirme sua senha."
                 variant="outlined"
@@ -216,6 +222,9 @@ const rejectTerms = () => {
   applicant.terms = false
   dialog.value = false
 }
+
+const visible = ref(false)
+const visible1 = ref(false)
 </script>
 
 <style scoped>
