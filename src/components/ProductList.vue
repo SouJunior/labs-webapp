@@ -13,7 +13,7 @@
                     :key="index"
                     :prepend-avatar="item.prependAvatar"
                     >
-                    <v-list-item-title v-text="item.name || 'Produto sem nome'""></v-list-item-title>
+                    <v-list-item-title v-text="item.name || 'Produto sem nome'"></v-list-item-title>
             </v-list-item>
         </v-sheet>
     </v-container>
