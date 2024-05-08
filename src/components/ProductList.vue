@@ -4,15 +4,16 @@
             <h2>
                 Produtos da Comunidade: 
             </h2>
+            <p>
+              Conheça os produtos criados dentro do SouJunior Labs.
+            </p>
 
             <v-list-item
                     v-for="(item, index) in products.products"
                     :key="index"
                     :prepend-avatar="item.prependAvatar"
-                    lines="three"
                     >
-                    <v-list-item-title v-text="item.name"></v-list-item-title>
-                    <v-list-item-subtitle v-text="item.name"></v-list-item-subtitle>
+                    <v-list-item-title v-text="item.name || 'Produto sem nome'""></v-list-item-title>
             </v-list-item>
         </v-sheet>
     </v-container>
