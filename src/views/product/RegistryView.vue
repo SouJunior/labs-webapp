@@ -14,14 +14,17 @@
 v-model="product.name" 
                                   label="Nome do produto*"
                                   variant="outlined"></v-text-field>
-                                  <v-textarea
-                                  v-model="product.description"
+                    <v-textarea
+v-model="product.description" 
+                                  label="Descrição do produto*"
                                   variant="outlined"
-                                  label="Descreva seu produto?"
+                                  counter="280"
                                   hint="Máximo de 280 caracteres"
-                                  :counter="280"
+                                  rows="3"
                                   auto-grow
-                                ></v-textarea>
+                                  outlined
+                                  :rules="[(v) => !!v || 'Campo obrigatório', (v) => (v && v.length <= 280) || 'Máximo de 280 caracteres']"
+                                  ></v-textarea>
                     <v-row  align="center" justify="center">
                         <v-col cols="6">
                             <v-btn color="primary" @click="submitApplication">Salvar</v-btn>
@@ -39,12 +42,15 @@ import { reactive } from 'vue';
 import { useProductStore } from '@/stores/product';
 import { useAuthStore } from "@/stores/auth";
 import { useRoute } from 'vue-router';
+import { useSnackbarStore } from '@/stores/snackbar';
 
 const route = useRoute();
 
 const productStore = useProductStore();
 const useAuth = useAuthStore();
 let p = {}
+
+const useSnackbar = useSnackbarStore();
 
 if ( route.meta.update ==  true) {
     //const index = useAuth.products.map(function(e) { return e.uuid; }).indexOf(route.params.uuid);
@@ -65,10 +71,18 @@ if ( route.meta.update ==  true) {
 }
 
 const submitApplication = () => {
-    if (route.meta.update == false) {
-        productStore.create(product);
+    if (product.description.length >= 1 && product.description.length <= 280) {
+        if (route.meta.update == false) {
+            productStore.create(product);
+        } else {
+            productStore.update(product);
+        }
     } else {
-        productStore.update(product);
+        useSnackbar.showSnackbar({
+            text: 'Preencha todos os campos corretamente',
+            color: 'error',
+            timeout: 3000
+        })
     }
 };
 </script>
