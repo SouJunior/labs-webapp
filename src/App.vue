@@ -155,6 +155,14 @@ function toggleTheme() {
   @media (max-width: 1600px) {
     margin-left: 120px;
     margin-right: 120px;
+  } 
+  @media screen and (max-width: 1440px) {
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }
 

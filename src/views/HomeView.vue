@@ -1,7 +1,7 @@
 <template>
   <v-container class="home-page d-flex flex-column">
     <v-container class="hero-section">
-      <div>
+      <v-row>
         <div class="d-flex flex-column">
           <h1>Vem pro Labs!</h1>
           <p>
@@ -12,7 +12,7 @@
             <v-btn class="font-weight-semibold">Quero fazer parte</v-btn>
           </a>
         </div>
-      </div>
+      </v-row>
       <div>
         <img :src="imgUrl" alt="Logo SouJunior Labs" class="drag-none floating" />
       </div>
@@ -57,17 +57,17 @@
       </div>
     </v-container>
     <v-container class="about-section">
-      <div>
-        <img :src="homeAboutIcon" alt="Sobre a SouJunior Labs" />
-      </div>
-      <div>
-        <h3>Somos uma iniciativa voluntária comprometida em criar produtos reais.</h3>
-        <p>
-          Nosso propósito é oferecer suporte àqueles que buscam experiência prática, através da
-          criação colaborativa de produtos inovadores, assim impulsionando o desenvolvimento
-          profissional dos Juniors na área tech.
-        </p>
-      </div>
+        <div>
+          <img :src="homeAboutIcon" alt="Sobre a SouJunior Labs" />
+        </div>
+        <div>
+          <h3>Somos uma iniciativa voluntária comprometida em criar produtos reais.</h3>
+          <p>
+            Nosso propósito é oferecer suporte àqueles que buscam experiência prática, através da
+            criação colaborativa de produtos inovadores, assim impulsionando o desenvolvimento
+            profissional dos Juniors na área tech.
+          </p>
+        </div>
     </v-container>
     <v-container class="howToUse-section">
       <div>
@@ -400,12 +400,22 @@ const teamMembers = [
   padding: 0;
   margin-top: 50px;
   gap: 75px;
+  @media screen and (max-width: 768px){
+    gap: 20px;
+  }
 }
 .hero-section {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   gap: 80px;
+  @media screen and (max-width: 968px) {
+    flex-direction: column;
+    gap: 0;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 .hero-section h1 {
   font-family: 'Radio Canada', sans-serif;
@@ -426,16 +436,21 @@ const teamMembers = [
 }
 
 .hero-section img {
+  max-height: 500px;
+  @media screen and (max-width: 1500px) {
+    max-height: 400px;
+  }
   @media screen and (max-width: 1300px) {
     max-height: 300px;
   }
   @media screen and (max-width: 968px) {
-    max-height: 100px;
+    max-height: 200px;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 968px) {
     display: none;
   }
 }
+
 .floating {
   animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 0 15px #06d7a033);
@@ -486,6 +501,9 @@ h6 {
 .services-section h2 {
   text-align: center;
   max-width: 1100px;
+  @media screen and (max-width: 968px) {
+    text-align: start;
+  }
 }
 .services {
   display: flex;
@@ -495,6 +513,7 @@ h6 {
   margin-top: 20px;
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    gap: 0;
   }
 }
 .services section div {
@@ -515,12 +534,19 @@ h6 {
   border-left: 2px solid #06d7a0;
   height: 100px;
   margin: 0 20px;
+  @media screen and (max-width: 768px){
+    display: none;
+  }
 }
 .about-section {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   gap: 80px;
+  @media screen and (max-width: 968px) {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .about-section div {
@@ -530,25 +556,17 @@ h6 {
 }
 
 .about-section div img {
-  width: 500px;
-  height: 500px;
+  max-height: 500px;
+  max-width: 500px;
   @media screen and (max-width: 1500px) {
     max-height: 400px;
     max-width: 400px;
   }
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 1100px) {
     max-height: 300px;
     max-width: 300px;
   }
   @media screen and (max-width: 968px) {
-    max-height: 100px;
-    max-width: 100px;
-  }
-  @media screen and (max-width: 768px) {
-    max-height: 100px;
-    max-width: 100px;
-  }
-  @media screen and (max-width: 768px) {
     display: none;
   }
 }
@@ -569,6 +587,9 @@ h6 {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 .occupation-info p {
   max-width: 800px;
@@ -614,16 +635,15 @@ h6 {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .howToUse-section div {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 600px;
-  @media screen and (max-width: 768px) {
-    text-align: center;
-  }
 }
 
 .howToUse-section div img {
@@ -665,6 +685,11 @@ hr {
   text-align: center;
   border: none;
   box-shadow: none;
+  @media screen and (max-width: 768px){
+    padding: 0;
+    align-items: start;
+    text-align: start;
+  }
 }
 
 .contact-section .v-card p {
@@ -701,6 +726,9 @@ hr {
   margin-top: 20px;
   max-width: 900px;
   text-align: center;
+  @media screen and (max-width: 768px){
+    text-align: start;
+  }
 }
 
 .squad-section .v-card {
@@ -744,7 +772,7 @@ hr {
 .v-footer .v-col {
   align-items: center;
   justify-content: space-between;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 968px) {
     flex-direction: column;
   }
 }
@@ -752,10 +780,6 @@ hr {
 .v-footer .v-col div {
   gap: 40px;
   margin-top: 10px;
-  @media screen and (max-width: 768px) {
-    text-align: center;
-    flex-direction: column;
-  }
 }
 
 .v-footer p {
