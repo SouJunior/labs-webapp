@@ -774,12 +774,16 @@ hr {
   justify-content: space-between;
   @media screen and (max-width: 968px) {
     flex-direction: column;
+    align-items: start;
   }
 }
 
 .v-footer .v-col div {
   gap: 40px;
   margin-top: 10px;
+  @media screen and (max-width: 968px) {
+    gap: 20px;
+  }
 }
 
 .v-footer p {
