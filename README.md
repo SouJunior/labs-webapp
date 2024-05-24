@@ -91,7 +91,7 @@ Mas não é só isso! Se você já tem experiência e deseja contribuir com a co
 
 ## Como surgiu o Salvando-Labs?
 
-O Salvando Labs se originou da dificuldade dos administradores e founders da comunidade SouJunior Labs em gerenciar os produtos criados dentro da comunidade. A necessidade de um ambiente centralizado e eficiente para gerenciar os produtos criados pela comunidade foi o que motivou a criação do projeto.
+O Salvando Labs surgiu da necessidade de gerenciar os produtos criados pela comunidade SouJunior Labs.
 
 Os administradores e founders da comunidade perceberam que, com o crescimento da comunidade, era necessário um ambiente que facilitasse o gerenciamento dos produtos criados, pois a comunidade estava crescendo e a quantidade de produtos criados estava aumentando.
 
