@@ -17,6 +17,9 @@ import SquadCreateView from '../views/squad/CreateView.vue'
 
 import { useAuthStore } from '@/stores/auth';
 
+// dashboard
+import DashboardView from '@/views/dashboard/DashboardView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,89 +42,89 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: ProfileView, 
-        meta : {
-            auth: true
-        }
+      component: ProfileView,
+      meta: {
+        auth: true
+      }
     },
-      {
-          path: '/products',
-          name: 'products',
-          component: ProductsView,
-          meta : {
-              auth: false
-          }
-      },
+    {
+      path: '/products',
+      name: 'products',
+      component: ProductsView,
+      meta: {
+        auth: false
+      }
+    },
     {
       path: '/product/:uuid',
       name: 'product-by-id',
       component: ProductView,
-        meta : {
-            auth: true
-        }
+      meta: {
+        auth: true
+      }
     },
     {
-        path: '/product/create',
-        name: 'product-create',
-        component: ProductRegistryView,
-        meta : {
-            auth: true,
-            update: false 
-        }
+      path: '/product/create',
+      name: 'product-create',
+      component: ProductRegistryView,
+      meta: {
+        auth: true,
+        update: false
+      }
     },
     {
-        path: '/product/:uuid/update',
-        name: 'product-update',
-        component: ProductRegistryView,
-        meta : {
-            auth: true,
-            update: true
-        }
+      path: '/product/:uuid/update',
+      name: 'product-update',
+      component: ProductRegistryView,
+      meta: {
+        auth: true,
+        update: true
+      }
     },
     {
       path: '/squads/:uuid',
       name: 'squads',
-      component: SquadsView, 
-        meta : {
-            auth: true
-        }
+      component: SquadsView,
+      meta: {
+        auth: true
+      }
 
     },
     {
       path: '/squad/:uuid',
       name: 'squad-by-id',
       component: SquadView,
-      props: true, 
-        meta : {
-            auth: true
-        }
+      props: true,
+      meta: {
+        auth: true
+      }
 
     },
     {
       path: '/squad/create/:productUuid',
       name: 'squad-create',
       component: SquadCreateView,
-        meta : {
-            auth: true,
-            type: 'create'
-        }
+      meta: {
+        auth: true,
+        type: 'create'
+      }
     },
     {
       path: '/squad/:uuid/update',
       name: 'squad-update',
       component: SquadCreateView,
-        meta : {
-            auth: true,
-            type: 'update'
-        }
+      meta: {
+        auth: true,
+        type: 'update'
+      }
     },
     {
       path: '/onboarding',
       name: 'onboarding',
       component: () => import('../views/OnboardingView.vue'),
-        meta : {
-            auth: true
-        }
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/about',
@@ -132,24 +135,29 @@ const router = createRouter({
       path: '/404',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue')
-    }
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardView
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
 
-    const auth = useAuthStore();
+  const auth = useAuthStore();
 
-    if (to.meta.auth === true && (token === '' || token === null)) {
-        router.push({ name: 'login' })
-    } 
+  if (to.meta.auth === true && (token === '' || token === null)) {
+    router.push({ name: 'login' })
+  }
 
-    if (auth.auth.name === '') {
-        auth.loginByToken()
-    }
+  if (auth.auth.name === '') {
+    auth.loginByToken()
+  }
 
-    return next()
+  return next()
 });
 
 export default router
