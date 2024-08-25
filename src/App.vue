@@ -1,15 +1,17 @@
 <template>
   <v-app :class="ef">
-    <HeaderMenu />
+    <component :is="currentLayout" />
     <transition name="fade" mode="out-in">
       <v-main class="d-flex flex-grow-1 main-container" style="margin-top: 64px">
         <RouterView />
-        <v-snackbar v-model="snackbarStore.snack.show" v-bind="snackbarStore.snack" location="top right">
+        <v-snackbar
+          v-model="snackbarStore.snack.show"
+          v-bind="snackbarStore.snack"
+          location="top right"
+        >
           {{ text }}
           <template #actions>
-            <v-btn variant="text" @click="snackbar = false">
-              Close
-            </v-btn>
+            <v-btn variant="text" @click="snackbar = false"> Close </v-btn>
           </template>
         </v-snackbar>
       </v-main>
@@ -23,14 +25,31 @@ import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { useSnackbarStore } from '@/stores/snackbar'
 import HeaderMenu from '@/components/HeaderMenu.vue'
+import SideMenu from '@/components/dashboard/Sidebar.vue'
 
 const theme = useTheme()
 const snackbarStore = useSnackbarStore()
 const route = useRoute()
 
+const sideMenuRoutes = [
+  '/dashboard',
+  '/profile',
+  '/onboarding',
+  '/products',
+  '/product/:uuid',
+  '/product/create',
+  '/squads/:uuid',
+  '/squad/:uuid',
+  '/squad/create/:productUuid',
+  '/squad/:uuid/update'
+]
+const currentLayout = computed(() => {
+  return sideMenuRoutes.includes(route.path) ? SideMenu : HeaderMenu
+})
+
 const currentTheme = computed(() => theme.current.value)
 
-const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : '')) 
+const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
 </script>
 
 <style lang="scss">
