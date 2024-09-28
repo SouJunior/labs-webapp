@@ -32,7 +32,6 @@ const snackbarStore = useSnackbarStore()
 const route = useRoute()
 
 const sideMenuRoutes = [
-  '/dashboard',
   '/profile',
   '/onboarding',
   '/products',

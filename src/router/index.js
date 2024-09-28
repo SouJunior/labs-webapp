@@ -17,10 +17,6 @@ import SquadCreateView from '../views/squad/CreateView.vue'
 
 import { useAuthStore } from '@/stores/auth';
 
-// dashboard
-import DashboardView from '@/views/dashboard/DashboardView.vue'
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -135,11 +131,6 @@ const router = createRouter({
       path: '/404',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue')
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: DashboardView
     },
   ]
 })

@@ -14,7 +14,7 @@
       <!-- Informação do usuário -->
       <v-list class="sidebar-list">
         <v-list-item class="user-info">
-          <v-list-item-avatar>
+          <v-list-item-avatar style="text-align: -webkit-center">
             <a :href="userProfileLink">
               <v-img class="user-avatar" :src="avatarUrl" height="84" width="84" alt="Avatar" />
             </a>
@@ -144,6 +144,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
+import { useProductStore } from '@/stores/product'
 import DiscordIcon from '@/components/icons/DiscordIcon.vue'
 import imgUrl from '@/assets/logo-white-transparent.png'
 import defaultAvatar from '@/assets/default-avatar.png'
@@ -160,7 +161,7 @@ const logged = computed(() => auth.getName() !== '')
 const navigateToHome = () => router.push({ name: 'home' })
 
 const userRole = computed(() => {
-  return auth.auth.user_type === 'admin' ? 'Admin' : 'Founder'
+  return auth.auth.user_type === 'Admin' ? 'Admin' : 'Admin'
 })
 
 const userProfileLink = computed(() => `/profile`)
@@ -173,12 +174,12 @@ const logout = () => {
   router.push({ name: 'home' })
 }
 
-const toggleProducts = () => {
-  productsExpanded.value = !productsExpanded.value
+const navigateToProduct = (uuid) => {
+  router.push({ name: 'product-by-id', params: { uuid: auth.getProduct().uuid } })
 }
 
-const navigateToProduct = (uuid) => {
-  router.push({ name: 'product', params: { uuid } })
+const navigateToSquad = (uuid) => {
+  router.push({ name: 'squads', params: { uuid: auth.getSquad().uuid } })
 }
 
 onMounted(async () => {
