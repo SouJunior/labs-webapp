@@ -27,11 +27,15 @@ export const useProductStore = defineStore('product', () => {
     }
 
     async function getProduct(uuid) {
-        product.value = await productRequest.show(uuid)
-
+        const p = products.value.find(product => product.uuid === uuid)
+        if (p) {
+            product.value = p
+        } else {
+            product.value = await productRequest.show(uuid)
+        }
         return product.value
     }
-
+    
     async function byUser(uuid) {
         products.value = await productRequest.byUser(uuid)
         return products.value

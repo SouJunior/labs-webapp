@@ -21,7 +21,7 @@
           </v-list-item-avatar>
           <v-list-item-content class="user-content">
             <v-list-item-title>{{ auth.getName() }}</v-list-item-title>
-            <v-list-item-subtitle>{{ userRole }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ auth.getRole() }} </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -160,9 +160,7 @@ const productsExpanded = ref(false)
 const logged = computed(() => auth.getName() !== '')
 const navigateToHome = () => router.push({ name: 'home' })
 
-const userRole = computed(() => {
-  return auth.auth.user_type === 'Admin' ? 'Admin' : 'Admin'
-})
+const userRole = computed(() => auth.getRole())
 
 const userProfileLink = computed(() => `/profile`)
 const avatarUrl = computed(() => auth.auth.avatar || defaultAvatar)
@@ -175,11 +173,11 @@ const logout = () => {
 }
 
 const navigateToProduct = (uuid) => {
-  router.push({ name: 'product-by-id', params: { uuid: auth.getProduct().uuid } })
+  router.push({ name: 'product-by-id', params: { uuid: uuid } })
 }
 
 const navigateToSquad = (uuid) => {
-  router.push({ name: 'squads', params: { uuid: auth.getSquad().uuid } })
+  router.push({ name: 'squads', params: { uuid: uuid } })
 }
 
 onMounted(async () => {

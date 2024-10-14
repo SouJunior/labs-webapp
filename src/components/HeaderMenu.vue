@@ -20,7 +20,7 @@
         <v-btn v-if="!logged" variant="text" class="font-weight-semibold" :to="{ name: 'login' }">
           Login
         </v-btn>
-        <v-btn variant="text" class="font-weight-semibold" :to="{ name: 'products' }">
+        <v-btn v-if="logged" variant="text" class="font-weight-semibold" :to="{ name: 'products' }">
           Produtos
         </v-btn>
         <v-menu v-if="logged" open-on-hover>
@@ -56,7 +56,7 @@
           <v-list-item link v-if="!logged" :to="{ name: 'login' }">
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item>
-          <v-list-item link :to="{ name: 'products' }">
+          <v-list-item link v-if="!logged" :to="{ name: 'products' }">
             <v-list-item-title>Produtos</v-list-item-title>
           </v-list-item>
           <v-list-item link v-if="logged" :to="{ name: 'profile' }">

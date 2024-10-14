@@ -55,6 +55,7 @@ const router = createRouter({
       path: '/product/:uuid',
       name: 'product-by-id',
       component: ProductView,
+      props: true,
       meta: {
         auth: true
       }

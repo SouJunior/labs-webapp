@@ -124,7 +124,6 @@ export const useAuthStore = defineStore('auth', () => {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
-        console.log('jsonPayload :', JSON.parse(jsonPayload));
         return JSON.parse(jsonPayload);
     }
 
@@ -156,6 +155,10 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    function getRole() {
+        return auth.value.user_type.charAt(0).toUpperCase() + auth.value.user_type.slice(1)
+    }
+
     return {
         login,
         logout,
@@ -172,7 +175,8 @@ export const useAuthStore = defineStore('auth', () => {
         updateProfile,
         setProducts,
         squadReset,
-        loginByToken
+        loginByToken,
+        getRole
     }
 
 },

@@ -34,6 +34,7 @@ const route = useRoute()
 const sideMenuRoutes = [
   '/profile',
   '/onboarding',
+  '/products',
   '/product/:uuid',
   '/product/create',
   '/squads/:uuid',
@@ -41,8 +42,16 @@ const sideMenuRoutes = [
   '/squad/create/:productUuid',
   '/squad/:uuid/update'
 ]
+
 const currentLayout = computed(() => {
-  return sideMenuRoutes.includes(route.path) ? SideMenu : HeaderMenu
+  // Verifica se alguma rota correspondida é uma das rotas do side menu
+  return route.matched.some((record) =>
+    sideMenuRoutes.some((pattern) =>
+      new RegExp(pattern.replace(':uuid', '[^/]+')).test(record.path)
+    )
+  )
+    ? SideMenu
+    : HeaderMenu
 })
 
 const currentTheme = computed(() => theme.current.value)
