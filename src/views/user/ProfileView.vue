@@ -13,14 +13,14 @@
           </v-text-field>
           <v-text-field v-model="profile.email" label="E-mail *" variant="outlined"> </v-text-field>
           <v-text-field
-            v-model="profile.city"
+            v-model="profile.cidade"
             label="Cidade *"
             variant="outlined"
             :rules="[rules.textOnly]"
           >
           </v-text-field>
           <v-text-field
-            v-model="profile.state"
+            v-model="profile.estado"
             label="Estado *"
             variant="outlined"
             :rules="[rules.textOnly]"
@@ -51,10 +51,10 @@ const auth = useAuthStore()
 const profile = reactive({
   name: auth.auth.name,
   email: auth.auth.email,
-  city: '',
-  state: '',
-  linkedin: '',
-  discord: ''
+  cidade: auth.auth.cidade,
+  estado: auth.auth.estado,
+  linkedin: auth.auth.linkedin,
+  discord: auth.auth.discord
 })
 
 const rules = {

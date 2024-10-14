@@ -34,7 +34,6 @@ const route = useRoute()
 const sideMenuRoutes = [
   '/profile',
   '/onboarding',
-  '/products',
   '/product/:uuid',
   '/product/create',
   '/squads/:uuid',

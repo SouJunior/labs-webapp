@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const axiosInstance = instance;
 
-    const auth = ref({ name: '', email: '', uuid: '', iat: '' });
+    const auth = ref({ name: '', email: '', cidade: '', estado:'', linkedin:'', discord:'',  uuid: '', iat: '' });
     const products = ref([]);
     const squads = ref([]);
     const useSnackbar = useSnackbarStore();
