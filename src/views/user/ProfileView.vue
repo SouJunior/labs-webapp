@@ -51,10 +51,10 @@ const auth = useAuthStore()
 const profile = reactive({
   name: auth.auth.name,
   email: auth.auth.email,
-  cidade: auth.auth.cidade,
-  estado: auth.auth.estado,
-  linkedin: auth.auth.linkedin,
-  discord: auth.auth.discord
+  cidade: auth.auth.cidade === '__NULL__' ? '' : auth.auth.cidade,
+  estado: auth.auth.estado === '__NULL__' ? '' : auth.auth.estado,
+  linkedin: auth.auth.linkedin === '__NULL__' ? '' : auth.auth.linkedin,
+  discord: auth.auth.discord === '__NULL__' ? '' : auth.auth.discord
 })
 
 const rules = {
