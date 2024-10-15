@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const axiosInstance = instance;
 
-    const auth = ref({ name: '', email: '', uuid: '', iat: '' });
+    const auth = ref({ name: '', email: '', cidade: '', estado:'', linkedin:'', discord:'',  uuid: '', iat: '' });
     const products = ref([]);
     const squads = ref([]);
     const useSnackbar = useSnackbarStore();
@@ -21,8 +21,12 @@ export const useAuthStore = defineStore('auth', () => {
             const data = response.data;
 
             if (data.error) {
-                alert(data.error)
-                return;
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: "error",
+                    timeout: 3000,
+                  });
+                  return;
             } else {
                 const token = data.token;
 
@@ -47,7 +51,11 @@ export const useAuthStore = defineStore('auth', () => {
 
         } catch (error) {
             if (error.response?.status === 401) {
-                alert(error.response.data)
+                useSnackbar.showSnackbar({
+                    text: error.response.data,
+                    color: "error",
+                    timeout: 3000,
+                });
             }
         }
     }
@@ -73,7 +81,11 @@ export const useAuthStore = defineStore('auth', () => {
 
         } catch (error) {
             if (error.response?.status === 401) {
-                alert(error.response.data)
+                useSnackbar.showSnackbar({
+                    text: error.response.data,
+                    color: "error",
+                    timeout: 3000,
+                });
             }
         }
     }
@@ -124,7 +136,6 @@ export const useAuthStore = defineStore('auth', () => {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
-        console.log('jsonPayload :', JSON.parse(jsonPayload));
         return JSON.parse(jsonPayload);
     }
 
@@ -150,10 +161,22 @@ export const useAuthStore = defineStore('auth', () => {
 
             const data = response.data;
 
-            alert(data.message)
+            useSnackbar.showSnackbar({
+                text: data.message,
+                color: "success",
+                timeout: 3000,
+            });
         } catch (error) {
-            alert(error.message)
+            useSnackbar.showSnackbar({
+                text: error.message,
+                color: "error",
+                timeout: 3000,
+            });
         }
+    }
+
+    function getRole() {
+        return auth.value.user_type.charAt(0).toUpperCase() + auth.value.user_type.slice(1)
     }
 
     return {
@@ -172,7 +195,8 @@ export const useAuthStore = defineStore('auth', () => {
         updateProfile,
         setProducts,
         squadReset,
-        loginByToken
+        loginByToken,
+        getRole
     }
 
 },

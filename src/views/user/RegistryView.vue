@@ -146,10 +146,13 @@ const applicant = reactive({
   register_token: '',
   name: '',
   email: '',
+  cidade: '',
+  estado: '',
   password: '',
   confirmPassword: '',
   terms: false,
-  linkedin: 'linkedin.com/in/'
+  linkedin: '',
+  discord: ''
 })
 
 const nextStep = () => {
@@ -170,6 +173,10 @@ const resetForm = () => {
   applicant.register_token = ''
   applicant.name = ''
   applicant.email = ''
+  applicant.cidade = ''
+  applicant.estado = ''
+  applicant.linkedin = ''
+  applicant.discord = ''
   applicant.password = ''
   applicant.confirmPassword = ''
   applicant.terms = false
@@ -178,6 +185,12 @@ const resetForm = () => {
 
 const submitApplicant = async () => {
   const newApplicant = { ...applicant }
+
+  newApplicant.cidade = newApplicant.cidade || '__NULL__'
+  newApplicant.estado = newApplicant.estado || '__NULL__'
+  newApplicant.linkedin = newApplicant.linkedin || '__NULL__'
+  newApplicant.discord = newApplicant.discord || '__NULL__'
+
   if (
     !newApplicant.register_token ||
     !newApplicant.name ||
