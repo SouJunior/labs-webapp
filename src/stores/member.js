@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import memberService from '@/services/member.js'
 import { ref } from 'vue'
+import { useSnackbarStore } from '@/stores/snackbar.js'
 
 export const useMemberStore = defineStore('member', () => {
     const member = ref([]);
+    const useSnackbar = useSnackbarStore();
 
     async function fetch(uuidSquad) {
         try {
@@ -11,13 +13,21 @@ export const useMemberStore = defineStore('member', () => {
             const data = response;
 
             if (data.error) {
-                alert(data.error)
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: 'error',
+                    timeout: 3000
+                });
                 return;
             } else {
                 member.value = data
             }
         } catch (error) {
-            alert('Catch: ' + error)
+            useSnackbar.showSnackbar({
+                text: 'Erro: ' + error,
+                color: 'error',
+                timeout: 3000
+            });
         }
     }
 
@@ -27,13 +37,21 @@ export const useMemberStore = defineStore('member', () => {
             const data = response;
 
             if (data.error) {
-                alert(data.error)
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: 'error',
+                    timeout: 3000
+                });
                 return;
             } else {
                 fetch(data.member.squad_uuid)
             }
         } catch (error) {
-            alert('Catch: ' + error)
+            useSnackbar.showSnackbar({
+                text: 'Erro: ' + error,
+                color: 'error',
+                timeout: 3000
+            });
         }
     }
 
@@ -43,13 +61,21 @@ export const useMemberStore = defineStore('member', () => {
             const data = response;
 
             if (data.error) {
-                alert(data.error)
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: 'error',
+                    timeout: 3000
+                });
                 return;
             } else {
                 fetch(data.member.squad_uuid)
             }
         } catch (error) {
-            alert('Catch: ' + error)
+            useSnackbar.showSnackbar({
+                text: 'Erro: ' + error,
+                color: 'error',
+                timeout: 3000
+            });
         }
     }
 
@@ -59,13 +85,21 @@ export const useMemberStore = defineStore('member', () => {
             const data = response;
 
             if (data.error) {
-                alert(data.error)
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: 'error',
+                    timeout: 3000
+                });
                 return;
             } else {
                 fetch(uuidSquad)
             }
         } catch (error) {
-            alert('Catch: ' + error)
+            useSnackbar.showSnackbar({
+                text: 'Erro: ' + error,
+                color: 'error',
+                timeout: 3000
+            });
         }
     }
 

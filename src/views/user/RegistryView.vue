@@ -146,10 +146,13 @@ const applicant = reactive({
   register_token: '',
   name: '',
   email: '',
+  cidade: 'Altere sua Cidade',
+  estado: 'Altere seu Estado',
   password: '',
   confirmPassword: '',
   terms: false,
-  linkedin: 'linkedin.com/in/'
+  linkedin: 'linkedin.com/in/',
+  discord: 'Discord#0000'
 })
 
 const nextStep = () => {
@@ -170,6 +173,10 @@ const resetForm = () => {
   applicant.register_token = ''
   applicant.name = ''
   applicant.email = ''
+  applicant.cidade = ''
+  applicant.estado = ''
+  applicant.linkedin = 'linkedin.com/in/'
+  applicant.discord = 'Discord#0000'
   applicant.password = ''
   applicant.confirmPassword = ''
   applicant.terms = false

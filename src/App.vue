@@ -11,7 +11,7 @@
         >
           {{ text }}
           <template #actions>
-            <v-btn variant="text" @click="snackbar = false"> Close </v-btn>
+            <v-btn variant="text" @click="snackbarStore.hideSnackbar">Fechar</v-btn>
           </template>
         </v-snackbar>
       </v-main>

@@ -21,8 +21,12 @@ export const useAuthStore = defineStore('auth', () => {
             const data = response.data;
 
             if (data.error) {
-                alert(data.error)
-                return;
+                useSnackbar.showSnackbar({
+                    text: data.error,
+                    color: "error",
+                    timeout: 3000,
+                  });
+                  return;
             } else {
                 const token = data.token;
 
@@ -47,7 +51,11 @@ export const useAuthStore = defineStore('auth', () => {
 
         } catch (error) {
             if (error.response?.status === 401) {
-                alert(error.response.data)
+                useSnackbar.showSnackbar({
+                    text: error.response.data,
+                    color: "error",
+                    timeout: 3000,
+                });
             }
         }
     }
@@ -73,7 +81,11 @@ export const useAuthStore = defineStore('auth', () => {
 
         } catch (error) {
             if (error.response?.status === 401) {
-                alert(error.response.data)
+                useSnackbar.showSnackbar({
+                    text: error.response.data,
+                    color: "error",
+                    timeout: 3000,
+                });
             }
         }
     }
@@ -149,9 +161,17 @@ export const useAuthStore = defineStore('auth', () => {
 
             const data = response.data;
 
-            alert(data.message)
+            useSnackbar.showSnackbar({
+                text: data.message,
+                color: "success",
+                timeout: 3000,
+            });
         } catch (error) {
-            alert(error.message)
+            useSnackbar.showSnackbar({
+                text: error.message,
+                color: "error",
+                timeout: 3000,
+            });
         }
     }
 

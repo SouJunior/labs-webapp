@@ -49,7 +49,7 @@
               <v-list-item-content>{{ product.name }}</v-list-item-content>
             </v-list-item>
 
-            <v-list-item v-if="!auth.products" class="menu-item-list">
+            <v-list-item v-if="auth.products.length === 0" class="menu-item-list">
               <v-list-item-content>Nenhum produto cadastrado</v-list-item-content>
             </v-list-item>
           </v-list-group>
@@ -75,7 +75,7 @@
               <v-list-item-content>{{ squad.name }}</v-list-item-content>
             </v-list-item>
 
-            <v-list-item v-if="!auth.products" class="menu-item">
+            <v-list-item v-if="auth.squads.length === 0" class="menu-item-list">
               <v-list-item-content class="menu-item-list"
                 >Nenhuma squad cadastrada</v-list-item-content
               >

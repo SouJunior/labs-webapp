@@ -57,10 +57,10 @@ export const useProductStore = defineStore('product', () => {
         if (p.statusCode == 200) {
             await tt.fetchProducts(tt.getUuid())
             useSnackbar.showSnackbar({
-                text: 'Product created successfully',
+                text: 'Produto criado com sucesso',
                 color: 'success',
                 timeout: 3000
-            })
+            });
             router.push('/product/' + p.product.uuid);
         }
         // return products.value
@@ -80,6 +80,12 @@ export const useProductStore = defineStore('product', () => {
             })
 
             router.push('/product/' + product.uuid);
+        } else {
+            useSnackbar.showSnackbar({
+                text: p.error || 'Erro ao atualizar produto',
+                color: 'error',
+                timeout: 3000
+            });
         }
         // return products.value
     }
