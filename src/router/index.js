@@ -145,7 +145,7 @@ router.beforeEach((to, from, next) => {
     router.push({ name: 'login' })
   }
 
-  if (auth.auth.name === '') {
+  if (auth.name === '') {
     auth.loginByToken()
   }
 
