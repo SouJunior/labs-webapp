@@ -30,9 +30,13 @@ export const useAuthStore = defineStore('auth', () => {
             } else {
                 const token = data.token;
 
+                const user = data.user;
+
                 localStorage.setItem('token', token);
 
-                auth.value = parseJwt(token);
+                localStorage.setItem('user', JSON.stringify(user));
+
+                auth.value = user;
 
                 await fetchProducts(auth.value.uuid);
 
@@ -61,11 +65,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function loginByToken() {
-
-        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
 
         try {
-            auth.value = parseJwt(token);
+            auth.value = JSON.parse(user);
 
             await fetchProducts(auth.value.uuid);
 
