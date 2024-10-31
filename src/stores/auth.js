@@ -179,7 +179,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     function getRole() {
-        return auth.value.user_type.charAt(0).toUpperCase() + auth.value.user_type.slice(1)
+        return auth.value.permission.charAt(0).toUpperCase() + auth.value.permission.slice(1)
     }
 
     return {
