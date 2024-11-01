@@ -167,22 +167,25 @@ export const useAuthStore = defineStore('auth', () => {
     async function updateProfile(profile) {
         try {
             const response = await axiosInstance.put('/user/' + auth.value.uuid, profile);
+            const updatedUser = profile;
+    
+            auth.value = { ...auth.value, ...updatedUser };
 
-            const data = response.data;
-
+            localStorage.setItem('user', JSON.stringify(auth.value));
+    
             useSnackbar.showSnackbar({
-                text: data.message,
+                text: response.data.message,
                 color: "success",
                 timeout: 3000,
             });
         } catch (error) {
             useSnackbar.showSnackbar({
-                text: error.message,
+                text: error.response?.data?.error || error.message,
                 color: "error",
                 timeout: 3000,
             });
         }
-    }
+    }      
 
     function getRole() {
         return auth.value.permission.charAt(0).toUpperCase() + auth.value.permission.slice(1)
