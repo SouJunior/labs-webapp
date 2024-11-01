@@ -198,7 +198,7 @@ onMounted(async () => {
   height: 100vh;
   border-radius: 0px 32px 0px 0px;
   border: 1px 1px 0px 0px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(180deg, #1c1c1c 40%, rgba(255, 255, 255, 0.05) 100%);
   border-width: 1px, 1px, 0px, 0px;
   border-style: solid;
   border-color: #ffffff1a;
