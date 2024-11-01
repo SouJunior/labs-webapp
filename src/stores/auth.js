@@ -56,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
         } catch (error) {
             if (error.response?.status === 401) {
                 useSnackbar.showSnackbar({
-                    text: error.response.data,
+                    text: error.response?.data?.message || error.message,
                     color: "error",
                     timeout: 3000,
                 });
@@ -85,11 +85,16 @@ export const useAuthStore = defineStore('auth', () => {
         } catch (error) {
             if (error.response?.status === 401) {
                 useSnackbar.showSnackbar({
-                    text: error.response.data,
+                    text: error.response?.data?.message || error.message,
                     color: "error",
                     timeout: 3000,
                 });
             }
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+
+            router.push('/');
         }
     }
 
@@ -124,10 +129,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     function $reset() {
-        auth.value = { name: '', email: '', token: '' }
-        products.value = []
-        squads.value = []
-    }
+        auth.value = { name: '', email: '', cidade: '', estado: '', linkedin: '', discord: '', uuid: '', iat: '' };
+        products.value = [];
+        squads.value = [];
+    }    
 
     function squadReset() {
         squads.value = []
