@@ -46,16 +46,20 @@ export const useProductStore = defineStore('product', () => {
 
         await tt.fetchProducts(tt.getUuid())
 
+        useSnackbar.showSnackbar({
+            text: 'Produto deletado com sucesso',
+            color: 'success',
+            timeout: 3000
+        });
+
         router.push('/onboarding' );
         //return products.value
     }
 
     async function create(product) {
         const p = await productRequest.create(product)
-        console.log('product created:', p);
 
-        if (p.statusCode == 200) {
-            await tt.fetchProducts(tt.getUuid())
+        if (p.statusCode == 201) {
             useSnackbar.showSnackbar({
                 text: 'Produto criado com sucesso',
                 color: 'success',

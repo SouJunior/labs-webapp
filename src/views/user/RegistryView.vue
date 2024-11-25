@@ -186,11 +186,6 @@ const resetForm = () => {
 const submitApplicant = async () => {
   const newApplicant = { ...applicant }
 
-  newApplicant.cidade = newApplicant.cidade || '__NULL__'
-  newApplicant.estado = newApplicant.estado || '__NULL__'
-  newApplicant.linkedin = newApplicant.linkedin || '__NULL__'
-  newApplicant.discord = newApplicant.discord || '__NULL__'
-
   if (
     !newApplicant.register_token ||
     !newApplicant.name ||

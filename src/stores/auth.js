@@ -30,9 +30,13 @@ export const useAuthStore = defineStore('auth', () => {
             } else {
                 const token = data.token;
 
+                const user = data.user;
+
                 localStorage.setItem('token', token);
 
-                auth.value = parseJwt(token);
+                localStorage.setItem('user', JSON.stringify(user));
+
+                auth.value = user;
 
                 await fetchProducts(auth.value.uuid);
 
@@ -52,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
         } catch (error) {
             if (error.response?.status === 401) {
                 useSnackbar.showSnackbar({
-                    text: error.response.data,
+                    text: error.response?.data?.message || error.message,
                     color: "error",
                     timeout: 3000,
                 });
@@ -61,11 +65,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function loginByToken() {
-
-        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
 
         try {
-            auth.value = parseJwt(token);
+            auth.value = JSON.parse(user);
 
             await fetchProducts(auth.value.uuid);
 
@@ -82,11 +85,16 @@ export const useAuthStore = defineStore('auth', () => {
         } catch (error) {
             if (error.response?.status === 401) {
                 useSnackbar.showSnackbar({
-                    text: error.response.data,
+                    text: error.response?.data?.message || error.message,
                     color: "error",
                     timeout: 3000,
                 });
             }
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+
+            router.push('/');
         }
     }
 
@@ -115,15 +123,16 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function logout() {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         $reset();
         router.push('/');
     }
 
     function $reset() {
-        auth.value = { name: '', email: '', token: '' }
-        products.value = []
-        squads.value = []
-    }
+        auth.value = { name: '', email: '', cidade: '', estado: '', linkedin: '', discord: '', uuid: '', iat: '' };
+        products.value = [];
+        squads.value = [];
+    }    
 
     function squadReset() {
         squads.value = []
@@ -158,25 +167,28 @@ export const useAuthStore = defineStore('auth', () => {
     async function updateProfile(profile) {
         try {
             const response = await axiosInstance.put('/user/' + auth.value.uuid, profile);
+            const updatedUser = profile;
+    
+            auth.value = { ...auth.value, ...updatedUser };
 
-            const data = response.data;
-
+            localStorage.setItem('user', JSON.stringify(auth.value));
+    
             useSnackbar.showSnackbar({
-                text: data.message,
+                text: response.data.message,
                 color: "success",
                 timeout: 3000,
             });
         } catch (error) {
             useSnackbar.showSnackbar({
-                text: error.message,
+                text: error.response?.data?.error || error.message,
                 color: "error",
                 timeout: 3000,
             });
         }
-    }
+    }      
 
     function getRole() {
-        return auth.value.user_type.charAt(0).toUpperCase() + auth.value.user_type.slice(1)
+        return auth.value.permission.charAt(0).toUpperCase() + auth.value.permission.slice(1)
     }
 
     return {

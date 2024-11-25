@@ -51,10 +51,10 @@ const auth = useAuthStore()
 const profile = reactive({
   name: auth.auth.name,
   email: auth.auth.email,
-  cidade: auth.auth.cidade === '__NULL__' ? '' : auth.auth.cidade,
-  estado: auth.auth.estado === '__NULL__' ? '' : auth.auth.estado,
-  linkedin: auth.auth.linkedin === '__NULL__' ? '' : auth.auth.linkedin,
-  discord: auth.auth.discord === '__NULL__' ? '' : auth.auth.discord
+  cidade: auth.auth.cidade || '',
+  estado: auth.auth.estado || '',
+  linkedin: auth.auth.linkedin || '',
+  discord: auth.auth.discord || ''
 })
 
 const rules = {
@@ -64,9 +64,18 @@ const rules = {
 
 const submitProfile = async () => {
   try {
-    auth.updateProfile(profile)
+    await auth.updateProfile(profile)
+
+    profile.name = auth.auth.name
+    profile.email = auth.auth.email
+    profile.cidade = auth.auth.cidade
+    profile.estado = auth.auth.estado
+    profile.linkedin = auth.auth.linkedin
+    profile.discord = auth.auth.discord
+
+    console.log('Perfil atualizado com sucesso.')
   } catch (error) {
-    console.log(error)
+    console.log('Erro ao atualizar o perfil:', error)
   }
 }
 </script>

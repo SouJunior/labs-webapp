@@ -141,12 +141,18 @@ router.beforeEach((to, from, next) => {
 
   const auth = useAuthStore();
 
-  if (to.meta.auth === true && (token === '' || token === null)) {
+  if (to.meta.auth === true && (!token || token === '' || token === null)) {
     router.push({ name: 'login' })
   }
 
-  if (auth.auth.name === '') {
-    auth.loginByToken()
+  if (!auth.auth.name && token) {
+    try {
+      auth.loginByToken()
+    }
+    catch (error) {
+      console.log('Erro ao tentar logar com token', error)
+      router.push({ name: 'login' })
+    }
   }
 
   return next()

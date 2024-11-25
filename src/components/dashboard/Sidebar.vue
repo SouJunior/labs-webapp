@@ -1,5 +1,13 @@
 <template>
-  <v-navigation-drawer app v-model="drawer" class="sidebar">
+  <v-navigation-drawer
+    v-model="drawer"
+    app
+    absolute
+    left
+    class="sidebar"
+    :permanent="isDesktop"
+    :temporary="!isDesktop"
+  >
     <div class="sidebar-wrapper">
       <!-- Logo -->
       <v-list-item @click="navigateToHome" class="logo">
@@ -141,20 +149,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useDisplay } from 'vuetify'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 import { useProductStore } from '@/stores/product'
 import DiscordIcon from '@/components/icons/DiscordIcon.vue'
 import imgUrl from '@/assets/logo-white-transparent.png'
 import defaultAvatar from '@/assets/default-avatar.png'
-import { onMounted } from 'vue'
 
 const auth = useAuthStore()
 const router = useRouter()
 
 const drawer = ref(true)
 const productsExpanded = ref(false)
+const { mdAndUp } = useDisplay()
 
 // Lógica compartilhada entre HeaderMenu e Sidebar
 const logged = computed(() => auth.getName() !== '')
@@ -180,6 +189,8 @@ const navigateToSquad = (uuid) => {
   router.push({ name: 'squads', params: { uuid: uuid } })
 }
 
+const isDesktop = computed(() => mdAndUp.value)
+
 onMounted(async () => {
   await auth.fetchProducts(auth.getUuid())
   if (auth.products.length > 0) {
@@ -194,15 +205,16 @@ onMounted(async () => {
   top: 50px !important;
   left: -1 !important;
   padding: 25px 0px 0px 0px;
-  width: 300px;
+  width: 240px;
   height: 100vh;
   border-radius: 0px 32px 0px 0px;
   border: 1px 1px 0px 0px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(180deg, #1c1c1c 40%, rgba(255, 255, 255, 0.05) 100%);
   border-width: 1px, 1px, 0px, 0px;
   border-style: solid;
   border-color: #ffffff1a;
   overflow: hidden; /* Remove a barra de rolagem externa */
+  transition: all 0.3s ease;
 }
 
 .sidebar-wrapper {

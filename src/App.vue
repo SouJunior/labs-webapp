@@ -2,7 +2,7 @@
   <v-app :class="ef">
     <component :is="currentLayout" />
     <transition name="fade" mode="out-in">
-      <v-main class="d-flex flex-grow-1 main-container" style="margin-top: 64px">
+      <v-main class="main-container" :class="{ 'route-content-style': !isHomePage }">
         <RouterView />
         <v-snackbar
           v-model="snackbarStore.snack.show"
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { useSnackbarStore } from '@/stores/snackbar'
@@ -43,20 +43,28 @@ const sideMenuRoutes = [
   '/squad/:uuid/update'
 ]
 
-const currentLayout = computed(() => {
-  // Verifica se alguma rota correspondida é uma das rotas do side menu
-  return route.matched.some((record) =>
+const currentLayout = computed(() =>
+  route.matched.some((record) =>
     sideMenuRoutes.some((pattern) =>
       new RegExp(pattern.replace(':uuid', '[^/]+')).test(record.path)
     )
   )
     ? SideMenu
     : HeaderMenu
+)
+
+const isHomePage = computed(() => {
+  return ['/', '/login', '/registry'].includes(route.path)
 })
-
-const currentTheme = computed(() => theme.current.value)
-
 const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
+
+const isMobile = ref(window.innerWidth <= 960)
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth <= 960
+  })
+})
 </script>
 
 <style lang="scss">
@@ -66,62 +74,64 @@ const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
 }
 
 .main-container {
-  margin-left: 240px;
-  margin-right: 240px;
+  margin: 64px auto;
   padding: 0;
+  max-width: 100vw;
+  width: 100%;
 
   @media (max-width: 1500px) {
-    margin-left: 120px;
-    margin-right: 120px;
+    padding: 0 120px;
   }
 
   @media (max-width: 1300px) {
-    margin-left: 64px;
-    margin-right: 64px;
+    padding: 0 64px;
   }
 
   @media (max-width: 968px) {
-    margin-left: 32px;
-    margin-right: 32px;
+    padding: 0 32px;
   }
 
   @media (max-width: 600px) {
-    margin-left: 16px;
-    margin-right: 16px;
+    padding: 0 16px;
   }
 }
 
+.route-content-style {
+  padding: 0px 0px 0px 250px;
+  @media (max-width: 968px) {
+    padding: 0 32px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 16px;
+  }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Radio Canada', sans-serif;
+  font-weight: 700;
+  color: #62d4a4;
+}
+
 h2 {
-  font-size: 36px;
-  font-family: 'Radio Canada', sans-serif;
-  font-weight: 700;
-  color: #62d4a4;
+  font-size: 2.25rem;
 }
-
 h3 {
-  font-size: 32px;
-  font-family: 'Radio Canada', sans-serif;
-  font-weight: 700;
-  color: #62d4a4;
+  font-size: 2rem;
 }
-
 h4 {
-  font-size: 22px;
-  font-family: 'Radio Canada', sans-serif;
-  font-weight: 700;
+  font-size: 1.375rem;
 }
-
 h5 {
-  font-size: 40px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
+  font-size: 2.5rem;
   color: #ffffff;
 }
-
 h6 {
-  font-size: 20px;
-  font-family: 'Radio Canada', sans-serif;
-  font-weight: 600;
+  font-size: 1.25rem;
   color: #ffffff;
 }
 </style>
