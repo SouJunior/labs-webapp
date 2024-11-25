@@ -27,11 +27,15 @@ export const useProductStore = defineStore('product', () => {
     }
 
     async function getProduct(uuid) {
-        product.value = await productRequest.show(uuid)
-
+        const p = products.value.find(product => product.uuid === uuid)
+        if (p) {
+            product.value = p
+        } else {
+            product.value = await productRequest.show(uuid)
+        }
         return product.value
     }
-
+    
     async function byUser(uuid) {
         products.value = await productRequest.byUser(uuid)
         return products.value
@@ -42,21 +46,25 @@ export const useProductStore = defineStore('product', () => {
 
         await tt.fetchProducts(tt.getUuid())
 
+        useSnackbar.showSnackbar({
+            text: 'Produto deletado com sucesso',
+            color: 'success',
+            timeout: 3000
+        });
+
         router.push('/onboarding' );
         //return products.value
     }
 
     async function create(product) {
         const p = await productRequest.create(product)
-        console.log('product created:', p);
 
-        if (p.statusCode == 200) {
-            await tt.fetchProducts(tt.getUuid())
+        if (p.statusCode == 201) {
             useSnackbar.showSnackbar({
-                text: 'Product created successfully',
+                text: 'Produto criado com sucesso',
                 color: 'success',
                 timeout: 3000
-            })
+            });
             router.push('/product/' + p.product.uuid);
         }
         // return products.value
@@ -76,6 +84,12 @@ export const useProductStore = defineStore('product', () => {
             })
 
             router.push('/product/' + product.uuid);
+        } else {
+            useSnackbar.showSnackbar({
+                text: p.error || 'Erro ao atualizar produto',
+                color: 'error',
+                timeout: 3000
+            });
         }
         // return products.value
     }
