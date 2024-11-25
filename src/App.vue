@@ -53,7 +53,9 @@ const currentLayout = computed(() =>
     : HeaderMenu
 )
 
-const isHomePage = computed(() => route.path === '/')
+const isHomePage = computed(() => {
+  return ['/', '/login', '/registry'].includes(route.path)
+})
 const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
 
 const isMobile = ref(window.innerWidth <= 960)
