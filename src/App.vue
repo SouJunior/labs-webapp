@@ -2,7 +2,7 @@
   <v-app :class="ef">
     <component :is="currentLayout" />
     <transition name="fade" mode="out-in">
-      <v-main class="main-container">
+      <v-main class="main-container" :class="{ 'route-content-style': !isHomePage }">
         <RouterView />
         <v-snackbar
           v-model="snackbarStore.snack.show"
@@ -53,7 +53,7 @@ const currentLayout = computed(() =>
     : HeaderMenu
 )
 
-const currentTheme = computed(() => theme.current.value)
+const isHomePage = computed(() => route.path === '/')
 const ef = computed(() => (route.path === '/' ? 'homeBackgroundEffect' : ''))
 
 const isMobile = ref(window.innerWidth <= 960)
@@ -85,6 +85,17 @@ onMounted(() => {
     padding: 0 64px;
   }
 
+  @media (max-width: 968px) {
+    padding: 0 32px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 16px;
+  }
+}
+
+.route-content-style {
+  padding: 0px 0px 0px 250px;
   @media (max-width: 968px) {
     padding: 0 32px;
   }
