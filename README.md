@@ -120,6 +120,27 @@ Acreditamos que, com o tempo, a plataforma se tornará uma ferramenta essencial 
 <img align="center" alt="Git badge" src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img align="center" alt="GitHub badge" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
 
+## DevOps
+
+```mermaid
+sequenceDiagram
+    actor Dev as Desenvolvedores
+    participant Git as GitHub
+    participant Net as Netlify
+
+    Note over Dev,Net: Fluxo de Deploy com Preview
+
+    Dev->>Git: Abre Pull Request (PR) para main
+    Git->>Net: Novo Evento: PR criada
+    Net-->>Git: Deploy Preview criado
+    
+    Note over Dev,Net: Loop de desenvolvimento
+    
+    Dev->>Git: Aprova e mergeia PR para main
+    Git->>Net: Novo Evento: Branch main atualizada
+    Net-->>Git: Deploy de Produção atualizado
+```
+
 ## Links Úteis
 
 - [API do Projeto](https://github.com/SouJunior-Labs/labs-api)
