@@ -9,7 +9,7 @@
             conosco.
         </p>
         <v-row>
-            <v-col v-for="member in teamMembers" :key="member.id" cols="12" md="6" lg="3"
+            <v-col v-for="member in teamMembers" :key="member.id" cols="12" md="6" lg="4"
                 class="d-flex flex-column align-center">
                 <v-card class="d-flex flex-column align-center">
                     <v-img :src="member.image" width="100" height="100" />
@@ -27,7 +27,7 @@
             </v-col>
             <v-col cols="12" md="6" lg="12" class="d-flex flex-column align-center">
                 <v-card class="d-flex flex-column align-center">
-                    <v-img :src="wouernerIcon" width="100" height="100" />
+                    <v-img :src="wouernerIcon" width="120" height="120" />
                     <h6>Wouerner Brandão</h6>
                     <p>Founder e CEO SouJunior / Tech Lead</p>
                     <div class="d-flex align-center justify-center ga-2 mt-3">
@@ -45,46 +45,65 @@
 </template>
 
 <script setup>
-import djhonantanIcon from '@/assets/home/djhonantan.png'
-import inahyeIcon from '@/assets/home/inahye.png'
-import thaisIcon from '@/assets/home/thais.png'
-import thaynnaIcon from '@/assets/home/thaynna.png'
-import wouernerIcon from '@/assets/home/wouerner.png'
+import andrezzaIcon from '@/assets/home/andrezzazenith.jpg'
+import anneIcon from '@/assets/home/annefreitas.jpg'
+import fernandaIcon from '@/assets/home/fernandagiraldelli.png'
+import larissaIcon from '@/assets/home/larissasouza.jpg'
+import leticiaIcon from '@/assets/home/leticiaevelyn.jpg'
+import ovidioIcon from '@/assets/home/ovidiofariasneto.jpg'
 import squadIcon1 from '@/assets/home/squadIcon1.png'
 import squadIcon2 from '@/assets/home/squadIcon2.png'
+import wouernerIcon from '@/assets/home/wouerner.png'
 
 const teamMembers = [
     {
         id: 1,
-        name: 'Djhonantan Parreira',
+        name: 'Ovídio Farias',
         role: 'Front-end Developer',
-        linkedin: 'https://www.linkedin.com/in/djhonantanparreira/',
-        github: 'https://www.github.com/djhonantanparreira',
-        image: djhonantanIcon
+        linkedin: 'https://www.linkedin.com/in/ovidiojcf/',
+        github: 'https://github.com/Ovidiojcf',
+        image: ovidioIcon
     },
     {
         id: 2,
-        name: 'Inahyê Dourado',
+        name: 'Leticia Neves',
         role: 'Product Manager',
-        linkedin: 'https://www.linkedin.com/in/inahyedourado/',
-        github: 'https://github.com/InahyeDourado',
-        image: inahyeIcon
+        linkedin: 'https://www.linkedin.com/in/leticiaevelyn/',
+        github: 'https://github.com/leticiaefneves',
+        image: leticiaIcon
     },
     {
         id: 3,
-        name: 'Thais Escobar',
+        name: 'Andrezza Zenith',
         role: 'Product Manager',
-        linkedin: 'https://www.linkedin.com/in/thais-escobar/',
-        github: 'https://github.com/thaisescobarf',
-        image: thaisIcon
+        linkedin: 'https://www.linkedin.com/in/andrezza-resende-zenith/',
+        github: 'https://github.com/Andrezzamg',
+        image: andrezzaIcon
     },
     {
         id: 4,
-        name: 'Thaynná Oliveira',
+        name: 'Anne Freitas',
         role: 'UI/UX Designer',
-        linkedin: 'https://www.linkedin.com/in/thaygjo/',
-        github: 'https://github.com/thaygjo',
-        image: thaynnaIcon
+        linkedin: 'https://www.linkedin.com/in/annefreitas/',
+        github: 'https://github.com/annecfreits',
+        image: anneIcon
+    },
+    {
+        id: 5,
+        name: 'Fernanda Giraldelli',
+        role: 'UI/UX Designer',
+        linkedin: 'https://www.linkedin.com/in/fernandagiraldelli/',
+        github: 'https://github.com/FeGiraldelli',
+        image: fernandaIcon
+    }
+    ,
+    {
+        id: 6,
+        name: 'Larissa Rodrigues',
+        role: 'UI/UX Designer',
+        linkedin: 'https://www.linkedin.com/in/larissamanawa/',
+        github: 'https://github.com/larimanawa',
+        image: larissaIcon
     }
 ]
 </script>
@@ -129,6 +148,13 @@ const teamMembers = [
 
 .squad-section .v-card .v-img {
     margin-bottom: 20px;
+}
+
+.squad-section .v-card .v-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .squad-section .v-card p {

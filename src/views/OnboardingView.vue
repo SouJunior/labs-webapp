@@ -1,21 +1,18 @@
 <template>
-	<v-container
-		fluid
-		class="pa-0 d-flex align-center justify-center container-gap"
-	>
-        <suspense>
-            <template #default>
-                <OnboardingPage />
-            </template >
-            <template #fallback>
-                <v-progress-circular color="primary" indeterminate></v-progress-circular>
-            </template>
-        </suspense>
+	<v-container fluid class="pa-0 d-flex align-center justify-center container-gap">
+		<suspense>
+			<template #default>
+				<OnboardingPage />
+			</template>
+			<template #fallback>
+				<v-progress-circular color="primary" indeterminate></v-progress-circular>
+			</template>
+		</suspense>
 	</v-container>
 </template>
 
 <script setup>
-import  OnboardingPage  from '@/components/OnboardingPage.vue';
+import OnboardingPage from '@/components/OnboardingPage.vue';
 
 
 </script>
@@ -51,4 +48,5 @@ import  OnboardingPage  from '@/components/OnboardingPage.vue';
 	font-size: 1.4rem;
 	font-weight: 300;
 }
+
 </style>

@@ -4,11 +4,7 @@
     <transition name="fade" mode="out-in">
       <v-main class="main-container" :class="{ 'route-content-style': !isHomePage }">
         <RouterView />
-        <v-snackbar
-          v-model="snackbarStore.snack.show"
-          v-bind="snackbarStore.snack"
-          location="top right"
-        >
+        <v-snackbar v-model="snackbarStore.snack.show" v-bind="snackbarStore.snack" location="top right">
           {{ text }}
           <template #actions>
             <v-btn variant="text" @click="snackbarStore.hideSnackbar">Fechar</v-btn>
@@ -20,12 +16,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useTheme } from 'vuetify'
-import { useSnackbarStore } from '@/stores/snackbar'
 import HeaderMenu from '@/components/HeaderMenu.vue'
 import SideMenu from '@/components/dashboard/Sidebar.vue'
+import { useSnackbarStore } from '@/stores/snackbar'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useTheme } from 'vuetify'
 
 const theme = useTheme()
 const snackbarStore = useSnackbarStore()
@@ -98,6 +94,7 @@ onMounted(() => {
 
 .route-content-style {
   padding: 0px 0px 0px 250px;
+
   @media (max-width: 968px) {
     padding: 0 32px;
   }
@@ -120,16 +117,20 @@ h6 {
 h2 {
   font-size: 2.25rem;
 }
+
 h3 {
   font-size: 2rem;
 }
+
 h4 {
   font-size: 1.375rem;
 }
+
 h5 {
   font-size: 2.5rem;
   color: #ffffff;
 }
+
 h6 {
   font-size: 1.25rem;
   color: #ffffff;
